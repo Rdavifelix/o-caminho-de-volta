@@ -22,3 +22,7 @@ Abrir <http://localhost:8790/>.
 ## Compliance conferido (16/10/2026, versão com fotos e copy reforçada)
 
 Nome + psicóloga + CRP só no bloco da autora e no rodapé (mínimo da Res. CFP 07/2023; barra do topo e repetições na abertura e no fechamento removidas a pedido do Davi em 16–17/10) · preço só no bloco de oferta, mesma fonte do texto, sem "de/por", desconto, cronômetro ou "só nesta página" · nenhuma promessa de resultado ou prazo · nenhum depoimento · nenhum caso identificável · fotos ilustrativas sem pessoas reais, declaradas no rodapé · blocos de persuasão só por identificação (conselhos que não ajudaram, radar, 9 mensagens, o que fica nas suas mãos) sem prever desfecho · conversa de admissão não aparece na página · aviso "Conteúdo educativo. Não substitui psicoterapia." e CVV 188 no rodapé e no FAQ · razão social, CNPJ, endereço e contato no rodapé (CDC) · sem Pixel até haver consentimento (LGPD).
+
+## Teste "Qual é o afastamento da sua família?" (`teste/`)
+
+Porta de entrada paralela (funil de quiz, aprovado 18/10/2026). Um arquivo `teste/index.html` com Tailwind pelo CDN, 23 telas, lógica condicional e pontuação por tipo; estrutura, imagens e pendências em `brasil/Funil de quiz — O Caminho de Volta.md` (Parte 3). Abrir em <http://localhost:8790/teste/>. Grava o lead em `/lead-teste` (Supabase) com `origem: 'quiz'` e manda para `../?tipo=` no fim.

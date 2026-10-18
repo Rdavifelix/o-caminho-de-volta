@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Qual é o afastamento da sua família? — teste de O Caminho de Volta</title>
+<meta name="description" content="Em poucos minutos, o teste indica qual dos 7 tipos de afastamento mais se parece com a sua história, o jeito como você tem reagido a ele e o primeiro passo do seu lado. Conteúdo educativo da psicóloga [Nome], CRP XX/XXXXX.">
+<meta property="og:title" content="Qual é o afastamento da sua família?">
+<meta property="og:description" content="Um teste curto para pais e mães de filhos adultos que se afastaram. Sete tipos, um primeiro passo para cada um.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../img/abertura.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      verde: '#1f4e46', 'verde-escuro': '#153831', terra: '#c4683a', 'terra-escura': '#9e4f27',
+      areia: '#e8d9b8', tinta: '#2b2a27', suave: '#6b665c', creme: '#faf6ee', linha: '#e7dfcf'
+    },
+    fontFamily: { serif: ['Lora','Georgia','serif'], sans: ['Nunito','-apple-system','Helvetica','Arial','sans-serif'] },
+    keyframes: {
+      entra: { '0%': { opacity: 0, transform: 'translateY(18px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+      pulso: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } },
+      ponto: { '0%,80%,100%': { opacity: .25 }, '40%': { opacity: 1 } },
+      revela: { '0%': { opacity: 0, transform: 'scale(.96)' }, '100%': { opacity: 1, transform: 'scale(1)' } }
+    },
+    animation: { entra: 'entra .38s cubic-bezier(.2,.7,.2,1) both', pulso: 'pulso 1.6s ease-in-out infinite', ponto: 'ponto 1.2s infinite', revela: 'revela .7s cubic-bezier(.2,.7,.2,1) both' }
+  } }
+}
+</script>
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { -webkit-font-smoothing: antialiased; }
+  .opcao { transition: transform .12s, box-shadow .12s, border-color .12s, background-color .12s; }
+  .opcao:active { transform: scale(.985); }
+  .opcao.marcada { border-color: #1f4e46; background: #eef4f1; box-shadow: 0 0 0 3px rgba(31,78,70,.18); }
+  .opcao.marcada .bolinha { background: #1f4e46; border-color: #1f4e46; }
+  .opcao.marcada .bolinha::after { opacity: 1; }
+  .bolinha::after { content: ''; position: absolute; inset: 5px; border-radius: 999px; background: #fff; opacity: 0; transition: opacity .12s; }
+  .opcao.marcada .icone { background: #1f4e46; color: #fff; }
+  .opcao.marcada .selo { opacity: 1; transform: scale(1); }
+  .selo { opacity: 0; transform: scale(.6); transition: all .18s; }
+  .barra { transition: width .45s cubic-bezier(.2,.7,.2,1); }
+  .resultado p { margin-bottom: 16px; }
+  .resultado strong { color: #1f4e46; }
+  .ponto:nth-child(2) { animation-delay: .2s } .ponto:nth-child(3) { animation-delay: .4s }
+  .atraso-1 { animation-delay: .15s } .atraso-2 { animation-delay: .3s } .atraso-3 { animation-delay: .45s }
+  @media (prefers-reduced-motion: reduce) { .animate-entra, .animate-pulso, .animate-revela { animation: none } }
+</style>
+</head>
+<body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed min-h-[100dvh] flex flex-col">
+
+<header class="sticky top-0 z-20 bg-creme/90 backdrop-blur border-b border-linha">
+  <div class="max-w-[640px] mx-auto px-4 py-3 flex items-center gap-3">
+    <button id="voltar" type="button" class="shrink-0 w-10 h-10 rounded-full border border-linha bg-white text-verde text-xl leading-none grid place-items-center disabled:opacity-0 disabled:pointer-events-none transition" aria-label="Voltar">‹</button>
+    <div class="flex-1"><div class="h-2.5 rounded-full bg-linha overflow-hidden"><div id="barra" class="barra h-full rounded-full bg-gradient-to-r from-verde to-terra" style="width:0%"></div></div></div>
+    <span id="passo" class="shrink-0 text-[13px] font-extrabold tracking-wider uppercase text-suave tabular-nums"></span>
+  </div>
+</header>
+
+<main id="tela" class="flex-1 w-full max-w-[640px] mx-auto px-4 pt-6 pb-36"></main>
+
+<div id="acao" class="fixed bottom-0 inset-x-0 z-20 bg-gradient-to-t from-creme via-creme/95 to-creme/0 pt-6 pb-[max(16px,env(safe-area-inset-bottom))] px-4 hidden">
+  <div class="max-w-[640px] mx-auto">
+    <button id="seguir" type="button" class="w-full rounded-full text-white font-bold text-[21px] py-[18px] px-6 shadow-[0_8px_20px_rgba(196,104,58,.32)] bg-gradient-to-b from-[#d47d4e] via-terra to-terra-escura transition hover:-translate-y-0.5 disabled:opacity-40 disabled:shadow-none disabled:translate-y-0">Continuar</button>
+  </div>
+</div>
+
+<footer class="border-t border-linha text-center text-[13.5px] leading-snug text-suave px-4 py-4 pb-[max(16px,env(safe-area-inset-bottom))]">
+  <span id="cred">[Nome], psicóloga · CRP XX/XXXXX</span> · Conteúdo educativo. Não substitui psicoterapia.<br>
+  <span class="opacity-80">Fotos ilustrativas, sem pessoas reais · [Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · <a class="underline" href="../#privacidade">Privacidade</a></span>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO
+   ============================================================ */
+const API = 'https://twhasxoshpfootucmkmo.supabase.co/functions/v1/area'; // '' = só localStorage
+const PAGINA_LIVRO = '../';
+const AUTORA = { nome: '', crp: '' };
+const TIPO_BD = {1:'distancia',2:'dinheiro',3:'valores',4:'nova_casa',5:'passado',6:'briga',7:'sem_motivo'};
+const RELER = {1:[1,3,6],2:[8,2,6],3:[8,3,6],4:[10,3,6],5:[11,7,6],6:[6,9,11],7:[3,2,6]};
+
+/* ícones (SVG inline, traço simples) */
+const I = {
+  rel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  casa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>',
+  mapa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6-5.2 6-10a6 6 0 0 0-12 0c0 4.8 6 10 6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>',
+  aviao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-8-6 14-3-6-6-3z"/></svg>',
+  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+  chatmin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></svg>',
+  mudo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M4 4l16 16"/></svg>',
+  bloq: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>',
+  eu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>',
+  dois: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="3.5"/><circle cx="16" cy="9" r="3"/><path d="M2 21c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M14 21c0-3 2-5 5-5s3 1 3 5"/></svg>',
+  ninguem: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14"/></svg>',
+  olho: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/><path d="M9 12l4 4"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>',
+  cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  anel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="13" r="5"/><circle cx="15" cy="13" r="5"/></svg>',
+  grupo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M1 20c0-3 2.5-5 6-5s6 2 6 5"/><path d="M11 20c0-3 2.5-5 6-5s6 2 6 5"/></svg>',
+  fala: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h14v9H8l-5 4z"/><path d="M17 9h4v9l-3-2h-5"/></svg>',
+  meio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9 15h6"/></svg>',
+  nada: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  tel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
+  presente: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1s4 1 6 1zm0 0c2-4 6-4 6-1s-4 1-6 1z"/></svg>',
+  silencio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 9c3 0 4-2 7-2s4 2 7 2"/><path d="M5 15c3 0 4-2 7-2s4 2 7 2"/></svg>',
+  prof: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>',
+  dia: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg>',
+  semana: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg>',
+  raro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 12c2-4 4-4 6 0s4 4 6 0 4-4 4 0"/></svg>',
+  parei: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
+  conversa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12v8H7l-4 3z"/><path d="M15 9h6v8l-3-2h-5v-2"/></svg>',
+  natal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l5 8h-3l4 6H6l4-6H7z"/><path d="M12 17v4"/></svg>',
+  netos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="7" r="3.5"/><circle cx="17" cy="12" r="2.5"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M14 21c0-2.5 1.5-4 3.5-4s3.5 1.5 3.5 4"/></svg>',
+  bem: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>',
+  ouvir: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10a6 6 0 0 1 12 0c0 3-2 4-3 6-.5 1-.5 3-2.5 3S10 17 9 16"/><path d="M9 10a3 3 0 0 1 6 0"/></svg>',
+  sim: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4L19 7"/></svg>',
+  acho: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7"/><path d="M12 17h.01"/></svg>',
+  medo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01"/><path d="M9 16c1-1.5 5-1.5 6 0"/></svg>',
+  parentes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M1 20c0-3 2.5-5 6-5s6 2 6 5"/><path d="M11 20c0-3 2.5-5 6-5s6 2 6 5"/></svg>',
+  culpa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v9"/><circle cx="12" cy="18" r="1"/><circle cx="12" cy="12" r="9"/></svg>',
+  raiva: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L5 14h6l-1 8 9-13h-6z"/></svg>',
+  saudade: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/><path d="M8 11h8" /></svg>',
+  naosei: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h10M4 17h6"/></svg>',
+  idade1:'<span class="font-serif font-semibold text-[15px]">54</span>', idade2:'<span class="font-serif font-semibold text-[15px]">55+</span>', idade3:'<span class="font-serif font-semibold text-[15px]">65+</span>', idade4:'<span class="font-serif font-semibold text-[15px]">75+</span>',
+  f1:'<span class="font-serif font-semibold text-[15px]">18+</span>', f2:'<span class="font-serif font-semibold text-[15px]">30+</span>', f3:'<span class="font-serif font-semibold text-[15px]">40+</span>', f4:'<span class="font-serif font-semibold text-[15px]">50+</span>'
+};
+
+/* ============================================================
+   ROTEIRO
+   Opção: [texto, pesos{tipo:pts}, chave, ícone ou foto]
+   ============================================================ */
+const T = [
+  { id:'intro', type:'intro' },
+
+  /* 01 — genérico */
+  { id:'quem', type:'single', bloco:'Sobre você', q:'Você é mãe ou pai?', layout:'foto',
+    ops:[['Mãe',{}, 'mae', 'img/mae.jpg'],['Pai',{}, 'pai', 'img/pai.jpg']] },
+  { id:'idade', type:'single', bloco:'Sobre você', q:'Qual é a sua idade?',
+    ops:[['Até 54 anos',{}, 0, I.idade1],['De 55 a 64',{}, 1, I.idade2],['De 65 a 74',{}, 2, I.idade3],['75 ou mais',{}, 3, I.idade4]] },
+  { id:'filho', type:'single', bloco:'Sobre o seu filho', q:'Estamos falando de um filho ou de uma filha?', layout:'foto', sub:'Se for mais de um, pense no que está mais afastado.',
+    ops:[['Um filho',{}, 'ele', 'img/filho.jpg'],['Uma filha',{}, 'ela', 'img/filha.jpg']] },
+  { id:'idadef', type:'single', bloco:'Sobre o seu filho', q:()=>`Quantos anos ${P.ele} tem?`,
+    ops:[['De 18 a 29',{4:1}, 0, I.f1],['De 30 a 39',{4:1}, 1, I.f2],['De 40 a 49',{}, 2, I.f3],['50 ou mais',{}, 3, I.f4]] },
+  { id:'mora', type:'single', bloco:'Sobre o seu filho', q:()=>`${P.Ele} mora…`,
+    ops:[['Na mesma cidade',{7:1}, 'perto', I.casa],['Em outra cidade ou estado',{1:2}, 'longe', I.mapa],['Em outro país',{1:3}, 'pais', I.aviao]] },
+
+  /* 02 — dor */
+  { id:'contato', type:'single', bloco:'Como está hoje', q:'Como está o contato entre vocês hoje?',
+    ops:[['Pouco e superficial: figurinha, parabéns, polegar no grupo',{7:1,1:1}, 'pouco', I.chatmin],['Só o essencial, quando precisa',{2:1,4:1}, 'essencial', I.chat],['Nenhum há meses',{6:1,5:1}, 'nenhum', I.mudo],['Fui bloqueado ou saiu do grupo da família',{6:2,5:1}, 'bloq', I.bloq]] },
+  { id:'inicia', type:'single', bloco:'Como está hoje', q:'Quando há contato, quem costuma começar?', skipIf:r=>r.contato==='bloq',
+    ops:[['Quase sempre eu',{7:1,1:1}, 'eu', I.eu],[()=>`Quase sempre ${P.ele}, quando precisa de algo`,{2:2}, 'ele', I.tel],['Os dois, mais ou menos',{4:1}, 'dois', I.dois],['Ninguém mais começa',{6:1,5:1}, 'ninguem', I.ninguem]] },
+  { id:'visu', type:'single', bloco:'Como está hoje', q:()=>`Aconteceu de você mandar mensagem e ver que ${P.ele} visualizou e não respondeu?`, skipIf:r=>r.contato==='bloq',
+    ops:[['Várias vezes',{7:1,1:1}, 'varias', I.olho],['Algumas vezes',{}, 'algumas', I.olho],['Uma ou duas',{}, 'poucas', I.check],['Não',{}, 'nao', I.x]] },
+  { id:'tempo', type:'single', bloco:'Como está hoje', q:'Há quanto tempo a relação está assim?',
+    ops:[['Menos de 6 meses',{6:2}, 0, I.cal],['De 6 meses a 2 anos',{4:1,6:1}, 1, I.cal],['De 2 a 5 anos',{5:1,3:1}, 2, I.cal],['Mais de 5 anos',{7:1,5:1}, 3, I.cal]] },
+
+  { id:'ins1', type:'insert', img:'../img/almoco.jpg', alt:'Mesa de almoço de domingo', sobre:'Uma pausa',
+    titulo:'Afastamento não é uma coisa só.',
+    texto:()=>`${P.tempoFrase} O tempo dói, e por isso é a primeira coisa que a gente mede. Mas é a <strong>causa</strong> que diz o que fazer.<br><br>São sete tipos de afastamento. O gesto que ajuda num deles pode piorar outro. As próximas perguntas servem para encontrar o seu.` },
+
+  { id:'comeco', type:'single', bloco:'Como começou', q:'Qual destas frases se parece mais com a sua história?',
+    ops:[[()=>`Depois que ${P.ele} mudou de cidade ou de país`,{1:3}, 'dist', I.aviao],['Envolveu dinheiro: empréstimo, herança, ajuda que virou cobrança',{2:3}, 'din', I.presente],['Depois que passamos a pensar diferente sobre a vida',{3:3}, 'val', I.fala],[()=>`Depois que ${P.ele} casou, foi morar junto ou teve filhos`,{4:3}, 'casa', I.anel],[()=>`Depois que ${P.ele} começou a falar da infância de um jeito que eu não reconheço`,{5:3}, 'pass', I.rel],['Depois de uma briga ou de um episódio com data',{6:3}, 'briga', I.raiva],['Foi diminuindo, sem motivo que eu consiga apontar',{7:3}, 'sem', I.raro]] },
+
+  /* espelho emocional: a cena do que a pessoa acabou de marcar */
+  { id:'espelho', type:'espelho' },
+
+  { id:'outra', type:'single', bloco:'Como começou', q:'Existe outra pessoa que pesa nesse contato?',
+    ops:[['Nora ou genro',{4:3}, 'nora', I.anel],['Um irmão ou outro parente',{6:1,2:1}, 'parente', I.grupo],['O outro pai ou mãe',{6:1}, 'outro', I.dois],['Não que eu saiba',{7:1}, 'nao', I.x]] },
+  { id:'disse', type:'single', bloco:'Como começou', q:()=>`${P.Ele} já disse por que se afastou?`,
+    ops:[['Disse com clareza',{}, 'sim', I.fala],['Deu a entender',{}, 'meio', I.meio],['Diz que não aconteceu nada',{7:2}, 'nada', I.nada],['Nunca falamos sobre isso',{7:1,5:1}, 'nunca', I.mudo]] },
+  { id:'frase', type:'single', bloco:'Como começou', q:'Qual frase se parece mais com o que foi dito?', skipIf:r=>!(r.disse==='sim'||r.disse==='meio'),
+    ops:[['“Você não respeita as minhas escolhas”',{3:3}, 'esc', I.fala],['“Você não aceita a minha família, o meu parceiro”',{4:3}, 'fam', I.anel],['“Você não lembra do que aconteceu quando eu era criança”',{5:3}, 'inf', I.rel],['“Depois do que você fez (ou disse) naquele dia…”',{6:3}, 'dia', I.raiva],['“É só a correria, a distância”',{1:3}, 'corr', I.aviao],['Nenhuma dessas',{}, 'nen', I.x]] },
+  { id:'tentou', type:'multi', bloco:'O que já foi feito', q:'O que você já tentou?', sub:'Pode marcar mais de um.',
+    ops:[['Mandar mensagens explicando o meu lado',{5:1,3:1}, 'explicar', I.mail],[()=>`Pedir que ${P.ele} me ligue ou apareça`,{1:1,7:1}, 'pedir', I.tel],['Mandar presentes, comida ou ajuda',{2:1}, 'ajuda', I.presente],['Pedir que outro parente intervenha',{4:1,6:1}, 'parente', I.grupo],['Ficar em silêncio esperando',{6:1}, 'silencio', I.silencio],['Procurar um profissional',{}, 'prof', I.prof],['Nada ainda',{}, 'nada', I.nada]] },
+
+  { id:'ins2', type:'insert', img:'../img/tiques.jpg', alt:'Celular com mensagem visualizada e sem resposta', sobre:'Antes de enviar',
+    titulo:'O radar.',
+    texto:()=>`${P.tentouFrase} Antes de mandar qualquer mensagem, três perguntas: <strong>isso cobra? isso aconselha? isso pede?</strong><br><br>Se a resposta for sim a qualquer uma, a mensagem costuma disparar um alarme. E o filho responde ao alarme, não ao amor que estava por trás.` },
+
+  { id:'freq', type:'single', bloco:'O que já foi feito', q:'Com que frequência você tenta contato hoje?',
+    ops:[['Todo dia ou quase',{7:1}, 'dia', I.dia],['Toda semana',{1:1}, 'semana', I.semana],['De vez em quando, com medo de incomodar',{5:1,3:1}, 'raro', I.raro],['Parei de tentar',{6:1}, 'parei', I.parei]] },
+
+  /* 03 — desejo */
+  { id:'quer', type:'single', bloco:'O que você gostaria', q:'Se fosse possível uma coisa só, qual seria?',
+    ops:[['Uma conversa tranquila, sem briga',{6:1}, 'conversa', I.conversa],['Ser chamado de novo para as datas da família',{4:1}, 'datas', I.natal],['Conhecer ou conviver com os netos',{4:2}, 'netos', I.netos],[()=>`Só saber que ${P.ele} está bem`,{1:1}, 'bem', I.bem],[()=>`Que ${P.ele} me ouvisse uma vez`,{5:1,3:1}, 'ouvir', I.ouvir]] },
+  { id:'saberia', type:'single', bloco:'O que você gostaria', q:()=>`Se ${P.ele} mandasse uma mensagem hoje, você saberia o que responder?`,
+    ops:[['Sim',{}, 'sim', I.sim],['Acho que sim',{}, 'acho', I.acho],['Não, teria medo de errar',{}, 'medo', I.medo],['Não sei',{}, 'ns', I.naosei]] },
+  { id:'pesa', type:'single', bloco:'O que você gostaria', q:'O que mais pesa quando o assunto aparece?',
+    ops:[['A pergunta dos parentes: “e o seu filho?”',{}, 'parentes', I.parentes],['A culpa',{5:1}, 'culpa', I.culpa],['A raiva',{6:1}, 'raiva', I.raiva],['A saudade',{1:1}, 'saudade', I.saudade],['Não saber o que fazer',{7:1}, 'naosei', I.naosei]] },
+
+  { id:'ins3', type:'insert', img:'../img/leitura.jpg', alt:'Pessoa lendo com calma', sobre:'Uma frase para guardar',
+    titulo:'Você não controla se o seu filho vai voltar.',
+    texto:()=>`Mas controla se, quando ${P.ele} voltar, vai encontrar ${P.oMesmo}, ou alguém com quem é seguro conversar.<br><br>O resultado do teste mostra duas coisas: <strong>o tipo de afastamento da sua família</strong> e <strong>o jeito como você tem reagido a ele</strong>. É aí que mora o seu lado do caminho de volta.` },
+
+  { id:'topa', type:'single', bloco:'Última pergunta', q:'Você toparia mudar o tipo de contato que faz hoje, antes de esperar que ele mude?',
+    ops:[['Sim, quero entender como',{}, 'sim', I.sim],['Acho que sim, dependendo do que for',{}, 'acho', I.acho],['Ainda não sei',{}, 'ns', I.naosei]] },
+
+  { id:'captura', type:'capture' },
+  { id:'lendo', type:'loading' },
+  { id:'resultado', type:'result' }
+];
+
+/* ============================================================
+   OS 7 TIPOS (capítulo 4) e os 5 ARQUÉTIPOS (5 trocas, capítulo 8)
+   ============================================================ */
+const TIPOS = {
+ 1:{nome:'pela distância', titulo:'Pela distância', img:'img/distancia.jpg', comeca:'O filho muda de cidade, de estado ou de país. No começo, as ligações são frequentes. Depois vão rareando: o fuso horário atrapalha, a vida nova toma o dia, e o “a gente se fala no fim de semana” vira “a gente se fala quando der”. Não houve briga. Houve espaço, e o espaço foi se enchendo de outras coisas.', sente:'Muitas vezes, uma mistura de culpa e cansaço. Culpa porque sabe que liga pouco. Cansaço porque toda ligação começa com “você sumiu”, e ele passa a adiar a ligação para adiar a cobrança.', erro:'Medir o amor pela frequência. Contar as ligações, comparar com a época em que morava perto e devolver essa conta, direta ou disfarçada: “a filha da vizinha liga todo dia”.', passo:'Trocar a pergunta “por que ele não liga?” por “o que eu posso mandar que não precise de resposta?”. Uma foto do bairro, uma notícia da cidade dele, um “lembrei de você hoje”. Mensagem que chega como presença, e não como fatura.'},
+ 2:{nome:'pelo dinheiro', titulo:'Pelo dinheiro', img:'img/dinheiro.jpg', comeca:'Um empréstimo que não voltou. Uma ajuda que virou obrigação. Uma herança, um imóvel, um negócio da família dividido de um jeito que alguém achou injusto. Ou o contrário: o filho que ajuda os pais e sente que isso nunca é reconhecido. O dinheiro raramente é a causa sozinha; é onde a tensão ganha forma.', sente:'Humilhação ou injustiça, dependendo do lado em que ele está. Quem recebeu ajuda muitas vezes sente que perdeu o direito de discordar. Quem acha que foi preterido sente que o dinheiro revelou uma preferência que sempre suspeitou.', erro:'Manter a contabilidade aberta. Lembrar do valor, mesmo “de brincadeira”. Usar a ajuda, passada ou futura, como argumento numa discussão que não é sobre dinheiro.', passo:'Decidir, sozinho e por escrito, o que fazer com a dívida ou com a ajuda: perdoar, cobrar de forma clara e única, ou encerrar. E separar, daqui em diante, as conversas sobre dinheiro das conversas sobre a relação.'},
+ 3:{nome:'pelos valores', titulo:'Pelos valores', img:'img/valores.jpg', comeca:'O filho passa a ver o mundo de um jeito diferente do seu. Pode ser a forma de criar os filhos, a escolha de carreira, o modo de vida, a opinião sobre um assunto que para você é central. Os almoços de domingo viram debate. Alguém se exalta, alguém se cala, e ninguém sai respeitado.', sente:'Que não pode ser quem é na casa onde cresceu. Para um adulto, ouvir dos pais que a sua visão de mundo é um erro costuma doer mais do que qualquer discordância com um amigo.', erro:'Tentar convencer. Mandar o texto, o vídeo, o “lê isso aqui com calma”. Ou tratar a diferença como uma fase que vai passar. O filho costuma ler as duas coisas como a mesma: “você não aceita quem eu sou”.', passo:'Separar concordar de aceitar. Você não precisa mudar de opinião. Precisa decidir que a relação vale mais que vencer esse assunto, e tirar o tema da mesa de forma concreta.'},
+ 4:{nome:'pela nova casa', titulo:'Pela nova casa', img:'img/nova_casa.jpg', comeca:'O filho casa, ou passa a morar com alguém, ou tem o primeiro filho. A rotina muda e as decisões passam a ser tomadas a dois. Uma situação comum é a mãe que percebe que o filho já não responde sozinho pelo que vai fazer no Natal: ele precisa “ver com a esposa”. E isso é lido como perda.', sente:'Dividido. Ele ama vocês e ama a pessoa com quem construiu uma casa. Quando sente que precisa escolher, costuma escolher a casa onde dorme. Não por falta de amor, mas porque é ali que a vida dele acontece agora.', erro:'Procurar um culpado. “Ele era outro antes de conhecer essa menina.” Nomear a nora ou o genro como adversário obriga o seu filho a defender essa pessoa, e ele costuma defender.', passo:'Tratar a casa do seu filho como uma casa de verdade, com regras próprias, que você visita e não administra. Antes de qualquer gesto, perguntar-se: isto ajuda essa casa a ficar em paz, ou pede que ele escolha um lado?'},
+ 5:{nome:'pelo passado', titulo:'Pelo passado', img:'img/passado.jpg', comeca:'O filho, já adulto, começa a falar da infância de um jeito que você não reconhece. Às vezes depois de iniciar uma terapia. Às vezes depois de ter os próprios filhos. Ele descreve uma casa que não é a casa de que você se lembra, e as conversas sobre isso terminam mal.', sente:'Que precisa que a história dele seja ouvida antes de qualquer outra coisa. Quando conta e ouve “não foi assim” ou “eu fiz o que pude”, sente que aquilo que doeu foi apagado pela segunda vez.', erro:'Defender-se. Corrigir a versão dele, explicar o contexto, lembrar de tudo que foi feito de bom. A defesa pode até ser verdadeira; o problema é que ela chega antes da escuta e soa como negação.', passo:'Escutar uma vez inteira, sem corrigir. Nem concordar, nem discordar: “eu não sabia que você viveu assim, e quero ouvir”.'},
+ 6:{nome:'por uma briga', titulo:'Por uma briga', img:'img/briga.jpg', comeca:'Com data. Um episódio que os dois sabem contar: a discussão no casamento, a frase no velório, o Natal em que alguém saiu da mesa. A partir dali o contato cai de uma vez, e cada lado guarda uma versão.', sente:'Orgulho ferido, muitas vezes misturado com alívio. A briga deu a ele uma razão clara para se afastar de um tipo de convivência que já o desgastava. Por isso, resolver a briga nem sempre resolve o afastamento.', erro:'Querer encerrar o assunto. “Precisamos conversar sobre aquele dia.” “Vamos esquecer o que aconteceu.” Ou insistir na própria versão até ele admitir que exagerou. Tudo isso tende a reabrir o episódio.', passo:'Parar de julgar a briga. Não é mais sobre quem tinha razão. Se houver algo seu para reparar naquele dia, repare de forma curta e sem “mas”. Se não houver, deixe o episódio quieto e cuide do padrão que o antecedeu.'},
+ 7:{nome:'sem motivo aparente', titulo:'Sem motivo aparente', img:'img/sem_motivo.jpg', comeca:'Devagar. Não houve briga, mudança, casamento, dinheiro. O filho foi respondendo menos, aparecendo menos, saiu do grupo da família “porque tinha muita mensagem”. Quando você pergunta se aconteceu alguma coisa, ele diz que não. E talvez não esteja mentindo.', sente:'Com frequência, um cansaço que ele mesmo não sabe nomear. Não há um fato; há um acúmulo de pequenas coisas que, somadas, fizeram a presença dos pais pesar mais do que acolher.', erro:'Caçar o motivo. Perguntar de novo, perguntar aos irmãos, perguntar à nora, reler conversas antigas em busca da frase que teria causado tudo. Cada investigação costuma chegar como mais uma cobrança.', passo:'Aceitar o “não sei” como ponto de partida, e não como derrota. Em vez de procurar o fato, olhe para o padrão: releia os seus últimos contatos com o radar na mão.'}
+};
+
+/* Arquétipo = o jeito como a saudade tem agido. Nomeado pelo gesto, nunca pelo defeito.
+   Cada um aponta para uma das 5 trocas do método. */
+const ARQ = {
+ insiste:{ f:'A mãe que insiste', m:'O pai que insiste', img:'img/insiste.jpg', frase:'Você não desiste. Manda a mensagem, o áudio, o bom-dia. Quando não vem resposta, manda outra.',
+   voce:'Ninguém pode dizer que você não tentou. O problema nunca foi a quantidade de amor; foi o formato em que ele chega. Cada mensagem que pede resposta vira, do outro lado, mais uma conta a pagar. E quem deve, adia.',
+   outro:()=>`${P.Ele} vê o seu nome na tela e sente, antes de abrir, que vai ser cobrado. Então deixa para depois. O depois vira dias. E você manda mais uma, porque o silêncio dói.`,
+   troca:['cobrança','convite'], trocaTexto:'Nada do que você manda precisa de resposta. Uma foto, uma notícia, um “lembrei de você”. Presença sem fatura. É isso que o contato sem alarme ensina a fazer, mensagem por mensagem.', cap:[5,6,9] },
+ espera:{ f:'A mãe que espera', m:'O pai que espera', img:'img/espera.jpg', frase:'Você parou de mandar. Decidiu que, se for para voltar, que venha da parte dele. E fica olhando o telefone.',
+   voce:'Pode ter sido sabedoria: parar de cobrar costuma ser um bom começo. Mas esperar em silêncio também é uma mensagem, e o seu filho pode estar lendo nela exatamente o que você mais teme: “ela desistiu de mim”.',
+   outro:()=>`${P.Ele} também espera. Talvez por um sinal de que a porta está aberta sem condições. Dois silêncios, cada um achando que o outro deveria dar o primeiro passo.`,
+   troca:['expectativa','curiosidade'], trocaTexto:'Sair da espera sem voltar à cobrança. Um contato pequeno, sem pedido, que diz “estou aqui” sem perguntar “quando você volta?”. O livro mostra como escrever esse contato e o que fazer quando a resposta demora.', cap:[6,9,11] },
+ explica:{ f:'A mãe que explica', m:'O pai que explica', img:'img/explica.jpg', frase:'Você escreve longo. Conta o seu lado, lembra o contexto, mostra que fez o que pôde. Quer que ele entenda.',
+   voce:'Tudo o que você escreve pode ser verdade. O problema é a ordem: a explicação chega antes da escuta e, por isso, do outro lado soa como defesa. E defesa, para quem está magoado, é o mesmo que negação.',
+   outro:()=>`${P.Ele} lê e pensa: “de novo ela está se justificando”. O que ${P.ele} queria ouvir não era a sua versão. Era que a versão ${P.dele} coubesse na conversa.`,
+   troca:['defesa','reparação'], trocaTexto:'Trocar o “deixa eu explicar” por “eu quero ouvir”. Uma reparação curta, sem “mas”, vale mais que dez páginas de contexto. O capítulo 11 mostra como reparar sem se justificar.', cap:[7,8,11] },
+ cuida:{ f:'A mãe que cuida', m:'O pai que cuida', img:'img/cuida.jpg', frase:'Você manda a marmita, o presente, a ajuda com a conta. É o seu jeito de dizer “estou aqui”.',
+   voce:'Cuidar é o que você sabe fazer melhor, e sempre funcionou. Mas o cargo de responsável foi extinto: para um adulto, ajuda que chega sem pedido pode soar como “você não dá conta sozinho”. E aí o cuidado vira dívida.',
+   outro:()=>`${P.Ele} aceita, agradece, e se sente um pouco menor a cada vez. Não sabe como recusar sem magoar. Então recebe e se afasta, para não ter de recusar.`,
+   troca:['resgate','confiança'], trocaTexto:'Trocar o resgate pela confiança: oferecer só quando pedido, e perguntar antes de resolver. O livro tem um capítulo inteiro sobre dinheiro, ajuda e o que cada gesto diz.', cap:[1,8,10] },
+ aliados:{ f:'A mãe que busca aliados', m:'O pai que busca aliados', img:'img/aliados.jpg', frase:'Você pergunta ao irmão, à tia, à nora. Pede que alguém fale com ele. Quer entender, e quer que alguém ajude.',
+   voce:'É natural: quando a porta fecha, a gente procura outra janela. Mas cada pessoa que você aciona chega ao seu filho como pressão vinda de todos os lados. E ele se fecha mais, agora também para quem levou o recado.',
+   outro:()=>`${P.Ele} descobre que a família inteira está falando ${P.dele}. Sente-se cercado, e exposto. A reação costuma ser sair do grupo, literalmente.`,
+   troca:['conselho','pergunta'], trocaTexto:'Deixar de recrutar e passar a perguntar, direto e sem intermediário, uma coisa só: “o que eu posso fazer diferente?”. O livro traz a pergunta certa para cada tipo de afastamento, e o que fazer com a resposta.', cap:[3,6,10] }
+};
+
+/* ============================================================
+   ESTADO E PERSONALIZAÇÃO
+   ============================================================ */
+const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let resp = {}, pesos = {}, hist = [], i = 0, lead = {};
+const P = {};
+function atualizarP(){
+  const f = resp.filho;
+  P.ele = f==='ela' ? 'ela' : 'ele';
+  P.Ele = P.ele.charAt(0).toUpperCase()+P.ele.slice(1);
+  P.dele = f==='ela' ? 'dela' : 'dele';
+  P.oFilho = f==='ela' ? 'a sua filha' : 'o seu filho';
+  P.mae = resp.quem==='pai' ? 'm' : 'f';
+  P.oMesmo = resp.quem==='pai' ? 'o mesmo pai' : 'a mesma mãe';
+  const t = resp.tempo;
+  P.tempoFrase = t===undefined ? '' : ['Menos de seis meses.','Entre seis meses e dois anos.','Entre dois e cinco anos.','Mais de cinco anos.'][t] + ' É um tempo que pesa.';
+  const tt = resp.tentou||[];
+  P.tentouFrase = tt.includes('explicar') ? 'Você contou que já tentou explicar o seu lado por mensagem. É o que quase todo pai e mãe faz primeiro.' : tt.includes('silencio') ? 'Você contou que tem ficado em silêncio. Às vezes é o mais sensato; às vezes é só mais uma espera.' : 'Quase todo pai e mãe começa pela mensagem.';
+}
+const txt = v => typeof v==='function' ? v() : v;
+
+/* ============================================================
+   NAVEGAÇÃO
+   ============================================================ */
+const tela = document.getElementById('tela'), barra = document.getElementById('barra'), passo = document.getElementById('passo');
+const acao = document.getElementById('acao'), seguir = document.getElementById('seguir'), voltar = document.getElementById('voltar');
+const CONTA = ['single','multi','insert','espelho'];
+const total = T.filter(t=>CONTA.includes(t.type)).length;
+const progresso = idx => T.slice(0, idx+1).filter(t=>CONTA.includes(t.type)).length;
+function evento(nome, dados){ try{ if (window.fbq) fbq('trackCustom', nome, dados||{}); }catch(e){} }
+
+function ir(idx, dir=1){
+  while (idx < T.length && T[idx].skipIf && T[idx].skipIf(resp)) idx += dir;
+  i = Math.max(0, Math.min(idx, T.length-1));
+  atualizarP(); render(); window.scrollTo({top:0, behavior:'instant'});
+}
+function avancar(){ hist.push(i); ir(i+1, 1); }
+function retroceder(){ if (!hist.length) return; i = hist.pop(); atualizarP(); render(); window.scrollTo({top:0, behavior:'instant'}); }
+voltar.onclick = retroceder;
+
+function render(){
+  const t = T[i], n = progresso(i);
+  barra.style.width = (['capture','loading','result'].includes(t.type) ? 100 : Math.round(n/total*100)) + '%';
+  passo.textContent = CONTA.includes(t.type) ? `${n} de ${total}` : (t.type==='capture' ? 'Resultado' : '');
+  voltar.disabled = !hist.length || ['result','loading'].includes(t.type);
+  acao.classList.add('hidden'); seguir.disabled = false; seguir.onclick = null;
+  tela.innerHTML = '';
+  const box = document.createElement('div'); box.className = 'animate-entra'; tela.appendChild(box);
+  ({intro, single, multi, insert, espelho, capture, loading, result})[t.type](t, box);
+}
+const rotulo = b => `<span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-terra-escura mb-3">${b}</span>`;
+const h2 = q => `<h2 class="font-serif font-semibold text-verde text-[clamp(26px,6.2vw,34px)] leading-[1.2] mb-5">${q}</h2>`;
+const cred = () => (AUTORA.nome&&AUTORA.crp) ? `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp}` : '[Nome], psicóloga · CRP XX/XXXXX';
+
+/* ---- telas ---- */
+function intro(t, box){
+  box.innerHTML = `
+    <div class="rounded-[26px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[4/3] mb-6 bg-areia">
+      <img src="../img/abertura.jpg" alt="Mãe olhando o celular, à espera" class="w-full h-full object-cover">
+    </div>
+    ${rotulo('Teste · 7 tipos de afastamento')}
+    <h1 class="font-serif font-semibold text-verde text-[clamp(30px,7.4vw,40px)] leading-[1.12] mb-4">Qual é o afastamento da sua família?</h1>
+    <p class="text-[20px] mb-4">Cada afastamento tem uma causa, e a causa diz o que fazer. O gesto que ajuda num tipo pode piorar outro.</p>
+    <p class="text-[20px] mb-5">No final, você recebe o seu resultado: <strong class="text-verde">o tipo de afastamento da sua família</strong>, <strong class="text-verde">o jeito como você tem reagido a ele</strong> e o primeiro passo do seu lado.</p>
+    <ul class="text-[17px] text-suave space-y-1">
+      <li class="flex gap-2"><span class="text-verde font-extrabold">✓</span> Cerca de 4 minutos, uma pergunta por tela</li>
+      <li class="flex gap-2"><span class="text-verde font-extrabold">✓</span> Nenhuma pergunta sobre saúde</li>
+      <li class="flex gap-2"><span class="text-verde font-extrabold">✓</span> O resultado chega na tela e no seu e-mail</li>
+    </ul>`;
+  seguir.textContent = 'Começar o teste';
+  acao.classList.remove('hidden');
+  seguir.onclick = ()=>{ evento('TesteIniciado'); avancar(); };
+}
+
+function opcaoHTML(o, k, tipo){
+  const [texto,,,ico] = o;
+  const marcador = ico && !ico.startsWith('img/')
+    ? `<span class="icone shrink-0 w-12 h-12 rounded-xl bg-creme text-verde grid place-items-center [&>svg]:w-7 [&>svg]:h-7 transition">${ico}</span>`
+    : `<span class="bolinha relative shrink-0 w-7 h-7 ${tipo==='multi'?'rounded-lg':'rounded-full'} border-2 border-linha bg-creme transition"></span>`;
+  return `<button type="button" data-i="${k}" class="opcao w-full text-left flex items-center gap-4 bg-white border-2 border-linha rounded-2xl px-4 py-3.5 text-[19px] leading-snug shadow-[0_6px_18px_rgba(31,78,70,.06)] hover:border-verde/50">
+    ${marcador}<span class="flex-1">${txt(texto)}</span>
+    ${tipo==='multi' ? `<span class="bolinha relative shrink-0 w-6 h-6 rounded-md border-2 border-linha bg-creme transition"></span>` : ''}</button>`;
+}
+function fotoHTML(o, k){
+  const [texto,,,img] = o;
+  return `<button type="button" data-i="${k}" class="opcao relative text-left bg-white border-2 border-linha rounded-[22px] overflow-hidden shadow-[0_10px_30px_rgba(31,78,70,.08)] hover:border-verde/50">
+    <span class="block aspect-square bg-areia"><img src="${img}" alt="" class="w-full h-full object-cover"></span>
+    <span class="selo absolute top-3 right-3 w-9 h-9 rounded-full bg-verde text-white grid place-items-center [&>svg]:w-5 [&>svg]:h-5 shadow">${I.sim}</span>
+    <span class="block px-4 py-3 font-serif font-semibold text-verde text-[22px] text-center">${txt(texto)}</span></button>`;
+}
+
+function single(t, box){
+  const grade = t.layout==='foto';
+  box.innerHTML = `${rotulo(t.bloco)}${h2(txt(t.q))}${t.sub?`<p class="text-suave text-[17px] -mt-2 mb-4">${t.sub}</p>`:''}
+    <div class="${grade?'grid grid-cols-2 gap-4':'space-y-3'}">${t.ops.map((o,k)=>grade?fotoHTML(o,k):opcaoHTML(o,k,'single')).join('')}</div>`;
+  const atual = resp[t.id];
+  box.querySelectorAll('.opcao').forEach(b=>{
+    const k = +b.dataset.i;
+    if (atual!==undefined && (t.ops[k][2]??k)===atual) b.classList.add('marcada');
+    b.onclick = ()=>{
+      box.querySelectorAll('.opcao').forEach(x=>x.classList.remove('marcada'));
+      b.classList.add('marcada');
+      resp[t.id] = t.ops[k][2] ?? k; pesos[t.id] = t.ops[k][1];
+      evento('TesteResposta', {tela:t.id});
+      setTimeout(avancar, 360);
+    };
+  });
+}
+
+function multi(t, box){
+  box.innerHTML = `${rotulo(t.bloco)}${h2(txt(t.q))}<p class="text-suave text-[17px] -mt-2 mb-4">${t.sub||''}</p>
+    <div class="space-y-3">${t.ops.map((o,k)=>opcaoHTML(o,k,'multi')).join('')}</div>`;
+  let sel = new Set((resp[t.id]||[]).map(ch=>t.ops.findIndex(o=>o[2]===ch)).filter(x=>x>=0));
+  const exclusivo = t.ops.findIndex(o=>o[2]==='nada');
+  const pinta = ()=>{ box.querySelectorAll('.opcao').forEach(b=>b.classList.toggle('marcada', sel.has(+b.dataset.i))); seguir.disabled = sel.size===0; };
+  box.querySelectorAll('.opcao').forEach(b=>{ b.onclick = ()=>{ const k=+b.dataset.i;
+    if (k===exclusivo){ sel = sel.has(k)? new Set() : new Set([k]); } else { sel.delete(exclusivo); sel.has(k)? sel.delete(k) : sel.add(k); }
+    pinta(); }; });
+  pinta();
+  seguir.textContent = 'Continuar'; acao.classList.remove('hidden');
+  seguir.onclick = ()=>{ resp[t.id] = [...sel].map(k=>t.ops[k][2]); const p={}; sel.forEach(k=>{ for (const tp in t.ops[k][1]) p[tp]=(p[tp]||0)+t.ops[k][1][tp]; }); pesos[t.id]=p; avancar(); };
+}
+
+function insert(t, box){
+  box.innerHTML = `
+    <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-6 bg-areia"><img src="${t.img}" alt="${t.alt}" class="w-full h-full object-cover"></div>
+    ${rotulo(t.sobre)}${h2(t.titulo)}
+    <p class="text-[20px] leading-[1.6]">${txt(t.texto)}</p>
+    <p class="mt-5 text-[15.5px] text-suave">${cred()}</p>`;
+  seguir.textContent = 'Continuar'; acao.classList.remove('hidden'); seguir.onclick = avancar;
+}
+
+/* espelho: devolve a cena do tipo que a pessoa acabou de marcar */
+const ESPELHO = {
+  dist:  ()=>[`A videochamada acabou. A casa ficou em silêncio.`, `Não houve briga. Houve espaço, e o espaço foi se enchendo de outras coisas. ${P.Ele} não liga menos porque ama menos. Liga menos porque toda ligação começa com “você sumiu”.`],
+  din:   ()=>[`O dinheiro raramente é a causa. É onde a tensão ganha forma.`, `Um empréstimo que não voltou, uma ajuda que virou obrigação, uma herança dividida. Cada vez que o valor volta à conversa, mesmo de brincadeira, ${P.ele} confirma uma suspeita: a de que a relação tem preço.`],
+  val:   ()=>[`O almoço de domingo virou debate. E ninguém sai respeitado.`, `Para um adulto, ouvir dos pais que a sua visão de mundo é um erro dói mais que qualquer discordância com um amigo. Vem de quem ${P.ele} mais queria que ${P.ele==='ela'?'a':'o'} aceitasse.`],
+  casa:  ()=>[`${P.Ele} agora precisa “ver com ${P.ele==='ela'?'o marido':'a esposa'}”. E isso é lido como perda.`, `Não é falta de amor. É que a vida ${P.dele} acontece em outra casa agora, com regras próprias, que você visita e não administra. Quando sente que precisa escolher, ${P.ele} escolhe a casa onde dorme.`],
+  pass:  ()=>[`${P.Ele} descreve uma casa que não é a casa de que você se lembra.`, `Quando conta e ouve “não foi assim”, sente que aquilo que doeu foi apagado pela segunda vez. A sua versão pode ser verdadeira. O problema é que ela chega antes da escuta.`],
+  briga: ()=>[`Tem data. Os dois sabem contar.`, `A partir daquele dia o contato caiu de uma vez, e cada lado guarda uma versão. Resolver a briga nem sempre resolve o afastamento, porque muitas vezes a briga só deu nome a um cansaço que já existia.`],
+  sem:   ()=>[`Não houve briga, mudança, casamento, dinheiro. Foi devagar.`, `${P.Ele} diz que não aconteceu nada, e talvez não esteja mentindo. Não há um fato; há um acúmulo de pequenas coisas. Caçar o motivo costuma chegar do outro lado como mais uma cobrança.`]
+};
+const IMG_ESPELHO = {dist:'img/distancia.jpg',din:'img/dinheiro.jpg',val:'img/valores.jpg',casa:'img/nova_casa.jpg',pass:'img/passado.jpg',briga:'img/briga.jpg',sem:'img/sem_motivo.jpg'};
+function espelho(t, box){
+  const k = resp.comeco || 'sem'; const [tit, texto] = ESPELHO[k]();
+  box.innerHTML = `
+    <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-6 bg-areia animate-revela"><img src="${IMG_ESPELHO[k]}" alt="" class="w-full h-full object-cover"></div>
+    ${rotulo('Você marcou')}${h2(tit)}
+    <p class="text-[20px] leading-[1.6]">${texto}</p>
+    <p class="mt-4 text-[17px] text-suave">Se não for bem isso, tudo bem: as próximas perguntas ajustam o resultado.</p>`;
+  seguir.textContent = 'Continuar'; acao.classList.remove('hidden'); seguir.onclick = avancar;
+}
+
+function capture(t, box){
+  box.innerHTML = `${rotulo('Pronto')}${h2('Para onde mando o seu resultado?')}
+    <p class="text-[19px] mb-5">Ele aparece aqui na tela e vai também para o seu e-mail, para você reler com calma.</p>
+    <form id="form" class="space-y-4" novalidate>
+      <label class="block"><span class="block text-[15px] font-extrabold tracking-wider uppercase text-suave mb-1">Seu primeiro nome</span>
+        <input name="nome" type="text" autocomplete="given-name" required class="w-full bg-white border-2 border-linha rounded-2xl px-5 py-4 text-[20px] focus:outline-none focus:border-verde" placeholder="Como você gosta de ser chamado"></label>
+      <label class="block"><span class="block text-[15px] font-extrabold tracking-wider uppercase text-suave mb-1">Seu e-mail</span>
+        <input name="email" type="email" autocomplete="email" inputmode="email" required class="w-full bg-white border-2 border-linha rounded-2xl px-5 py-4 text-[20px] focus:outline-none focus:border-verde" placeholder="nome@exemplo.com.br"></label>
+      <label class="flex items-start gap-3 bg-white border-2 border-linha rounded-2xl px-5 py-4 cursor-pointer">
+        <input name="zap" type="checkbox" class="mt-1.5 w-5 h-5 accent-verde"><span class="text-[17px] leading-snug">Quero receber também pelo WhatsApp <span class="text-suave">(opcional)</span></span></label>
+      <div id="zapcampo" class="hidden"><label class="block"><span class="block text-[15px] font-extrabold tracking-wider uppercase text-suave mb-1">WhatsApp com DDD</span>
+        <input name="tel" type="tel" autocomplete="tel" inputmode="tel" class="w-full bg-white border-2 border-linha rounded-2xl px-5 py-4 text-[20px] focus:outline-none focus:border-verde" placeholder="(11) 9 9999-9999"></label></div>
+      <p id="erro" class="hidden text-terra-escura font-bold text-[16px]">Confira o nome e o e-mail.</p>
+      <p class="text-[14px] leading-snug text-suave">Ao continuar, você autoriza o envio do seu resultado e de e-mails educativos de ${cred()}. Pode se descadastrar em qualquer mensagem. Nenhuma resposta é compartilhada. Conteúdo educativo. Não substitui psicoterapia.</p>
+    </form>`;
+  const form = box.querySelector('#form');
+  form.zap.onchange = ()=> box.querySelector('#zapcampo').classList.toggle('hidden', !form.zap.checked);
+  seguir.textContent = 'Ver o meu resultado'; acao.classList.remove('hidden');
+  seguir.onclick = ()=>{
+    const nome = form.nome.value.trim(), email = form.email.value.trim();
+    const ok = nome.length>=2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    box.querySelector('#erro').classList.toggle('hidden', ok); if (!ok) return;
+    lead = { nome, email, zap: form.zap.checked ? form.tel.value.trim() : '' };
+    evento('TesteLead'); avancar();
+  };
+}
+
+/* ---- cálculo ---- */
+function calcular(){
+  const pts = {1:0,2:0,3:0,4:0,5:0,6:0,7:0};
+  for (const id in pesos) for (const k in pesos[id]) pts[k]+=pesos[id][k];
+  for (const k in (pesos.comeco||{})) pts[k]+=0.5;
+  const ordem = Object.keys(pts).sort((a,b)=>pts[b]-pts[a]);
+  const n=+ordem[0], n2 = pts[ordem[1]] > 0 && pts[ordem[1]] >= pts[ordem[0]]*0.6 ? +ordem[1] : null;
+  return {n, n2, pts, arq: arquetipo()};
+}
+function arquetipo(){
+  const a = {insiste:0, espera:0, explica:0, cuida:0, aliados:0};
+  const tt = resp.tentou||[];
+  if (tt.includes('explicar')) a.explica+=3; if (tt.includes('pedir')) a.insiste+=2; if (tt.includes('ajuda')) a.cuida+=3;
+  if (tt.includes('parente')) a.aliados+=3; if (tt.includes('silencio')) a.espera+=3;
+  if (resp.freq==='dia') a.insiste+=3; if (resp.freq==='semana') a.insiste+=1; if (resp.freq==='raro') a.espera+=1; if (resp.freq==='parei') a.espera+=3;
+  if (resp.inicia==='eu') a.insiste+=1; if (resp.inicia==='ninguem') a.espera+=1; if (resp.inicia==='ele') a.cuida+=1;
+  if (resp.visu==='varias') a.insiste+=1;
+  if (resp.outra==='nora'||resp.outra==='parente') a.aliados+=1;
+  if (resp.comeco==='pass'||resp.frase==='inf') a.explica+=1; if (resp.comeco==='din') a.cuida+=1;
+  if (resp.pesa==='culpa') a.explica+=1; if (resp.pesa==='parentes') a.aliados+=1;
+  const ordem = Object.keys(a).sort((x,y)=>a[y]-a[x]);
+  return a[ordem[0]]>0 ? ordem[0] : 'espera';
+}
+
+function loading(t, box){
+  const nomes = Object.values(TIPOS).map(x=>x.titulo);
+  box.innerHTML = `<div class="text-center pt-10">
+    <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-verde to-verde-escuro grid place-items-center animate-pulso shadow-[0_18px_44px_rgba(31,78,70,.25)]">
+      <svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#e8d9b8" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+    <h2 class="font-serif font-semibold text-verde text-[28px] mt-7 mb-2">Lendo as suas respostas<span class="ponto animate-ponto">.</span><span class="ponto animate-ponto">.</span><span class="ponto animate-ponto">.</span></h2>
+    <p id="lista" class="text-suave text-[18px] min-h-[32px]"></p></div>`;
+  const lista = box.querySelector('#lista'); let k=0;
+  const iv = setInterval(()=>{ if (k<nomes.length) lista.textContent = 'Comparando com: ' + nomes[k++].toLowerCase(); else lista.textContent = 'Lendo o jeito como você tem reagido…'; }, 380);
+  const r = calcular(); salvar(r);
+  setTimeout(()=>{ clearInterval(iv); avancar(); }, 380*nomes.length + 1100);
+}
+
+function salvar(r){
+  lsSet('pfa_quiz', { ...lead, n:r.n, n2:r.n2, arq:r.arq, resp, quando:new Date().toISOString() });
+  if (!API) return;
+  const corpo = { nome:lead.nome, email:lead.email, optin_whatsapp: !!lead.zap, whatsapp: lead.zap||undefined,
+    tipo_afastamento: TIPO_BD[r.n], tipo_secundario: r.n2?TIPO_BD[r.n2]:undefined, arquetipo:r.arq, origem:'quiz', respostas: resp };
+  const q = new URLSearchParams(location.search);
+  for (const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']) if (q.get(k)) corpo[k]=q.get(k);
+  fetch(API+'/lead-teste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo),keepalive:true}).catch(()=>{});
+}
+
+function result(t, box){
+  const r = calcular(), tp = TIPOS[r.n], tp2 = r.n2 ? TIPOS[r.n2] : null, A = ARQ[r.arq];
+  atualizarP();
+  const arqNome = A[P.mae];
+  const ecos = [];
+  if (resp.freq==='dia' && (resp.visu==='varias'||resp.visu==='algumas')) ecos.push(`Você contou que tenta contato quase todo dia e que ${P.ele} visualiza e não responde. Nesse tipo, a frequência costuma ser lida como cobrança, mesmo quando é saudade.`);
+  else if (resp.freq==='parei') ecos.push(`Você contou que parou de tentar. Parar de cobrar costuma ser um bom começo; parar de existir, não. O primeiro passo abaixo é o meio-termo.`);
+  if (resp.outra==='nora') ecos.push(`Você marcou que a nora ou o genro pesa nesse contato. O livro tem uma aula só sobre isso. A regra de ouro: não transformar essa pessoa em adversária, porque cada crítica a ela chega ao seu filho como crítica à escolha dele.`);
+  if (resp.saberia==='medo'||resp.saberia==='ns') ecos.push(`Você disse que não saberia o que responder se ${P.ele} escrevesse hoje. É mais comum do que parece. É para isso que existem as 30 mensagens-modelo que acompanham o livro.`);
+  const alerta = (resp.comeco==='pass' || resp.frase==='inf' || (resp.tentou||[]).includes('prof'));
+  const caps = [...new Set([...A.cap, ...RELER[r.n]])].slice(0,4).sort((a,b)=>a-b);
+  box.innerHTML = `
+    ${rotulo('O seu resultado')}
+    <p class="text-[19px] mb-1">${lead.nome||''}, pelo jeito como você tem reagido, você é…</p>
+    <h1 class="font-serif font-semibold text-verde text-[clamp(34px,8.6vw,46px)] leading-[1.08] mb-4 animate-revela">${arqNome}.</h1>
+    <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-5 bg-areia animate-revela atraso-1"><img src="${A.img}" alt="" class="w-full h-full object-cover"></div>
+    <p class="font-serif italic text-[22px] text-verde-escuro leading-snug mb-4">${A.frase}</p>
+    <div class="resultado text-[19px]">
+      <p>${A.voce}</p>
+      <p><strong>Do outro lado.</strong> ${txt(A.outro)}</p>
+      <div class="bg-white border border-linha rounded-2xl px-5 py-4 my-5">
+        <span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-terra-escura mb-2">A troca que mais pesa para você</span>
+        <p class="font-serif text-[24px] text-verde mb-2"><span class="line-through decoration-terra/70 opacity-70">${A.troca[0]}</span> <span class="text-terra-escura">→</span> ${A.troca[1]}</p>
+        <p class="mb-0">${A.trocaTexto}</p>
+      </div>
+      <p class="text-[17px] text-suave">Isso não é quem você é. É o jeito que a saudade encontrou para agir. E jeito se troca.</p>
+    </div>
+
+    <hr class="border-linha my-8">
+    ${rotulo('E o afastamento da sua família')}
+    <h2 class="font-serif font-semibold text-verde text-[clamp(28px,7vw,38px)] leading-[1.1] mb-4">É ${tp.nome}.</h2>
+    ${tp2 ? `<p class="text-[17px] text-suave mb-5 bg-white border border-linha rounded-2xl px-5 py-3">Com traços do afastamento <strong class="text-verde">${tp2.nome}</strong>. É comum se reconhecer em dois. O primeiro explica o começo; o que pesa mais hoje indica o primeiro passo.</p>` : ''}
+    <div class="resultado text-[19px]">
+      <p><strong>Como costuma começar.</strong> ${tp.comeca}</p>
+      <p><strong>O que ${P.oFilho} costuma estar sentindo.</strong> ${tp.sente}</p>
+      <p><strong>O erro mais comum.</strong> ${tp.erro}</p>
+      <div class="bg-white border border-linha border-l-[6px] border-l-terra rounded-2xl px-5 py-4 my-5"><p class="mb-0"><strong>Um primeiro passo.</strong> ${tp.passo}</p></div>
+      ${ecos.map(e=>`<p class="text-verde-escuro bg-areia/50 rounded-2xl px-5 py-4">${e}</p>`).join('')}
+      ${alerta ? `<p class="text-[17px] text-suave border border-linha rounded-2xl px-5 py-4">Se a história envolver violência, abuso ou um sofrimento muito intenso, este teste e o livro não são o lugar: procure um psicólogo ou psiquiatra. Em crise, o CVV atende no <strong>188</strong>, 24 horas, de graça.</p>` : ''}
+      <p class="text-[17px] text-suave">Os tipos são um mapa, não um rótulo. Servem para escolher um caminho, não para dar nome à dor. Uma cópia deste resultado vai para ${lead.email||'o seu e-mail'}.</p>
+    </div>
+
+    <div class="mt-8 rounded-[24px] overflow-hidden bg-gradient-to-br from-verde to-verde-escuro text-white shadow-[0_18px_44px_rgba(31,78,70,.25)]">
+      <div class="aspect-[16/8] bg-areia"><img src="img/esperanca.jpg" alt="" class="w-full h-full object-cover"></div>
+      <div class="px-6 py-7">
+        <span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-areia mb-2">O seu próximo passo</span>
+        <h2 class="font-serif font-semibold text-[26px] leading-tight mb-3">Trocar ${A.troca[0]} por ${A.troca[1]}, no afastamento ${tp.nome}.</h2>
+        <p class="text-[18px] text-[#d6e2dc] mb-4">É exatamente isso que <em>O Caminho de Volta</em> ensina, capítulo por capítulo. Para o seu caso, os capítulos ${caps.slice(0,-1).join(', ')} e ${caps[caps.length-1]} conversam direto com o seu resultado.</p>
+        <ul class="text-[17px] text-[#e6eeea] space-y-2 mb-4">
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Mensagens Sem Alarme</strong>: 30 modelos prontos, para a hora em que você não sabe o que escrever</span></li>
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Audiobook</strong> na voz da autora, para ouvir sem precisar enxergar a tela</span></li>
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>O radar em uma página</strong>, para colar na geladeira antes de enviar</span></li>
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span>O teste completo, o Diário Sem Alarme e três aulas gravadas</span></li>
+        </ul>
+        <p class="text-[15px] text-[#bfd0c8]">Guia educativo escrito por ${cred()}. Garantia de 30 dias.</p>
+      </div>
+    </div>`;
+  seguir.textContent = 'Conhecer O Caminho de Volta'; acao.classList.remove('hidden');
+  seguir.onclick = ()=>{ evento('TesteResultado', {tipo:TIPO_BD[r.n], arq:r.arq}); location.href = PAGINA_LIVRO + '?tipo=' + TIPO_BD[r.n] + '&arq=' + r.arq + (r.n2?'&tipo2='+TIPO_BD[r.n2]:''); };
+  evento('TesteConcluido', {tipo:TIPO_BD[r.n], arq:r.arq});
+}
+
+if (AUTORA.nome && AUTORA.crp) document.getElementById('cred').textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp}`;
+ir(0);
+</script>
+</body>
+</html>
