@@ -13,7 +13,7 @@ Abrir <http://localhost:8790/>.
 ## Antes de ir ao ar
 
 - `CHECKOUT` no fim do `index.html`: link do checkout da Hotmart. Vazio, os botões levam ao bloco de preço.
-- Placeholders: `[Nome]`, `CRP XX/XXXXX`, `[X] anos`, `[abordagem]`, história de origem (após a entrevista), `[Razão social]`, `CNPJ`, `[endereço]`, `[e-mail de contato]`, garantia `[7 / 30]`, links de Política de privacidade e Termos de uso.
+- Placeholders: `[Nome]`, `CRP XX/XXXXX`, `[X] anos`, `[abordagem]`, história de origem (após a entrevista), `[Razão social]`, `CNPJ`, `[endereço]`, `[e-mail de contato]`, links de Política de privacidade e Termos de uso. Garantia definida: 30 dias (configurar o mesmo prazo na Hotmart). Falta o arquivo do bônus *O radar em uma página* na área de membros.
 - Imagens: foto da autora (4:5, ≥ 800 px, bloco `.foto`). A foto de abertura (`img/abertura.jpg`) pode ser trocada pela foto da autora se ela preferir aparecer no topo. Arte final da capa ainda não existe (o cartão sobre a foto usa um mini-mockup em CSS).
 - Rastreamento (Pixel / GA4): só com política de privacidade e banner de consentimento. O evento de compra fica no checkout.
 - Hospedagem (desde 18/10/2026): **GitHub Pages**, repositório público <https://github.com/Rdavifelix/o-caminho-de-volta> (conta Rdavifelix), branch `main`, raiz. URL do Pages: <https://rdavifelix.github.io/o-caminho-de-volta/>. Domínio: **paisdeadultos.com.br** (arquivo `CNAME`). Publicar = `git push` na `main`. O projeto do Vercel (`o-caminho-de-volta-teal.vercel.app`) continua no ar como cópia; pode ser apagado quando o domínio estiver funcionando.
