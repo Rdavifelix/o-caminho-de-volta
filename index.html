@@ -457,7 +457,7 @@ footer .aviso{color:#fff;font-size:16.5px}
   </div>
 </section>
 
-<!-- Bloco 9 — Preço e garantia. Formato: mockup + lista pontilhada + preço + botão. Pelo CFP: sem valor por item, sem "de/por", sem preço riscado, sem "limitado"; preço na mesma fonte do texto. -->
+<!-- Bloco 9 — Preço e garantia. Formato: mockup + lista com valor por item + "de R$ 497 por R$ 97" + botão. Decisão do Davi em 18/10/2026, contra a orientação de compliance (ver CLAUDE.md §3). -->
 <style>
 .oferta2{text-align:center;max-width:820px;margin:0 auto}
 .oferta2 .pilha-img{margin:0 auto 26px;max-width:860px}
@@ -467,6 +467,11 @@ footer .aviso{color:#fff;font-size:16.5px}
 .oferta2 ul.inclui .pt{flex:1 1 20px;border-bottom:2px dotted #c9bfa8;transform:translateY(-5px);min-width:20px}
 .oferta2 ul.inclui .ok{flex:0 0 auto;color:var(--verde);font-weight:800}
 .oferta2 ul.inclui .ok::before{content:'✓ ';}
+.oferta2 ul.inclui .val{flex:0 0 auto;font-weight:800;color:var(--tinta)}
+.oferta2 .depor{margin:4px 0 10px;line-height:1.2}
+.oferta2 .depor .de{display:block;font-size:20px;color:var(--suave)}
+.oferta2 .depor .de s{text-decoration-thickness:2px}
+.oferta2 .depor .por{display:block;font-family:var(--serif);font-size:clamp(34px,6vw,48px);font-weight:600;color:var(--terra-escura)}
 .oferta2 .ancora{max-width:640px;margin:0 auto 14px;font-size:19px;color:var(--suave)}
 .oferta2 .preco{font-size:20px;margin-bottom:6px}
 .oferta2 .preco b{font-weight:800}
@@ -479,9 +484,10 @@ footer .aviso{color:#fff;font-size:16.5px}
       <span class="sobre">Para começar hoje</span>
       <h2>Tudo isto, numa área só</h2>
       <div class="pilha-img"><img src="img/pilha.webp" alt="Os materiais de O Caminho de Volta: o livro, o audiobook e as mensagens no celular, o radar em uma página, o Caderno, o Diário Sem Alarme e as aulas gravadas" width="1813" height="868" loading="lazy"></div>
-      <ul class="inclui"><li><span class="it">O livro digital <em>O Caminho de Volta</em> (PDF, letra grande)</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O audiobook completo, narrado pela autora</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O teste "Qual é o afastamento da sua família?"</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">Mensagens Sem Alarme: 30 mensagens-modelo</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O radar em uma página</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O Caderno de exercícios</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O Diário Sem Alarme: 30 dias</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">Três aulas gravadas com a autora</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O vídeo com a tarefa de hoje e 14 dias de acompanhamento</span><span class="pt"></span><span class="ok">incluído</span></li></ul>
-      <p class="ancora">São nove materiais que, separados, seriam nove compras. Aqui é uma só, com tudo na mesma área: o que você levaria meses para juntar sozinho, pronto para começar hoje.</p>
-      <p class="preco"><em>O Caminho de Volta</em>, completo: <b>R$ 97</b>, pagamento único, no Pix ou em até 12x no cartão.</p>
+      <ul class="inclui"><li><span class="it">O livro digital <em>O Caminho de Volta</em> (PDF, letra grande)</span><span class="pt"></span><span class="val">R$ 97</span></li><li><span class="it">O audiobook completo, narrado pela autora</span><span class="pt"></span><span class="val">R$ 47</span></li><li><span class="it">O teste "Qual é o afastamento da sua família?"</span><span class="pt"></span><span class="val">R$ 27</span></li><li><span class="it">Mensagens Sem Alarme: 30 mensagens-modelo</span><span class="pt"></span><span class="val">R$ 47</span></li><li><span class="it">O radar em uma página</span><span class="pt"></span><span class="val">R$ 17</span></li><li><span class="it">O Caderno de exercícios</span><span class="pt"></span><span class="val">R$ 37</span></li><li><span class="it">O Diário Sem Alarme: 30 dias</span><span class="pt"></span><span class="val">R$ 47</span></li><li><span class="it">Três aulas gravadas com a autora</span><span class="pt"></span><span class="val">R$ 147</span></li><li><span class="it">O vídeo com a tarefa de hoje e 14 dias de acompanhamento</span><span class="pt"></span><span class="val">R$ 31</span></li></ul>
+      <p class="ancora">Somados, os nove materiais chegam a R$ 497. Numa compra só, com tudo na mesma área:</p>
+      <p class="depor"><span class="de">De <s>R$ 497</s></span> <span class="por">por R$ 97</span></p>
+      <p class="preco">Pagamento único, no Pix ou em até 12x no cartão.</p>
       <a class="btn wide" href="#" data-checkout>Quero começar O Caminho de Volta</a>
       <div class="selo">✓ &nbsp;30 dias para ler e pedir reembolso, sem explicação</div>
       <p>Leia com calma. Se, ao ler, você achar que o livro não é para você, é só pedir o reembolso pela plataforma. Você fica com a leitura e recebe o valor de volta.</p>
