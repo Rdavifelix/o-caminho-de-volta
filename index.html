@@ -358,30 +358,100 @@ footer .aviso{color:#fff;font-size:16.5px}
   </div>
 </section>
 
-<!-- Bloco 8 — O que você recebe -->
+<!-- Bloco 8 — O que você recebe. Mockups em CSS (sem imagem gerada); trocar a capa por arte real quando existir. Sem valor por item, sem "de/por", sem "limitado". -->
+
+<style>
+/* Bloco 8 — mockups dos entregáveis (CSS puro; trocar a capa por arte real quando existir) */
+.entregas{display:grid;gap:18px;margin-top:8px}
+.entrega{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:center;background:var(--cartao);border:1px solid var(--linha);border-radius:22px;padding:26px 28px}
+.entrega .num{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-escura);margin-bottom:6px;display:block}
+.entrega h3{margin-bottom:8px}
+.entrega p{font-size:18px;margin-bottom:8px}
+.entrega .como{font-size:16.5px;color:var(--suave);font-style:italic}
+.mk{position:relative;width:200px;height:200px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.mk *{box-sizing:border-box}
+/* livro */
+.mk-livro{width:128px;height:178px;border-radius:4px 10px 10px 4px;background:linear-gradient(160deg,#2a655b,var(--verde) 55%,var(--verde-escuro));color:#fff;padding:18px 14px;transform:perspective(600px) rotateY(-16deg);box-shadow:-10px 0 0 -3px #0f2a25,-14px 0 0 -4px #c9bfa8,18px 22px 36px rgba(31,78,70,.35);display:flex;flex-direction:column;justify-content:space-between}
+.mk-livro .t{font-family:var(--serif);font-size:19px;line-height:1.15;font-weight:600}
+.mk-livro .st{font-size:9px;line-height:1.3;opacity:.85;margin-top:8px}
+.mk-livro .au{font-size:9px;opacity:.9;border-top:1px solid rgba(255,255,255,.35);padding-top:6px}
+.mk-livro .selo{position:absolute;right:-8px;top:-8px;width:40px;height:40px;border-radius:50%;background:var(--terra);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1;box-shadow:0 4px 10px rgba(0,0,0,.25);transform:rotateY(16deg)}
+/* celular */
+.mk-fone{width:104px;height:196px;border-radius:22px;background:#1c1b19;padding:9px;box-shadow:0 18px 32px rgba(0,0,0,.28);transform:rotate(-5deg)}
+.mk-fone .tela{width:100%;height:100%;border-radius:15px;background:var(--creme);padding:16px 10px 10px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
+.mk-fone .cap{font-size:8px;font-weight:800;color:var(--terra-escura);letter-spacing:.06em;text-transform:uppercase}
+.mk-fone .tit{font-family:var(--serif);font-size:11px;line-height:1.2;color:var(--verde)}
+.mk-fone .onda{display:flex;align-items:flex-end;gap:2px;height:34px;margin-top:4px}
+.mk-fone .onda i{flex:1;background:var(--verde);border-radius:2px;opacity:.85}
+.mk-fone .play{width:30px;height:30px;border-radius:50%;background:var(--terra);margin:6px auto 0;position:relative}
+.mk-fone .play::after{content:'';position:absolute;left:11px;top:8px;border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.mk-fone .opc{background:#fff;border:1px solid var(--linha);border-radius:8px;padding:5px 7px;font-size:8px;line-height:1.2;color:var(--tinta)}
+.mk-fone .opc.on{border-color:var(--verde);background:#e9f1ee;font-weight:700}
+.mk-fone .bolha{background:#dcefe4;border-radius:10px 10px 10px 2px;padding:6px 7px;font-size:7.5px;line-height:1.3;color:var(--tinta)}
+.mk-fone .copiar{font-size:7.5px;color:var(--verde);font-weight:800;text-align:right}
+/* folhas */
+.mk-folhas{position:relative;width:132px;height:176px}
+.mk-folhas .f{position:absolute;inset:0;background:#fff;border:1px solid var(--linha);border-radius:6px;box-shadow:0 10px 22px rgba(31,78,70,.16)}
+.mk-folhas .f.b1{transform:rotate(-6deg) translate(-6px,4px)}
+.mk-folhas .f.b2{transform:rotate(4deg) translate(6px,2px)}
+.mk-folhas .f.top{padding:14px 12px;display:flex;flex-direction:column;gap:6px}
+.mk-folhas .cap{font-size:7.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-escura)}
+.mk-folhas .tit{font-family:var(--serif);font-size:13px;line-height:1.15;color:var(--verde)}
+.mk-folhas .ln{height:5px;border-radius:3px;background:#eee7d8}
+.mk-folhas .ln.c{width:70%}
+.mk-folhas .caixa{border:1px solid var(--areia);background:var(--creme);border-radius:6px;padding:5px 6px;font-size:8px;font-weight:700;color:var(--verde);text-align:center}
+.mk-folhas .grade{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:2px}
+.mk-folhas .grade i{display:block;aspect-ratio:1;border-radius:3px;background:#eee7d8}
+.mk-folhas .grade i.x{background:var(--verde)}
+.mk-folhas .num{position:absolute;right:10px;bottom:8px;font-size:8px;color:var(--suave)}
+.mk-folhas .linhas{display:grid;gap:9px;margin-top:4px}
+.mk-folhas .linhas i{display:block;border-bottom:1px solid #d9d0bd}
+.mk-folhas .ab{position:absolute;right:-10px;bottom:-6px;width:36px;height:36px;border-radius:50%;background:var(--terra);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 12px rgba(0,0,0,.2)}
+/* aula / vídeo */
+.mk-aula{width:186px;height:124px;border-radius:14px;background:linear-gradient(160deg,#2a655b,var(--verde-escuro));box-shadow:0 18px 30px rgba(31,78,70,.3);position:relative;overflow:hidden;transform:rotate(-2deg)}
+.mk-aula .pessoa{position:absolute;left:14px;bottom:0;width:62px;height:78px;border-radius:30px 30px 0 0;background:#c9bfa8;opacity:.9}
+.mk-aula .pessoa::before{content:'';position:absolute;left:17px;top:-28px;width:28px;height:28px;border-radius:50%;background:#c9bfa8}
+.mk-aula .play{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:var(--terra);box-shadow:0 6px 14px rgba(0,0,0,.3)}
+.mk-aula .play::after{content:'';position:absolute;left:17px;top:12px;border-left:15px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.mk-aula .tag{position:absolute;left:12px;top:10px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.18);padding:3px 7px;border-radius:999px}
+.mk-aula .barra{position:absolute;left:12px;right:12px;bottom:10px;height:4px;background:rgba(255,255,255,.25);border-radius:2px}
+.mk-aula .barra::after{content:'';position:absolute;left:0;top:0;height:100%;width:38%;background:var(--terra);border-radius:2px}
+.mk-aulas{position:relative;width:200px;height:170px}
+.mk-aulas .mk-aula{position:absolute;width:160px;height:106px;left:20px;top:32px}
+.mk-aulas .mk-aula.a1{transform:rotate(-7deg) translate(-14px,-14px);opacity:.85}
+.mk-aulas .mk-aula.a2{transform:rotate(3deg) translate(0,-6px);opacity:.92}
+.mk-aulas .mk-aula.a3{transform:rotate(-1deg) translate(10px,6px)}
+/* pilha de abertura */
+.pilha{position:relative;height:300px;margin:6px 0 34px}
+.pilha .mk{position:absolute;margin:0}
+.pilha .p1{left:50%;top:30px;transform:translateX(-50%) scale(1.25);z-index:5}
+.pilha .p2{left:8%;top:60px;transform:rotate(-8deg) scale(.95);z-index:3}
+.pilha .p3{right:8%;top:50px;transform:rotate(7deg) scale(.95);z-index:3}
+.pilha .p4{left:26%;top:120px;transform:rotate(-4deg) scale(.8);z-index:4}
+.pilha .p5{right:24%;top:120px;transform:rotate(5deg) scale(.8);z-index:4}
+.pilha .p6{left:0;top:160px;transform:scale(.7);z-index:2}
+.pilha .p7{right:0;top:170px;transform:scale(.7);z-index:2}
+@media (max-width:760px){
+  .entrega{grid-template-columns:1fr;gap:10px;padding:22px 20px;text-align:center}
+  .entrega .mk{margin-bottom:6px}
+  .pilha{height:250px}
+  .pilha .p1{transform:translateX(-50%) scale(1.05)}
+  .pilha .p2{left:-4%;top:70px;transform:rotate(-8deg) scale(.75)}
+  .pilha .p3{right:-4%;top:60px;transform:rotate(7deg) scale(.75)}
+  .pilha .p4,.pilha .p5,.pilha .p6,.pilha .p7{display:none}
+}
+</style>
+
 <section>
   <div class="wrap">
-    <div class="duas" style="margin-bottom:28px">
-      <div>
-        <span class="sobre">O que você recebe</span>
-        <h2>Para ler, ouvir e usar na hora em que estiver com o celular na mão</h2>
-        <p>Tudo fica numa área só, com acesso por e-mail logo depois da confirmação, para abrir no celular, no tablet ou imprimir.</p>
-      </div>
-      <div>
-        <div class="foto-r"><img src="img/leitura.jpg" alt="Mulher de cerca de 60 anos ouvindo o audiobook em um tablet, sentada numa poltrona" loading="lazy" width="1400" height="1050"></div>
-        <p class="legenda">Letra grande e a voz da autora, para quem lê mal no celular.</p>
-      </div>
+    <div style="text-align:center;max-width:760px;margin:0 auto">
+      <span class="sobre">O que você recebe</span>
+      <h2>Tudo o que está dentro de <em>O Caminho de Volta</em></h2>
+      <p>Nove materiais numa área só, com acesso por e-mail logo depois da confirmação, para abrir no celular, no tablet ou imprimir.</p>
     </div>
-    <div class="itens">
-      <div class="item"><div class="ic">📖</div><div><b>O livro digital <em>O Caminho de Volta</em></b><span>12 capítulos em PDF com letra grande, cerca de 100 páginas, cada um lido em 10 a 15 minutos, com um exercício no fim.</span></div></div>
-      <div class="item"><div class="ic">🎧</div><div><b>O audiobook completo</b><span>Narrado pela autora, dividido por capítulo, para ouvir no carro, na caminhada ou antes de dormir.</span></div></div>
-      <div class="item"><div class="ic">🧭</div><div><b>O teste "Qual é o afastamento da sua família?"</b><span>Em poucos minutos, o seu tipo principal entre os 7 — com o erro mais comum nesse tipo e o capítulo por onde começar.</span></div></div>
-      <div class="item"><div class="ic">💬</div><div><b>Mensagens Sem Alarme</b><span>30 mensagens-modelo por situação, com botão de copiar — para a hora em que você não sabe o que escrever.</span></div></div>
-      <div class="item"><div class="ic">📌</div><div><b>O radar em uma página</b><span>As três perguntas do radar e as 9 mensagens que disparam o alarme, numa página só, para guardar no celular e olhar antes de enviar.</span></div></div>
-      <div class="item"><div class="ic">✏️</div><div><b>O Caderno</b><span>Os exercícios dos 12 capítulos em páginas para imprimir e preencher, com espaço de notas por parte.</span></div></div>
-      <div class="item"><div class="ic">📅</div><div><b>O Diário Sem Alarme</b><span>30 dias, uma página por dia: o que você teve vontade de mandar, o que estava sentindo e o que escolheu fazer no lugar.</span></div></div>
-      <div class="item"><div class="ic">🎬</div><div><b>Três aulas gravadas com a autora</b><span><em>Por que o que você tentou não funcionou</em> · <em>Os 7 tipos de afastamento</em>, com um resumo por tipo · <em>Quando a nora ou o genro está no meio</em>.</span></div></div>
-      <div class="item"><div class="ic">▶️</div><div><b>Um vídeo com a tarefa de hoje</b><span>Uma primeira ação que não depende de falar com o seu filho — e 14 dias de e-mails curtos da autora acompanhando o começo.</span></div></div>
+    <div class="pilha"><div class="mk p1"><div class="mk-livro"><div><div class="t">O Caminho<br>de Volta</div><div class="st">Um guia para pais que querem se reaproximar de um filho adulto que se afastou</div></div><div class="au">[Nome], psicóloga<br>CRP XX/XXXXX</div><div class="selo">PDF<br>+ áudio</div></div></div><div class="mk p2"><div class="mk-fone"><div class="tela"><div class="cap">Audiobook · cap. 2</div><div class="tit">Visualizou e não respondeu</div><div class="onda"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:75%"></i><i style="height:55%"></i></div><div class="play"></div></div></div></div><div class="mk p3"><div class="mk-aulas"><div class="mk-aula a1"><span class="tag">Aula 1</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div><div class="mk-aula a2"><span class="tag">Aula 2</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div><div class="mk-aula a3"><span class="tag">Aula 3</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div></div></div><div class="mk p4"><div class="mk-fone"><div class="tela"><div class="cap">Mensagens Sem Alarme</div><div class="tit">A primeira depois de meses</div><div class="bolha">Oi, [nome]. Passei a semana lembrando de você e quis só dizer isso. Não precisa responder. Um abraço.</div><div class="copiar">⧉ Copiar</div><div class="bolha" style="opacity:.6">Lembrei de você hoje por nada em especial…</div></div></div></div><div class="mk p5"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">Diário Sem Alarme</div><div class="tit">Dia 12 de 30</div><div class="grade"><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><div class="ln"></div><div class="ln c"></div></div><div class=ab>📅</div></div></div><div class="mk p6"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">Bônus</div><div class="tit">O radar em uma página</div><div class="caixa">Isso cobra?</div><div class="caixa">Isso julga ou aconselha?</div><div class="caixa">Isso pede?</div><div class="ln"></div><div class="ln c"></div></div><div class=ab>📌</div></div></div><div class="mk p7"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">O Caderno</div><div class="tit">Exercício do capítulo 3</div><div class="ln c"></div><div class="linhas"><i></i><i></i><i></i><i></i><i></i></div></div><div class=ab>✏️</div></div></div></div>
+    <div class="entregas">
+<div class="entrega"><div class="mk"><div class="mk-livro"><div><div class="t">O Caminho<br>de Volta</div><div class="st">Um guia para pais que querem se reaproximar de um filho adulto que se afastou</div></div><div class="au">[Nome], psicóloga<br>CRP XX/XXXXX</div><div class="selo">PDF<br>+ áudio</div></div></div><div><span class="num">Item 1 de 9</span><h3>O livro digital <em>O Caminho de Volta</em></h3><p>12 capítulos em PDF com letra grande, cerca de 100 páginas, para ler no celular, no tablet ou imprimir.</p><p class="como">Como funciona: cada capítulo leva de 10 a 15 minutos, tem uma ideia central e termina com um exercício curto. A ordem segue o que você precisa primeiro: entender, parar o que piora, preparar o caminho de volta.</p></div></div><div class="entrega"><div class="mk"><div class="mk-fone"><div class="tela"><div class="cap">Audiobook · cap. 2</div><div class="tit">Visualizou e não respondeu</div><div class="onda"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:75%"></i><i style="height:55%"></i></div><div class="play"></div></div></div></div><div><span class="num">Item 2 de 9</span><h3>O audiobook completo</h3><p>Narrado pela autora e dividido por capítulo, para ouvir no carro, na caminhada ou antes de dormir.</p><p class="como">Como funciona: aperta o play dentro da área do livro, no celular, e o capítulo toca. Não precisa instalar nada.</p></div></div><div class="entrega"><div class="mk"><div class="mk-fone"><div class="tela"><div class="cap">Teste · pergunta 2 de 7</div><div class="tit">Como começou?</div><div class="opc">Depois que mudou de cidade</div><div class="opc on">Depois que casou ou teve filhos</div><div class="opc">Envolveu dinheiro</div><div class="opc">Foi diminuindo</div></div></div></div><div><span class="num">Item 3 de 9</span><h3>O teste "Qual é o afastamento da sua família?"</h3><p>Sete perguntas e, em poucos minutos, o seu tipo principal entre os 7 tipos de afastamento.</p><p class="como">Como funciona: o resultado diz como esse tipo costuma começar, o erro mais comum dos pais nesse caso e por qual capítulo começar a leitura.</p></div></div><div class="entrega"><div class="mk"><div class="mk-fone"><div class="tela"><div class="cap">Mensagens Sem Alarme</div><div class="tit">A primeira depois de meses</div><div class="bolha">Oi, [nome]. Passei a semana lembrando de você e quis só dizer isso. Não precisa responder. Um abraço.</div><div class="copiar">⧉ Copiar</div><div class="bolha" style="opacity:.6">Lembrei de você hoje por nada em especial…</div></div></div></div><div><span class="num">Item 4 de 9</span><h3>Mensagens Sem Alarme</h3><p>30 mensagens-modelo, uma para cada situação: a primeira depois de meses, o aniversário, o Natal, o "visualizou e não respondeu".</p><p class="como">Como funciona: você abre a situação parecida com a sua, lê por que aquela mensagem costuma passar pelo radar, adapta e copia com um toque.</p></div></div><div class="entrega"><div class="mk"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">Bônus</div><div class="tit">O radar em uma página</div><div class="caixa">Isso cobra?</div><div class="caixa">Isso julga ou aconselha?</div><div class="caixa">Isso pede?</div><div class="ln"></div><div class="ln c"></div></div><div class=ab>📌</div></div></div><div><span class="num">Item 5 de 9</span><h3>O radar em uma página</h3><p>As três perguntas do radar e as 9 mensagens que disparam o alarme, numa página só.</p><p class="como">Como funciona: salva no celular ou imprime e cola na geladeira. É para olhar antes de enviar qualquer mensagem.</p></div></div><div class="entrega"><div class="mk"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">O Caderno</div><div class="tit">Exercício do capítulo 3</div><div class="ln c"></div><div class="linhas"><i></i><i></i><i></i><i></i><i></i></div></div><div class=ab>✏️</div></div></div><div><span class="num">Item 6 de 9</span><h3>O Caderno</h3><p>Os exercícios dos 12 capítulos em páginas para imprimir e preencher, com espaço de notas por parte.</p><p class="como">Como funciona: a cada capítulo lido, uma página para fazer o exercício à mão, sem precisar inventar formato.</p></div></div><div class="entrega"><div class="mk"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">Diário Sem Alarme</div><div class="tit">Dia 12 de 30</div><div class="grade"><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div><div class="ln"></div><div class="ln c"></div></div><div class=ab>📅</div></div></div><div><span class="num">Item 7 de 9</span><h3>O Diário Sem Alarme</h3><p>30 dias, uma página por dia, para praticar o contato sem alarme.</p><p class="como">Como funciona: três campos por dia, o que você teve vontade de mandar, o que estava sentindo e o que escolheu fazer no lugar, e uma pergunta de reflexão.</p></div></div><div class="entrega"><div class="mk"><div class="mk-aulas"><div class="mk-aula a1"><span class="tag">Aula 1</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div><div class="mk-aula a2"><span class="tag">Aula 2</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div><div class="mk-aula a3"><span class="tag">Aula 3</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div></div></div><div><span class="num">Item 8 de 9</span><h3>Três aulas gravadas com a autora</h3><p><em>Por que o que você tentou não funcionou</em> · <em>Os 7 tipos de afastamento</em>, com um resumo de uma página por tipo · <em>Quando a nora ou o genro está no meio</em>.</p><p class="como">Como funciona: aulas curtas em áudio e vídeo, dentro da área do livro, para assistir no seu ritmo e, se quiser, a dois.</p></div></div><div class="entrega"><div class="mk"><div class="mk-aula"><span class="tag">A tarefa de hoje · 7 min</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div></div><div><span class="num">Item 9 de 9</span><h3>Um vídeo com a tarefa de hoje</h3><p>Sete minutos com a autora e uma primeira ação que não depende de falar com o seu filho.</p><p class="como">Como funciona: o vídeo aparece logo depois da compra. Nos 14 dias seguintes, você recebe e-mails curtos da autora acompanhando o começo.</p></div></div>
     </div>
   </div>
 </section>
