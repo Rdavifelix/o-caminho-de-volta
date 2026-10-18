@@ -160,7 +160,22 @@ footer .aviso{color:#fff;font-size:16.5px}
   .btn{padding:18px 24px;font-size:19px}
   .fixa{display:block;position:fixed;left:0;right:0;bottom:0;background:rgba(250,246,238,.96);border-top:1px solid var(--linha);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:50;backdrop-filter:blur(6px)}
   .fixa .btn{display:block;padding:15px 18px;font-size:18px;box-shadow:0 4px 14px rgba(196,104,58,.3)}
-  body{padding-bottom:84px}
+  body{padding-bottom:96px}
+  .btn{display:block;width:100%;max-width:420px;margin-left:auto;margin-right:auto;padding:17px 12px;font-size:17.5px;line-height:1.25}
+  .wrap{padding-left:16px;padding-right:16px}
+  h2{font-size:clamp(26px,7.2vw,32px)}
+  footer a,.rodape a{display:inline-block;padding:8px 2px;min-height:44px;line-height:28px}
+  .hero .btn{margin-top:4px}
+}
+@media (max-width:640px){
+  /* lista de preço: sem pontilhado, valor alinhado à direita, uma linha por item */
+  .oferta2 ul.inclui li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--linha);font-size:16.5px;line-height:1.4}
+  .oferta2 ul.inclui .pt{display:none}
+  .oferta2 ul.inclui .val,.oferta2 ul.inclui .ok{white-space:nowrap}
+  .oferta2{padding:26px 16px}
+  .oferta2 .ancora{font-size:17px}
+  .oferta2 .depor .por{font-size:40px}
+  .oferta2 .selo{font-size:14.5px;padding:8px 12px}
 }
 </style>
 </head>
@@ -433,8 +448,17 @@ footer .aviso{color:#fff;font-size:16.5px}
 .pilha .p6{left:0;top:160px;transform:scale(.7);z-index:2}
 .pilha .p7{right:0;top:170px;transform:scale(.7);z-index:2}
 @media (max-width:760px){
-  .entrega{grid-template-columns:1fr;gap:10px;padding:22px 20px;text-align:center}
-  .entrega .mk{margin-bottom:6px}
+  /* entregáveis compactos: mockup pequeno à esquerda, texto à direita */
+  .entregas{gap:12px}
+  .entrega{grid-template-columns:96px 1fr;gap:14px;padding:16px 14px;align-items:start;border-radius:16px}
+  .entrega .mk{width:96px;height:110px;margin:0;overflow:visible}
+  .entrega .mk>*{transform-origin:center;transform:scale(.52)}
+  .entrega .mk .mk-livro{transform:scale(.55) perspective(600px) rotateY(-16deg)}
+  .entrega .mk .mk-aula{transform:scale(.5) rotate(-2deg)}
+  .entrega .num{font-size:12px;margin-bottom:2px}
+  .entrega h3{font-size:19px;margin-bottom:4px}
+  .entrega p{font-size:16px;margin-bottom:4px;line-height:1.45}
+  .entrega .como{font-size:14.5px}
   .pilha{height:250px}
   .pilha .p1{transform:translateX(-50%) scale(1.05)}
   .pilha .p2{left:-4%;top:70px;transform:rotate(-8deg) scale(.75)}
@@ -476,7 +500,6 @@ footer .aviso{color:#fff;font-size:16.5px}
 .oferta2 .preco{font-size:20px;margin-bottom:6px}
 .oferta2 .preco b{font-weight:800}
 .oferta2 .btn{margin:14px auto 18px}
-@media (max-width:640px){.oferta2 ul.inclui li{font-size:16.5px}}
 </style>
 <section class="alt" id="oferta">
   <div class="wrap">
