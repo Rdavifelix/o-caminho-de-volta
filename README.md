@@ -19,6 +19,10 @@ Abrir <http://localhost:8790/>.
 - Hospedagem (desde 18/10/2026): **GitHub Pages**, repositório público <https://github.com/Rdavifelix/o-caminho-de-volta> (conta Rdavifelix), branch `main`, raiz. URL do Pages: <https://rdavifelix.github.io/o-caminho-de-volta/>. Domínio: **paisdeadultos.com.br** (arquivo `CNAME`). Publicar = `git push` na `main`. O projeto do Vercel (`o-caminho-de-volta-teal.vercel.app`) continua no ar como cópia; pode ser apagado quando o domínio estiver funcionando.
 - DNS do domínio está na Hostinger (`cosmos`/`nova.dns-parking.com`). Configurado em 18/10/2026: `A @` → 185.199.108.153, .109.153, .110.153, .111.153 · `CNAME www` → `rdavifelix.github.io` (www redireciona para a raiz). E-mail (MX, SPF, DKIM, DMARC da Hostinger) mantido. Certificado Let's Encrypt emitido pelo GitHub e "Enforce HTTPS" ligado: <https://paisdeadultos.com.br> responde 200 e HTTP redireciona para HTTPS.
 
+## Imagens geradas por IA
+
+Toda imagem com texto (capa, mockup, cartão) precisa ser **revisada letra por letra** antes de publicar: em 18/10/2026 o gerador escreveu "filho autista" no subtítulo da capa em `img/pilha.webp` (corrigido em 19/10 com edição manual da imagem). Preferir texto em HTML/CSS por cima da imagem quando possível.
+
 ## Compliance conferido (16/10/2026, versão com fotos e copy reforçada)
 
 Nome + psicóloga + CRP só no bloco da autora e no rodapé (mínimo da Res. CFP 07/2023; barra do topo e repetições na abertura e no fechamento removidas a pedido do Davi em 16–17/10) · preço só no bloco de oferta, mesma fonte do texto, sem "de/por", desconto, cronômetro ou "só nesta página" · nenhuma promessa de resultado ou prazo · nenhum depoimento · nenhum caso identificável · fotos ilustrativas sem pessoas reais, declaradas no rodapé · blocos de persuasão só por identificação (conselhos que não ajudaram, radar, 9 mensagens, o que fica nas suas mãos) sem prever desfecho · conversa de admissão não aparece na página · aviso "Conteúdo educativo. Não substitui psicoterapia." e CVV 188 no rodapé e no FAQ · razão social, CNPJ, endereço e contato no rodapé (CDC) · sem Pixel até haver consentimento (LGPD).
