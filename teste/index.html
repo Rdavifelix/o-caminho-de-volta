@@ -232,26 +232,26 @@ const TIPOS = {
 /* Arquétipo = o jeito como a saudade tem agido. Nomeado pelo gesto, nunca pelo defeito.
    Cada um aponta para uma das 5 trocas do método. */
 const ARQ = {
- insiste:{ f:'A mãe que insiste', m:'O pai que insiste', img:{f:'img/insiste.jpg', m:'img/insiste_m.jpg'}, frase:'Você não desiste. Manda a mensagem, o áudio, o bom-dia. Quando não vem resposta, manda outra.',
-   voce:'Ninguém pode dizer que você não tentou. O problema nunca foi a quantidade de amor; foi o formato em que ele chega. Cada mensagem que pede resposta vira, do outro lado, mais uma conta a pagar. E quem deve, adia.',
-   outro:()=>`${P.Ele} vê o seu nome na tela e sente, antes de abrir, que vai ser cobrado. Então deixa para depois. O depois vira dias. E você manda mais uma, porque o silêncio dói.`,
-   troca:['cobrança','convite'], trocaTexto:'Nada do que você manda precisa de resposta. Uma foto, uma notícia, um “lembrei de você”. Presença sem fatura. É isso que o contato sem alarme ensina a fazer, mensagem por mensagem.', cap:[5,6,9] },
- espera:{ f:'A mãe que espera', m:'O pai que espera', img:{f:'img/espera_f.jpg', m:'img/espera.jpg'}, frase:'Você parou de mandar. Decidiu que, se for para voltar, que venha da parte dele. E fica olhando o telefone.',
-   voce:'Pode ter sido sabedoria: parar de cobrar costuma ser um bom começo. Mas esperar em silêncio também é uma mensagem, e o seu filho pode estar lendo nela exatamente o que você mais teme: “ela desistiu de mim”.',
-   outro:()=>`${P.Ele} também espera. Talvez por um sinal de que a porta está aberta sem condições. Dois silêncios, cada um achando que o outro deveria dar o primeiro passo.`,
-   troca:['expectativa','curiosidade'], trocaTexto:'Sair da espera sem voltar à cobrança. Um contato pequeno, sem pedido, que diz “estou aqui” sem perguntar “quando você volta?”. O livro mostra como escrever esse contato e o que fazer quando a resposta demora.', cap:[6,9,11] },
- explica:{ f:'A mãe que explica', m:'O pai que explica', img:{f:'img/explica.jpg', m:'img/explica_m.jpg'}, frase:'Você escreve longo. Conta o seu lado, lembra o contexto, mostra que fez o que pôde. Quer que ele entenda.',
-   voce:'Tudo o que você escreve pode ser verdade. O problema é a ordem: a explicação chega antes da escuta e, por isso, do outro lado soa como defesa. E defesa, para quem está magoado, é o mesmo que negação.',
-   outro:()=>`${P.Ele} lê e pensa: “de novo ela está se justificando”. O que ${P.ele} queria ouvir não era a sua versão. Era que a versão ${P.dele} coubesse na conversa.`,
-   troca:['defesa','reparação'], trocaTexto:'Trocar o “deixa eu explicar” por “eu quero ouvir”. Uma reparação curta, sem “mas”, vale mais que dez páginas de contexto. O capítulo 11 mostra como reparar sem se justificar.', cap:[7,8,11] },
+ insiste:{ f:'A mãe que insiste', m:'O pai que insiste', img:{f:'img/insiste.jpg', m:'img/insiste_m.jpg'}, frase:'Você não desiste. Manda a mensagem, o áudio, o bom-dia. E quando a resposta não vem, manda mais uma.',
+   voce:'Ninguém pode dizer que você não tentou. O problema nunca foi a quantidade de amor. Foi o jeito como ele chega lá. Cada mensagem que pede resposta vira, do outro lado, mais uma conta pra pagar. E quem está devendo, adia.',
+   outro:()=>`${P.Ele} vê o seu nome na tela e já sabe, antes de abrir, que vai ser ${P.cobrado}. Então deixa pra depois. O depois vira dias. E você manda mais uma, porque o silêncio dói demais.`,
+   troca:['cobrança','convite'], trocaTexto:'Mandar sem esperar resposta. Uma foto, uma notícia, um “lembrei de você hoje”. Presença, não cobrança. É isso que a mensagem sem alarme ensina, uma por uma.', cap:[5,6,9] },
+ espera:{ f:'A mãe que espera', m:'O pai que espera', img:{f:'img/espera_f.jpg', m:'img/espera.jpg'}, frase:()=>`Você parou de mandar. Decidiu que, se for pra voltar, que venha da parte ${P.dele}. E fica olhando o telefone.`,
+   voce:()=>`Pode ter sido sabedoria. Parar de cobrar costuma ser um bom começo. Só que esperar em silêncio também é uma mensagem, e ${P.oFilho} pode estar lendo nela justamente o que você mais teme: “${P.desistiu} de mim”.`,
+   outro:()=>`${P.Ele} também está esperando. Talvez um sinal de que a porta está aberta, sem condição nenhuma. São dois silêncios, cada um achando que o outro é que tinha de dar o primeiro passo.`,
+   troca:['expectativa','curiosidade'], trocaTexto:'Sair da espera sem voltar a cobrar. Uma mensagem pequena, sem pedido, que diz “estou aqui” sem perguntar “quando você volta?”. O livro mostra como escrever essa mensagem e o que fazer quando a resposta demora.', cap:[6,9,11] },
+ explica:{ f:'A mãe que explica', m:'O pai que explica', img:{f:'img/explica.jpg', m:'img/explica_m.jpg'}, frase:()=>`Você escreve longo. Conta o seu lado, lembra o contexto, mostra que fez o que pôde. Quer que ${P.ele} entenda.`,
+   voce:'Tudo o que você escreve pode ser verdade. O problema é a ordem. A explicação chega antes da escuta, e por isso, do outro lado, soa como defesa. E pra quem está magoado, defesa é a mesma coisa que negar.',
+   outro:()=>`${P.Ele} lê e pensa: “lá vem ${P.maePai} se justificar de novo”. O que ${P.ele} queria não era ouvir a sua versão. Era que a versão ${P.dele} coubesse na conversa.`,
+   troca:['defesa','reparação'], trocaTexto:'Trocar o “deixa eu explicar” por “eu quero ouvir”. Uma mensagem curta de reparação, sem “mas”, vale mais que dez páginas de contexto. O capítulo 11 mostra como reparar sem se justificar.', cap:[7,8,11] },
  cuida:{ f:'A mãe que cuida', m:'O pai que cuida', img:{f:'img/cuida.jpg', m:'img/cuida_m.jpg'}, frase:'Você manda a marmita, o presente, a ajuda com a conta. É o seu jeito de dizer “estou aqui”.',
-   voce:'Cuidar é o que você sabe fazer melhor, e sempre funcionou. Mas o cargo de responsável foi extinto: para um adulto, ajuda que chega sem pedido pode soar como “você não dá conta sozinho”. E aí o cuidado vira dívida.',
-   outro:()=>`${P.Ele} aceita, agradece, e se sente um pouco menor a cada vez. Não sabe como recusar sem magoar. Então recebe e se afasta, para não ter de recusar.`,
-   troca:['resgate','confiança'], trocaTexto:'Trocar o resgate pela confiança: oferecer só quando pedido, e perguntar antes de resolver. O livro tem um capítulo inteiro sobre dinheiro, ajuda e o que cada gesto diz.', cap:[1,8,10] },
- aliados:{ f:'A mãe que busca aliados', m:'O pai que busca aliados', img:{f:'img/aliados.jpg', m:'img/aliados_m.jpg'}, frase:'Você pergunta ao irmão, à tia, à nora. Pede que alguém fale com ele. Quer entender, e quer que alguém ajude.',
-   voce:'É natural: quando a porta fecha, a gente procura outra janela. Mas cada pessoa que você aciona chega ao seu filho como pressão vinda de todos os lados. E ele se fecha mais, agora também para quem levou o recado.',
-   outro:()=>`${P.Ele} descobre que a família inteira está falando ${P.dele}. Sente-se cercado, e exposto. A reação costuma ser sair do grupo, literalmente.`,
-   troca:['conselho','pergunta'], trocaTexto:'Deixar de recrutar e passar a perguntar, direto e sem intermediário, uma coisa só: “o que eu posso fazer diferente?”. O livro traz a pergunta certa para cada tipo de afastamento, e o que fazer com a resposta.', cap:[3,6,10] }
+   voce:()=>`Cuidar é o que você sabe fazer melhor, e a vida inteira funcionou. Só que o cargo de responsável foi extinto. Pra um adulto, ajuda que chega sem ter sido pedida pode soar como “você não dá conta ${P.sozinhoEle}”. E aí o cuidado vira dívida.`,
+   outro:()=>`${P.Ele} aceita, agradece, e se sente um pouco menor a cada vez. Não sabe como recusar sem magoar você. Então recebe, e se afasta, pra não precisar recusar.`,
+   troca:['resgate','confiança'], trocaTexto:'Trocar o resgate pela confiança. Oferecer só quando pedem, e perguntar antes de resolver. O livro tem um capítulo inteiro sobre dinheiro, ajuda e o que cada gesto diz sem querer.', cap:[1,8,10] },
+ aliados:{ f:'A mãe que busca aliados', m:'O pai que busca aliados', img:{f:'img/aliados.jpg', m:'img/aliados_m.jpg'}, frase:()=>`Você pergunta pro irmão, pra tia, pra ${P.noraGenro}. Pede que alguém fale com ${P.ele}. Quer entender, e quer que alguém ajude.`,
+   voce:()=>`É natural. Quando a porta fecha, a gente procura outra janela. Só que cada pessoa que você aciona chega ${P.aoFilho} como pressão vinda de todo lado. E ${P.ele} se fecha mais, agora também pra quem levou o recado.`,
+   outro:()=>`${P.Ele} descobre que a família inteira está falando ${P.dele}. Se sente ${P.cercado}, e ${P.exposto}. A reação mais comum é sair do grupo. Literalmente.`,
+   troca:['conselho','pergunta'], trocaTexto:'Parar de recrutar gente e fazer, você mesmo, uma pergunta só, direto e sem intermediário: “o que eu posso fazer diferente?”. O livro traz a mensagem certa pra cada tipo de afastamento, e o que fazer com a resposta.', cap:[3,6,10] }
 };
 
 /* ============================================================
@@ -272,6 +272,14 @@ function atualizarP(){
   const t = resp.tempo;
   P.tempoFrase = t===undefined ? '' : ['Menos de seis meses.','Entre seis meses e dois anos.','Entre dois e cinco anos.','Mais de cinco anos.'][t] + ' É um tempo que pesa.';
   P.ocupado = resp.filho==='ela' ? 'ocupada' : 'ocupado';
+  P.cobrado = resp.filho==='ela' ? 'cobrada' : 'cobrado';
+  P.cercado = resp.filho==='ela' ? 'cercada' : 'cercado';
+  P.exposto = resp.filho==='ela' ? 'exposta' : 'exposto';
+  P.sozinhoEle = resp.filho==='ela' ? 'sozinha' : 'sozinho';
+  P.aoFilho = resp.filho==='ela' ? 'na sua filha' : 'no seu filho';
+  P.noraGenro = resp.filho==='ela' ? 'o genro' : 'a nora';
+  P.maePai = resp.quem==='pai' ? 'o meu pai' : 'a minha mãe';
+  P.desistiu = resp.quem==='pai' ? 'ele desistiu' : 'ela desistiu';
   P.sozinha = resp.quem==='pai' ? 'sozinho' : 'sozinha';
   P.diaDe = resp.quem==='pai' ? 'O Dia dos Pais' : 'O Dia das Mães';
   const pr = resp.parentes;
@@ -507,16 +515,16 @@ function result(t, box){
     <p class="text-[19px] mb-1">${lead.nome||''}, pelo jeito como você tem reagido, você é…</p>
     <h1 class="font-serif font-semibold text-verde text-[clamp(34px,8.6vw,46px)] leading-[1.08] mb-4 animate-revela">${arqNome}.</h1>
     <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-5 bg-areia animate-revela atraso-1"><img src="${A.img[P.mae]}" alt="" class="w-full h-full object-cover"></div>
-    <p class="font-serif italic text-[22px] text-verde-escuro leading-snug mb-4">${A.frase}</p>
+    <p class="font-serif italic text-[22px] text-verde-escuro leading-snug mb-4">${txt(A.frase)}</p>
     <div class="resultado text-[19px]">
-      <p>${A.voce}</p>
+      <p>${txt(A.voce)}</p>
       <p><strong>Do outro lado.</strong> ${txt(A.outro)}</p>
       <div class="bg-white border border-linha rounded-2xl px-5 py-4 my-5">
         <span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-terra-escura mb-2">A troca que mais pesa para você</span>
         <p class="font-serif text-[24px] text-verde mb-2"><span class="line-through decoration-terra/70 opacity-70">${A.troca[0]}</span> <span class="text-terra-escura">→</span> ${A.troca[1]}</p>
         <p class="mb-0">${A.trocaTexto}</p>
       </div>
-      <p class="text-[17px] text-suave">Isso não é quem você é. É o jeito que a saudade encontrou para agir. E jeito se troca.</p>
+      <p class="text-[17px] text-suave">Isso não é quem você é. É o jeito que a saudade encontrou pra agir. E jeito se muda.</p>
     </div>
 
     <hr class="border-linha my-8">
@@ -530,22 +538,22 @@ function result(t, box){
       <div class="bg-white border border-linha border-l-[6px] border-l-terra rounded-2xl px-5 py-4 my-5"><p class="mb-0"><strong>Um primeiro passo.</strong> ${tp.passo}</p></div>
       ${ecos.slice(0,3).map(e=>`<p class="text-verde-escuro bg-areia/50 rounded-2xl px-5 py-4">${e}</p>`).join('')}
       ${alerta ? `<p class="text-[17px] text-suave border border-linha rounded-2xl px-5 py-4">Se a história envolver violência, abuso ou um sofrimento muito intenso, este teste e o livro não são o lugar: procure um psicólogo ou psiquiatra. Em crise, o CVV atende no <strong>188</strong>, 24 horas, de graça.</p>` : ''}
-      <p class="text-[17px] text-suave">Os tipos são um mapa, não um rótulo. Servem para escolher um caminho, não para dar nome à dor. Uma cópia deste resultado vai para ${lead.email||'o seu e-mail'}.</p>
+      <p class="text-[17px] text-suave">Os tipos são um mapa, não um rótulo. Servem pra escolher um caminho, não pra dar nome à dor. Uma cópia deste resultado vai para ${lead.email||'o seu e-mail'}.</p>
     </div>
 
     <div class="mt-8 rounded-[24px] overflow-hidden bg-gradient-to-br from-verde to-verde-escuro text-white shadow-[0_18px_44px_rgba(31,78,70,.25)]">
       <div class="aspect-[16/8] bg-areia"><img src="img/esperanca.jpg" alt="" class="w-full h-full object-cover"></div>
       <div class="px-6 py-7">
-        <span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-areia mb-2">O seu próximo passo</span>
-        <h2 class="font-serif font-semibold text-[26px] leading-tight mb-3">Trocar ${A.troca[0]} por ${A.troca[1]}, no afastamento ${tp.nome}.</h2>
-        <p class="text-[18px] text-[#d6e2dc] mb-4">É exatamente isso que <em>O Caminho de Volta</em> ensina, capítulo por capítulo. Para o seu caso, os capítulos ${caps.slice(0,-1).join(', ')} e ${caps[caps.length-1]} conversam direto com o seu resultado.</p>
+        <span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-areia mb-2">E agora?</span>
+        <h2 class="font-serif font-semibold text-[26px] leading-tight mb-3">Trocar ${A.troca[0]} por ${A.troca[1]}. É por aí que começa, no afastamento ${tp.nome}.</h2>
+        <p class="text-[18px] text-[#d6e2dc] mb-4">É isso que <em>O Caminho de Volta</em> ensina, capítulo por capítulo, com mensagem pronta pra cada situação. No seu caso, os capítulos ${caps.slice(0,-1).join(', ')} e ${caps[caps.length-1]} falam direto com o que você acabou de ler.</p>
         <ul class="text-[17px] text-[#e6eeea] space-y-2 mb-4">
-          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Mensagens Sem Alarme</strong>: 30 modelos prontos, para a hora em que você não sabe o que escrever</span></li>
-          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Audiobook</strong> na voz da autora, para ouvir sem precisar enxergar a tela</span></li>
-          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>O radar em uma página</strong>, para colar na geladeira antes de enviar</span></li>
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Mensagens Sem Alarme</strong>: 30 mensagens prontas pra hora em que você não sabe o que escrever</span></li>
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Audiobook</strong> na voz da autora, pra ouvir sem precisar enxergar a tela</span></li>
+          <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>O radar em uma página</strong>, pra colar na geladeira e olhar antes de mandar qualquer mensagem</span></li>
           <li class="flex gap-2"><span class="text-areia">✓</span> <span>O teste completo, o Diário Sem Alarme e três aulas gravadas</span></li>
         </ul>
-        <p class="text-[15px] text-[#bfd0c8]">Guia educativo escrito por ${cred()}. Garantia de 30 dias.</p>
+        <p class="text-[15px] text-[#bfd0c8]">Guia educativo escrito por ${cred()}. Se não for pra você, devolvemos o valor em até 30 dias.</p>
       </div>
     </div>`;
   seguir.textContent = 'Conhecer O Caminho de Volta'; acao.classList.remove('hidden');
