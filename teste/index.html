@@ -529,7 +529,7 @@ function result(t, box){
 
     <hr class="border-linha my-8">
     ${rotulo('E o afastamento da sua família')}
-    <h2 class="font-serif font-semibold text-verde text-[clamp(28px,7vw,38px)] leading-[1.1] mb-4">É ${tp.nome}.</h2>
+    <h2 class="font-serif font-semibold text-verde text-[clamp(28px,7vw,38px)] leading-[1.1] mb-4">${r.n===4 ? `É pela nova casa: a família que ${P.ele} formou.` : `É ${tp.nome}.`}</h2>
     ${tp2 ? `<p class="text-[17px] text-suave mb-5 bg-white border border-linha rounded-2xl px-5 py-3">Com traços do afastamento <strong class="text-verde">${tp2.nome}</strong>. É comum se reconhecer em dois. O primeiro explica o começo; o que pesa mais hoje indica o primeiro passo.</p>` : ''}
     <div class="resultado text-[19px]">
       <p><strong>Como costuma começar.</strong> ${tp.comeca}</p>
