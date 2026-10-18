@@ -16,7 +16,8 @@ Abrir <http://localhost:8790/>.
 - Placeholders: `[Nome]`, `CRP XX/XXXXX`, `[X] anos`, `[abordagem]`, história de origem (após a entrevista), `[Razão social]`, `CNPJ`, `[endereço]`, `[e-mail de contato]`, garantia `[7 / 30]`, links de Política de privacidade e Termos de uso.
 - Imagens: foto da autora (4:5, ≥ 800 px, bloco `.foto`). A foto de abertura (`img/abertura.jpg`) pode ser trocada pela foto da autora se ela preferir aparecer no topo. Arte final da capa ainda não existe (o cartão sobre a foto usa um mini-mockup em CSS).
 - Rastreamento (Pixel / GA4): só com política de privacidade e banner de consentimento. O evento de compra fica no checkout.
-- Deploy: projeto próprio no Vercel, `o-caminho-de-volta` (separado do app, que manda `X-Robots-Tag: noindex`). Produção: <https://o-caminho-de-volta-teal.vercel.app>. Publicar de novo com `cd brasil/site && npx vercel deploy --prod`. Domínio .com.br ainda pendente (ver CLAUDE.md, decisões em aberto).
+- Hospedagem (desde 18/10/2026): **GitHub Pages**, repositório público <https://github.com/Rdavifelix/o-caminho-de-volta> (conta Rdavifelix), branch `main`, raiz. URL do Pages: <https://rdavifelix.github.io/o-caminho-de-volta/>. Domínio: **paisdeadultos.com.br** (arquivo `CNAME`). Publicar = `git push` na `main`. O projeto do Vercel (`o-caminho-de-volta-teal.vercel.app`) continua no ar como cópia; pode ser apagado quando o domínio estiver funcionando.
+- DNS do domínio está na Hostinger (`dns-parking.com`). Registros necessários: `A @` → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 (apagar o A de estacionamento 2.57.91.91) · `CNAME www` → `rdavifelix.github.io`. Depois da propagação: ativar "Enforce HTTPS" no Pages (`gh api -X PUT repos/Rdavifelix/o-caminho-de-volta/pages -F https_enforced=true`).
 
 ## Compliance conferido (16/10/2026, versão com fotos e copy reforçada)
 
