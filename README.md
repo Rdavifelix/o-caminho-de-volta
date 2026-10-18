@@ -17,7 +17,7 @@ Abrir <http://localhost:8790/>.
 - Imagens: foto da autora (4:5, ≥ 800 px, bloco `.foto`). A foto de abertura (`img/abertura.jpg`) pode ser trocada pela foto da autora se ela preferir aparecer no topo. Arte final da capa ainda não existe (o cartão sobre a foto usa um mini-mockup em CSS).
 - Rastreamento (Pixel / GA4): só com política de privacidade e banner de consentimento. O evento de compra fica no checkout.
 - Hospedagem (desde 18/10/2026): **GitHub Pages**, repositório público <https://github.com/Rdavifelix/o-caminho-de-volta> (conta Rdavifelix), branch `main`, raiz. URL do Pages: <https://rdavifelix.github.io/o-caminho-de-volta/>. Domínio: **paisdeadultos.com.br** (arquivo `CNAME`). Publicar = `git push` na `main`. O projeto do Vercel (`o-caminho-de-volta-teal.vercel.app`) continua no ar como cópia; pode ser apagado quando o domínio estiver funcionando.
-- DNS do domínio está na Hostinger (`dns-parking.com`). Registros necessários: `A @` → 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 (apagar o A de estacionamento 2.57.91.91) · `CNAME www` → `rdavifelix.github.io`. Depois da propagação: ativar "Enforce HTTPS" no Pages (`gh api -X PUT repos/Rdavifelix/o-caminho-de-volta/pages -F https_enforced=true`).
+- DNS do domínio está na Hostinger (`cosmos`/`nova.dns-parking.com`). Configurado em 18/10/2026: `A @` → 185.199.108.153, .109.153, .110.153, .111.153 · `CNAME www` → `rdavifelix.github.io` (www redireciona para a raiz). E-mail (MX, SPF, DKIM, DMARC da Hostinger) mantido. Certificado Let's Encrypt emitido pelo GitHub e "Enforce HTTPS" ligado: <https://paisdeadultos.com.br> responde 200 e HTTP redireciona para HTTPS.
 
 ## Compliance conferido (16/10/2026, versão com fotos e copy reforçada)
 
