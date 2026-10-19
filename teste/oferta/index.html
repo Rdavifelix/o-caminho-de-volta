@@ -9,214 +9,477 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = { theme: { extend: {
-  colors: { verde:'#1f4e46','verde-escuro':'#153831', terra:'#c4683a','terra-escura':'#9e4f27', areia:'#e8d9b8', tinta:'#2b2a27', suave:'#6b665c', creme:'#faf6ee', linha:'#e7dfcf' },
-  fontFamily: { serif:['Lora','Georgia','serif'], sans:['Nunito','-apple-system','Helvetica','Arial','sans-serif'] },
-  keyframes: { entra:{ '0%':{opacity:0,transform:'translateY(14px)'}, '100%':{opacity:1,transform:'translateY(0)'} } },
-  animation: { entra:'entra .5s cubic-bezier(.2,.7,.2,1) both' }
-} } }
-</script>
+<!-- Folha de estilo copiada da página principal (brasil/site/index.html) em 18/10/2026; se ela mudar, regenerar com o script em scratchpad -->
 <style>
-  body{-webkit-font-smoothing:antialiased}
-  .sobre{display:block;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9e4f27;margin-bottom:10px}
-  h2{font-family:Lora,Georgia,serif;font-weight:600;color:#1f4e46;font-size:clamp(26px,6vw,34px);line-height:1.18;margin-bottom:14px}
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
-  section{padding:44px 0}
-  section.alt{background:#fff;border-top:1px solid #e7dfcf;border-bottom:1px solid #e7dfcf}
-  section.escuro{background:#153831;color:#e6eeea} section.escuro h2{color:#fff} section.escuro .sobre{color:#e8d9b8}
-  p{margin-bottom:16px}
-  .btn{display:block;width:100%;text-align:center;border-radius:999px;color:#fff;font-weight:700;font-size:21px;padding:18px 24px;background:linear-gradient(180deg,#d47d4e,#c4683a 60%,#9e4f27);box-shadow:0 8px 20px rgba(196,104,58,.32);text-decoration:none}
-  .card{background:#fff;border:1px solid #e7dfcf;border-radius:22px;padding:22px 22px}
-  .chat{font-family:Nunito,sans-serif;font-size:16px;line-height:1.4}
-  .balao{max-width:88%;border-radius:14px;padding:10px 12px;margin:6px 0;position:relative}
-  .balao.mae{background:#dcf8c6;margin-left:auto;border-bottom-right-radius:4px}
-  .balao .hora{display:block;text-align:right;font-size:11px;color:#6b665c;margin-top:4px}
-  .mock{background:linear-gradient(160deg,#fbf7ee,#efe4cc);border-radius:4px 10px 10px 4px;box-shadow:-6px 0 0 -3px #c9b98f,0 14px 30px rgba(31,78,70,.18);font-family:Lora,serif;color:#153831;display:flex;flex-direction:column;justify-content:space-between;padding:14px 12px}
+/* Pais de Filhos Adultos — página do livro · mesma identidade da área de membros (brasil/app/estilo.css) */
+:root{
+  --verde:#1f4e46; --verde-escuro:#153831; --terra:#c4683a; --terra-escura:#9e4f27;
+  --areia:#e8d9b8; --tinta:#2b2a27; --suave:#6b665c; --creme:#faf6ee; --cartao:#ffffff; --linha:#e7dfcf;
+  --serif:'Lora',Georgia,serif; --sans:'Nunito',-apple-system,Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--tinta);background:var(--creme);font-size:20px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--verde)}
+p{margin-bottom:18px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+section.alt{background:#fff;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+section.escuro{background:var(--verde-escuro);color:#e6eeea}
+section.escuro h2{color:#fff}
+section.escuro .sobre{color:#e8d9b8}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.6vw,38px);line-height:1.2;color:var(--verde);margin-bottom:20px}
+h3{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.25;color:var(--verde);margin-bottom:10px}
+.sobre{display:block;font-size:14.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-escura);margin-bottom:12px}
+.lead{font-size:22px}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
+.foto-r{border-radius:22px;overflow:hidden;box-shadow:0 18px 44px rgba(31,78,70,.18)}
+.foto-r img{width:100%;height:100%;object-fit:cover}
+.legenda{font-size:14.5px;color:var(--suave);margin-top:10px;text-align:center}
+ul.lista{list-style:none;margin:0 0 22px}
+ul.lista li{position:relative;padding:12px 0 12px 42px;border-bottom:1px solid var(--linha)}
+ul.lista li:last-child{border-bottom:0}
+ul.lista li::before{content:'';position:absolute;left:8px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--terra)}
+ul.lista.check li::before{content:'✓';background:none;color:var(--verde);font-weight:800;font-size:22px;top:9px;left:4px;width:auto;height:auto}
+.btn{display:inline-block;background:linear-gradient(180deg,#d47d4e,var(--terra) 60%,var(--terra-escura));color:#fff;font-weight:700;font-size:21px;text-decoration:none;text-align:center;padding:20px 34px;border-radius:999px;border:0;cursor:pointer;box-shadow:0 8px 20px rgba(196,104,58,.32);transition:transform .12s,box-shadow .12s;font-family:var(--sans);max-width:100%}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(196,104,58,.4)}
+.btn.wide{display:block;width:100%;max-width:460px;margin:0 auto}
+.centro{text-align:center}
+.nota{font-size:15.5px;color:var(--suave)}
+.cred{font-size:16px;color:var(--suave)}
+
+
+/* abertura */
+.faixa{background:var(--areia);color:var(--verde-escuro);font-size:14.5px;font-weight:800;letter-spacing:.06em;text-align:center;padding:12px 20px;line-height:1.4}
+.hero{background:linear-gradient(170deg,var(--verde) 0%,var(--verde-escuro) 100%);color:#fff;padding:52px 0 56px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-120px;top:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(232,217,184,.22),transparent 70%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,5.2vw,48px);line-height:1.15;margin-bottom:18px}
+.hero p{color:#d6e2dc;font-size:21px}
+.hero em{font-style:italic;color:#fff}
+.hero .cred{margin:0 0 24px;color:#bfd0c8}
+.hero .nota{color:#bfd0c8;margin-top:14px}
+.hero-foto{position:relative;border-radius:26px;overflow:hidden;box-shadow:0 26px 60px rgba(0,0,0,.4);aspect-ratio:3/4}
+.hero-foto img{width:100%;height:100%;object-fit:cover}
+.hero-foto .capinha{position:absolute;left:16px;bottom:16px;right:16px;background:rgba(21,56,49,.86);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center;color:#fff;font-size:14px;line-height:1.3}
+.hero-foto .mini{flex:0 0 46px;height:64px;border-radius:3px 6px 6px 3px;background:linear-gradient(160deg,#fbf7ee,#efe4cc);box-shadow:-4px 0 0 -2px #c9b98f;padding:6px 5px;font-family:var(--serif);font-weight:700;font-size:9px;line-height:1.05;color:var(--verde-escuro)}
+.hero-foto .capinha b{display:block;font-size:15px}
+
+/* conselhos que não ajudaram */
+.conselhos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.conselho{background:var(--cartao);border:1px solid var(--linha);border-radius:20px;padding:24px 22px;box-shadow:0 10px 30px rgba(31,78,70,.06)}
+.conselho q{display:block;font-family:var(--serif);font-style:italic;font-size:22px;color:var(--verde);margin-bottom:10px;quotes:'“' '”'}
+.conselho p{font-size:17.5px;color:var(--suave);margin:0}
+
+/* radar */
+.radar{display:grid;grid-template-columns:260px 1fr;gap:34px;align-items:center}
+.radar svg{width:100%;height:auto}
+.tres{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 18px}
+.tres span{background:#fff;border:2px solid var(--terra);color:var(--terra-escura);font-weight:800;padding:8px 16px;border-radius:999px;font-size:17px}
+
+/* mensagens que disparam o alarme */
+.balao{background:#fff;border:1px solid var(--linha);border-radius:18px 18px 18px 4px;padding:16px 20px;margin:0 0 12px;max-width:560px;font-size:19px;position:relative;box-shadow:0 6px 18px rgba(31,78,70,.06)}
+.balao small{display:block;font-size:14px;color:var(--terra-escura);font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.balao .exp{font-size:16.5px;color:var(--suave);margin-top:6px}
+
+/* três partes / capítulos */
+.partes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:8px 0 10px}
+.parte{background:var(--cartao);border:1px solid var(--linha);border-radius:20px;padding:24px 22px;box-shadow:0 10px 30px rgba(31,78,70,.06)}
+.parte .n{width:44px;height:44px;border-radius:50%;background:var(--verde);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.parte h3{font-size:22px}
+.parte ol{padding-left:22px;font-size:17px;color:var(--suave)}
+.parte li{margin-bottom:6px}
+.parte li b{color:var(--tinta)}
+
+/* destaque de frase */
+.tese{background:#fff;border:1px solid var(--linha);border-left:6px solid var(--terra);border-radius:18px;padding:26px 28px;margin:26px 0;font-family:var(--serif);font-size:23px;line-height:1.45;color:var(--verde-escuro)}
+section.escuro .tese{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);border-left-color:var(--terra);color:#fff}
+
+/* o que você vai saber fazer */
+.saber{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.saber div{background:var(--cartao);border:1px solid var(--linha);border-radius:18px;padding:20px 22px;font-size:18.5px}
+.saber div b{display:block;color:var(--verde);font-size:19px;margin-bottom:4px}
+
+/* o que não é */
+.naoe{background:var(--cartao);border:1px solid var(--linha);border-radius:20px;padding:8px 26px;margin-bottom:10px}
+.naoe li{padding-left:0}
+.naoe li::before{display:none}
+.naoe b{color:var(--verde)}
+
+/* autora */
+.autora{display:grid;grid-template-columns:240px 1fr;gap:34px;align-items:start}
+.foto{aspect-ratio:4/5;border-radius:22px;background:linear-gradient(160deg,#dfe9e4,#c8d8d1);display:flex;align-items:flex-end;justify-content:center;color:var(--verde);font-size:14px;font-weight:700;padding:14px;text-align:center;border:1px solid var(--linha)}
+.autora h2{margin-bottom:6px}
+
+/* o que recebe */
+.itens{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:10px}
+.item{background:var(--cartao);border:1px solid var(--linha);border-radius:18px;padding:22px;display:flex;gap:16px;align-items:flex-start}
+.item .ic{flex:0 0 52px;height:52px;border-radius:16px;background:linear-gradient(160deg,var(--verde),#2f6f63);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px}
+.item b{display:block;font-size:19px;margin-bottom:2px}
+.item span{font-size:17px;color:var(--suave)}
+
+/* preço */
+.oferta{background:#fff;border:1px solid var(--linha);border-radius:24px;padding:36px 32px;box-shadow:0 12px 38px rgba(31,78,70,.08)}
+.oferta h2{margin-bottom:14px}
+.oferta .btn{margin:10px auto 18px}
+.selo{display:inline-flex;align-items:center;gap:10px;background:#f3eee4;border-radius:999px;padding:8px 16px;font-size:16px;color:var(--verde);font-weight:700;margin-bottom:14px}
+
+/* perguntas */
+details.acc{border:1px solid var(--linha);border-radius:16px;background:#fdfbf6;margin-bottom:14px}
+details.acc[open]{background:#fff;box-shadow:0 4px 16px rgba(31,78,70,.06)}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:20px 22px;font-size:19.5px;font-weight:700;color:var(--tinta);border-radius:16px;line-height:1.35}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary .chev{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:#edf3f0;color:var(--verde);display:flex;align-items:center;justify-content:center;font-size:16px;transition:transform .2s;margin-left:auto}
+details.acc[open] summary .chev{transform:rotate(180deg)}
+details.acc .accbody{padding:0 22px 20px;font-size:19px}
+details.acc .accbody p{margin-bottom:10px}
+
+/* rodapé */
+footer{background:var(--verde-escuro);color:#c9d6d0;font-size:15.5px;padding:40px 0 48px;line-height:1.6}
+footer a{color:#e8d9b8}
+footer p{margin-bottom:12px}
+footer .aviso{color:#fff;font-size:16.5px}
+
+/* barra fixa no celular */
+.fixa{display:none}
+
+@media (max-width:760px){
+  body{font-size:19px}
+  section{padding:42px 0}
+  .hero .wrap,.duas,.radar,.autora,.saber,.itens{grid-template-columns:1fr}
+  .hero{padding-top:36px}
+  .hero-foto{max-width:320px;margin:10px auto 0}
+  .conselhos,.partes{grid-template-columns:1fr}
+  .radar svg{max-width:240px;margin:0 auto}
+  .foto{width:min(100%,220px)}
+  .btn{padding:18px 24px;font-size:19px}
+  .fixa{display:block;position:fixed;left:0;right:0;bottom:0;background:rgba(250,246,238,.96);border-top:1px solid var(--linha);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:50;backdrop-filter:blur(6px)}
+  .fixa .btn{display:block;padding:15px 18px;font-size:18px;box-shadow:0 4px 14px rgba(196,104,58,.3)}
+  body{padding-bottom:96px}
+  .btn{display:block;width:100%;max-width:420px;margin-left:auto;margin-right:auto;padding:17px 12px;font-size:17.5px;line-height:1.25}
+  .wrap{padding-left:16px;padding-right:16px}
+  h2{font-size:clamp(26px,7.2vw,32px)}
+  footer a,.rodape a{display:inline-block;padding:8px 2px;min-height:44px;line-height:28px}
+  .hero .btn{margin-top:4px}
+}
+@media (max-width:640px){
+  /* lista de preço: sem pontilhado, valor alinhado à direita, uma linha por item */
+  .oferta2 ul.inclui li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--linha);font-size:16.5px;line-height:1.4}
+  .oferta2 ul.inclui .pt{display:none}
+  .oferta2 ul.inclui .val,.oferta2 ul.inclui .ok{white-space:nowrap}
+  .oferta2{padding:26px 16px}
+  .oferta2 .ancora{font-size:17px}
+  .oferta2 .depor .por{font-size:40px}
+  .oferta2 .selo{font-size:14.5px;padding:8px 12px}
+}
+</style><style>
+/* Bloco 8 — mockups dos entregáveis (CSS puro; trocar a capa por arte real quando existir) */
+.entregas{display:grid;gap:18px;margin-top:8px}
+.entrega{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:center;background:var(--cartao);border:1px solid var(--linha);border-radius:22px;padding:26px 28px}
+.entrega .num{font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--terra-escura);margin-bottom:6px;display:block}
+.entrega h3{margin-bottom:8px}
+.entrega p{font-size:18px;margin-bottom:8px}
+.entrega .como{font-size:16.5px;color:var(--suave);font-style:italic}
+.mk{position:relative;width:200px;height:200px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.mk *{box-sizing:border-box}
+/* livro */
+.mk-livro{width:128px;height:178px;border-radius:4px 10px 10px 4px;background:linear-gradient(160deg,#2a655b,var(--verde) 55%,var(--verde-escuro));color:#fff;padding:18px 14px;transform:perspective(600px) rotateY(-16deg);box-shadow:-10px 0 0 -3px #0f2a25,-14px 0 0 -4px #c9bfa8,18px 22px 36px rgba(31,78,70,.35);display:flex;flex-direction:column;justify-content:space-between}
+.mk-livro .t{font-family:var(--serif);font-size:19px;line-height:1.15;font-weight:600}
+.mk-livro .st{font-size:9px;line-height:1.3;opacity:.85;margin-top:8px}
+.mk-livro .au{font-size:9px;opacity:.9;border-top:1px solid rgba(255,255,255,.35);padding-top:6px}
+.mk-livro .selo{position:absolute;right:-8px;top:-8px;width:40px;height:40px;border-radius:50%;background:var(--terra);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.1;box-shadow:0 4px 10px rgba(0,0,0,.25);transform:rotateY(16deg)}
+/* celular */
+.mk-fone{width:104px;height:196px;border-radius:22px;background:#1c1b19;padding:9px;box-shadow:0 18px 32px rgba(0,0,0,.28);transform:rotate(-5deg)}
+.mk-fone .tela{width:100%;height:100%;border-radius:15px;background:var(--creme);padding:16px 10px 10px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
+.mk-fone .cap{font-size:8px;font-weight:800;color:var(--terra-escura);letter-spacing:.06em;text-transform:uppercase}
+.mk-fone .tit{font-family:var(--serif);font-size:11px;line-height:1.2;color:var(--verde)}
+.mk-fone .onda{display:flex;align-items:flex-end;gap:2px;height:34px;margin-top:4px}
+.mk-fone .onda i{flex:1;background:var(--verde);border-radius:2px;opacity:.85}
+.mk-fone .play{width:30px;height:30px;border-radius:50%;background:var(--terra);margin:6px auto 0;position:relative}
+.mk-fone .play::after{content:'';position:absolute;left:11px;top:8px;border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.mk-fone .opc{background:#fff;border:1px solid var(--linha);border-radius:8px;padding:5px 7px;font-size:8px;line-height:1.2;color:var(--tinta)}
+.mk-fone .opc.on{border-color:var(--verde);background:#e9f1ee;font-weight:700}
+.mk-fone .bolha{background:#dcefe4;border-radius:10px 10px 10px 2px;padding:6px 7px;font-size:7.5px;line-height:1.3;color:var(--tinta)}
+.mk-fone .copiar{font-size:7.5px;color:var(--verde);font-weight:800;text-align:right}
+/* folhas */
+.mk-folhas{position:relative;width:132px;height:176px}
+.mk-folhas .f{position:absolute;inset:0;background:#fff;border:1px solid var(--linha);border-radius:6px;box-shadow:0 10px 22px rgba(31,78,70,.16)}
+.mk-folhas .f.b1{transform:rotate(-6deg) translate(-6px,4px)}
+.mk-folhas .f.b2{transform:rotate(4deg) translate(6px,2px)}
+.mk-folhas .f.top{padding:14px 12px;display:flex;flex-direction:column;gap:6px}
+.mk-folhas .cap{font-size:7.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--terra-escura)}
+.mk-folhas .tit{font-family:var(--serif);font-size:13px;line-height:1.15;color:var(--verde)}
+.mk-folhas .ln{height:5px;border-radius:3px;background:#eee7d8}
+.mk-folhas .ln.c{width:70%}
+.mk-folhas .caixa{border:1px solid var(--areia);background:var(--creme);border-radius:6px;padding:5px 6px;font-size:8px;font-weight:700;color:var(--verde);text-align:center}
+.mk-folhas .grade{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:2px}
+.mk-folhas .grade i{display:block;aspect-ratio:1;border-radius:3px;background:#eee7d8}
+.mk-folhas .grade i.x{background:var(--verde)}
+.mk-folhas .num{position:absolute;right:10px;bottom:8px;font-size:8px;color:var(--suave)}
+.mk-folhas .linhas{display:grid;gap:9px;margin-top:4px}
+.mk-folhas .linhas i{display:block;border-bottom:1px solid #d9d0bd}
+.mk-folhas .ab{position:absolute;right:-10px;bottom:-6px;width:36px;height:36px;border-radius:50%;background:var(--terra);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 12px rgba(0,0,0,.2)}
+/* aula / vídeo */
+.mk-aula{width:186px;height:124px;border-radius:14px;background:linear-gradient(160deg,#2a655b,var(--verde-escuro));box-shadow:0 18px 30px rgba(31,78,70,.3);position:relative;overflow:hidden;transform:rotate(-2deg)}
+.mk-aula .pessoa{position:absolute;left:14px;bottom:0;width:62px;height:78px;border-radius:30px 30px 0 0;background:#c9bfa8;opacity:.9}
+.mk-aula .pessoa::before{content:'';position:absolute;left:17px;top:-28px;width:28px;height:28px;border-radius:50%;background:#c9bfa8}
+.mk-aula .play{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:var(--terra);box-shadow:0 6px 14px rgba(0,0,0,.3)}
+.mk-aula .play::after{content:'';position:absolute;left:17px;top:12px;border-left:15px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.mk-aula .tag{position:absolute;left:12px;top:10px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.18);padding:3px 7px;border-radius:999px}
+.mk-aula .barra{position:absolute;left:12px;right:12px;bottom:10px;height:4px;background:rgba(255,255,255,.25);border-radius:2px}
+.mk-aula .barra::after{content:'';position:absolute;left:0;top:0;height:100%;width:38%;background:var(--terra);border-radius:2px}
+.mk-aulas{position:relative;width:200px;height:170px}
+.mk-aulas .mk-aula{position:absolute;width:160px;height:106px;left:20px;top:32px}
+.mk-aulas .mk-aula.a1{transform:rotate(-7deg) translate(-14px,-14px);opacity:.85}
+.mk-aulas .mk-aula.a2{transform:rotate(3deg) translate(0,-6px);opacity:.92}
+.mk-aulas .mk-aula.a3{transform:rotate(-1deg) translate(10px,6px)}
+/* pilha de abertura */
+.pilha-img{margin:6px auto 34px;max-width:980px}.pilha-img img{width:100%;height:auto;display:block}
+.pilha{position:relative;height:300px;margin:6px 0 34px}
+.pilha .mk{position:absolute;margin:0}
+.pilha .p1{left:50%;top:30px;transform:translateX(-50%) scale(1.25);z-index:5}
+.pilha .p2{left:8%;top:60px;transform:rotate(-8deg) scale(.95);z-index:3}
+.pilha .p3{right:8%;top:50px;transform:rotate(7deg) scale(.95);z-index:3}
+.pilha .p4{left:26%;top:120px;transform:rotate(-4deg) scale(.8);z-index:4}
+.pilha .p5{right:24%;top:120px;transform:rotate(5deg) scale(.8);z-index:4}
+.pilha .p6{left:0;top:160px;transform:scale(.7);z-index:2}
+.pilha .p7{right:0;top:170px;transform:scale(.7);z-index:2}
+@media (max-width:760px){
+  /* entregáveis compactos: mockup pequeno à esquerda, texto à direita */
+  .entregas{gap:12px}
+  .entrega{grid-template-columns:96px 1fr;gap:14px;padding:16px 14px;align-items:start;border-radius:16px}
+  .entrega .mk{width:96px;height:110px;margin:0;overflow:visible}
+  .entrega .mk>*{transform-origin:center;transform:scale(.52)}
+  .entrega .mk .mk-livro{transform:scale(.55) perspective(600px) rotateY(-16deg)}
+  .entrega .mk .mk-aula{transform:scale(.5) rotate(-2deg)}
+  .entrega .num{font-size:12px;margin-bottom:2px}
+  .entrega h3{font-size:19px;margin-bottom:4px}
+  .entrega p{font-size:16px;margin-bottom:4px;line-height:1.45}
+  .entrega .como{font-size:14.5px}
+  .pilha{height:250px}
+  .pilha .p1{transform:translateX(-50%) scale(1.05)}
+  .pilha .p2{left:-4%;top:70px;transform:rotate(-8deg) scale(.75)}
+  .pilha .p3{right:-4%;top:60px;transform:rotate(7deg) scale(.75)}
+  .pilha .p4,.pilha .p5,.pilha .p6,.pilha .p7{display:none}
+}
+</style><style>
+.noite{display:grid;gap:14px;max-width:760px}
+.noite>div{display:grid;grid-template-columns:84px 1fr;gap:14px;align-items:start;background:var(--cartao);border:1px solid var(--linha);border-radius:16px;padding:16px 18px}
+.noite .min{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--terra-escura);line-height:1.2}
+.noite b{display:block}
+@media (max-width:640px){.noite>div{grid-template-columns:64px 1fr;padding:14px}.noite .min{font-size:19px}}
+.oferta2{text-align:center;max-width:820px;margin:0 auto}
+.oferta2 .pilha-img{margin:0 auto 26px;max-width:860px}
+.oferta2 ul.inclui{list-style:none;margin:0 auto 28px;max-width:640px;text-align:left;padding:0}
+.oferta2 ul.inclui li{display:flex;align-items:baseline;gap:8px;padding:9px 0;font-size:18px}
+.oferta2 ul.inclui .it{flex:0 1 auto}
+.oferta2 ul.inclui .pt{flex:1 1 20px;border-bottom:2px dotted #c9bfa8;transform:translateY(-5px);min-width:20px}
+.oferta2 ul.inclui .ok{flex:0 0 auto;color:var(--verde);font-weight:800}
+.oferta2 ul.inclui .ok::before{content:'✓ ';}
+.oferta2 ul.inclui .val{flex:0 0 auto;font-weight:800;color:var(--tinta)}
+.oferta2 .depor{margin:4px 0 10px;line-height:1.2}
+.oferta2 .depor .de{display:block;font-size:20px;color:var(--suave)}
+.oferta2 .depor .de s{text-decoration-thickness:2px}
+.oferta2 .depor .por{display:block;font-family:var(--serif);font-size:clamp(34px,6vw,48px);font-weight:600;color:var(--terra-escura)}
+.oferta2 .ancora{max-width:640px;margin:0 auto 14px;font-size:19px;color:var(--suave)}
+.oferta2 .preco{font-size:20px;margin-bottom:6px}
+.oferta2 .preco b{font-weight:800}
+.oferta2 .btn{margin:14px auto 18px}
+</style>
+<style>
+/* oferta pós-quiz */
+@media (min-width:761px){.hero .wrap{grid-template-columns:1.1fr .9fr}}
+.hero .hero-foto{aspect-ratio:16/11}
+@media (max-width:760px){.hero .wrap{grid-template-columns:1fr}.hero .hero-foto{max-width:none;width:100%;margin:8px 0 0;aspect-ratio:16/10}}
+.hero h1{margin-bottom:14px}
+.hidden{display:none}
+.noite>div{display:block;padding:14px 18px;font-size:18px}
+.duas-msgs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duas-msgs .conselho{padding:18px 18px 14px}
+.duas-msgs .conselho p{font-size:16px;color:var(--suave);margin:12px 0 0}
+.zap{background:#efe9dc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23ddd3c0'/%3E%3C/svg%3E");border-radius:14px;padding:12px 10px}
+.balao{background:#dcf8c6;border-radius:12px 12px 2px 12px;padding:10px 12px;font-size:16px;line-height:1.4;margin-left:14%;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.balao .hora{display:block;text-align:right;font-size:11px;color:#6b665c;margin-top:4px}
+.fixo{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px 0 max(12px,env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(250,246,238,0),rgba(250,246,238,.96) 30%);pointer-events:none}
+.fixo .btn{pointer-events:auto;font-size:19px;padding:16px 24px;box-shadow:0 10px 26px rgba(196,104,58,.4)}
+.fixo .wrap{max-width:560px}
+body{padding-bottom:96px}
+footer{padding-bottom:110px}
+#hoje li{padding-left:42px}
+#hoje li::before{content:'✕';background:none;color:var(--terra-escura);font-weight:800;font-size:18px;top:11px;left:6px;width:auto;height:auto}
+@media (max-width:760px){
+  .duas-msgs{grid-template-columns:1fr}
+  .hero .hero-foto{max-width:none;margin-top:6px}
+  .oferta2 ul.inclui li{font-size:16.5px;padding:7px 0}
+  .lista li{font-size:17.5px}
+}
 </style>
 </head>
-<body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed">
-
-<!-- 1. Abertura personalizada -->
-<section class="pt-10 pb-8">
-  <div class="wrap animate-entra">
-    <span class="sobre">O seu resultado chegou</span>
-    <h1 class="font-serif font-semibold text-verde text-[clamp(30px,7.6vw,42px)] leading-[1.1] mb-4"><span id="nome-abre"></span>o seu caminho de volta ficou pronto.</h1>
-    <p class="text-[20px]">Pelo que você contou, o afastamento da sua família é <strong class="text-verde" id="tipo-abre"></strong> e você tem reagido como <strong class="text-verde" id="arq-abre"></strong>. Esta página mostra o que fazer com isso, começando hoje.</p>
-    <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] bg-areia mt-6"><img id="img-arq" src="" alt="" class="w-full h-full object-cover"></div>
+<body>
+<!-- Bloco 1 — Abertura personalizada (nome vem do localStorage do quiz; nunca da URL) -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="sobre" style="color:var(--areia)">O seu resultado chegou</span>
+      <h1><span id="nome-abre"></span>o seu caminho de volta ficou pronto.</h1>
+      <p>Pelo que você contou, o afastamento da sua família é <em id="tipo-abre"></em> e você tem reagido como <em id="arq-abre"></em>. Esta página mostra o que fazer com isso, começando hoje.</p>
+    </div>
+    <div class="hero-foto"><img id="img-arq" src="" alt=""></div>
   </div>
 </section>
 
-<!-- 2. O que você contou → o que fica nas suas mãos -->
+<!-- Bloco 2 — O que você contou / o que fica nas suas mãos -->
 <section class="alt">
   <div class="wrap">
     <span class="sobre">O que você contou</span>
     <h2>Três coisas que as suas respostas deixaram claras.</h2>
-    <div id="ecos" class="space-y-3 mb-8"></div>
+    <div class="noite" id="ecos"></div>
+    <div style="height:30px"></div>
     <span class="sobre">O que fica nas suas mãos</span>
-    <h2 class="text-[24px]">Você não controla se ele vai voltar. Controla isto:</h2>
-    <ul class="space-y-3 text-[18px]">
-      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span>Saber, antes de apertar enviar, se a mensagem cobra, aconselha ou pede.</span></li>
-      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span id="troca-item">Trocar o gesto que tem pesado pelo gesto que não dispara o alarme.</span></li>
-      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span>Ter uma mensagem pronta para a hora da saudade, às onze da noite, sem improvisar.</span></li>
-      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span>Passar pelas datas difíceis sem transformar a mesa em cobrança.</span></li>
+    <h2>Você não controla se ele vai voltar. Controla isto:</h2>
+    <ul class="lista check">
+      <li>Saber, antes de apertar enviar, se a mensagem cobra, aconselha ou pede.</li>
+      <li id="troca-item">Trocar o gesto que tem pesado pelo gesto que não dispara o alarme.</li>
+      <li>Ter uma mensagem pronta para a hora da saudade, às onze da noite, sem improvisar.</li>
+      <li>Passar pelas datas difíceis sem transformar a mesa em cobrança.</li>
     </ul>
   </div>
 </section>
 
-<!-- 3. Prova de mecanismo: a mesma mensagem, antes e depois do radar (print montado, nome fictício) -->
+<!-- Bloco 3 — Prova de mecanismo: a mesma mensagem antes e depois do radar (exemplo montado, nome fictício) -->
 <section>
   <div class="wrap">
     <span class="sobre">A mesma saudade, dois jeitos de chegar</span>
     <h2>Veja o que muda numa mensagem quando o radar entra antes do enviar.</h2>
-    <p class="text-suave text-[16px]">Exemplo montado, com nome fictício, para mostrar a ideia do capítulo 6. Não é relato de leitor.</p>
-    <div class="grid gap-4 sm:grid-cols-2">
-      <div class="card chat">
-        <span class="sobre mb-2">Antes</span>
-        <div class="balao mae">Oi filho, tudo bem? Faz 3 semanas que você não dá notícia. Sei que você é ocupado, mas uma ligação de 5 minutos não custa nada né. Sua avó pergunta de você toda hora. Me liga quando puder. Beijo da mãe que te ama <span class="hora">21:47 ✓✓</span></div>
-        <p class="text-[14px] text-suave mt-3 mb-0">Cobra ("3 semanas"), aconselha ("não custa nada"), pede ("me liga"). O alarme dispara três vezes.</p>
+    <p class="nota">Exemplo montado, com nome fictício, para mostrar a ideia do capítulo 6. Não é relato de leitor.</p>
+    <div class="duas-msgs">
+      <div class="conselho">
+        <span class="sobre" style="color:#9e2f2f">Antes</span>
+        <div class="zap"><div class="balao">Oi filho, tudo bem? Faz 3 semanas que você não dá notícia. Sei que você é ocupado, mas uma ligação de 5 minutos não custa nada né. Sua avó pergunta de você toda hora. Me liga quando puder. Beijo da mãe que te ama<span class="hora">21:47 ✓✓</span></div></div>
+        <p>Cobra ("3 semanas"), aconselha ("não custa nada"), pede ("me liga"). O alarme dispara três vezes.</p>
       </div>
-      <div class="card chat">
-        <span class="sobre mb-2">Depois</span>
-        <div class="balao mae">Passei hoje na padaria da esquina e ainda tem aquele pão de queijo que você gostava. Lembrei de você. Não precisa responder, só queria contar. Beijo <span class="hora">21:47 ✓✓</span></div>
-        <p class="text-[14px] text-suave mt-3 mb-0">Não cobra, não aconselha, não pede. Chega como presença, e não como fatura.</p>
+      <div class="conselho">
+        <span class="sobre" style="color:var(--verde)">Depois</span>
+        <div class="zap"><div class="balao">Passei hoje na padaria da esquina e ainda tem aquele pão de queijo que você gostava. Lembrei de você. Não precisa responder, só queria contar. Beijo<span class="hora">21:47 ✓✓</span></div></div>
+        <p>Não cobra, não aconselha, não pede. Chega como presença, e não como fatura.</p>
       </div>
     </div>
-    <p class="text-[17px] text-suave mt-4">Nenhuma mensagem garante resposta. O que muda é o que o seu filho encontra quando abre.</p>
+    <p class="nota" style="margin-top:14px">Nenhuma mensagem garante resposta. O que muda é o que o seu filho encontra quando abre.</p>
   </div>
 </section>
 
-<!-- 4. Quem escreve -->
+<!-- Bloco 4 — Quem escreve (foto real da autora e CRP: a preencher) -->
 <section class="alt">
   <div class="wrap">
-    <div class="grid gap-6 sm:grid-cols-[200px_1fr] items-start">
-      <div class="aspect-[4/5] rounded-[22px] bg-areia grid place-items-center text-center text-[14px] text-suave p-4">[Foto profissional da autora]</div>
+    <div class="autora">
+      <div class="foto">[Foto profissional da autora]</div>
       <div>
         <span class="sobre">Quem escreve</span>
-        <h2>[Nome]</h2>
-        <p class="text-suave text-[16px] -mt-2">Psicóloga · CRP XX/XXXXX · [X] anos de prática em [abordagem]</p>
+        <h2>Lívia R. Viana</h2>
+        <p class="cred">Psicóloga · CRP XX/XXXXX</p>
+        <p>[Formação e anos de prática em [abordagem], só com títulos que ela de fato possui.]</p>
         <p>[História de origem em primeira pessoa, a preencher após a entrevista: o momento em que ela entendeu, na própria vida, que um gesto de carinho pode chegar ao outro como cobrança.]</p>
-        <p>[Segundo parágrafo.]</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 5. O que você recebe -->
+<!-- Bloco 5 — O que você recebe (mockups da página principal) -->
 <section>
   <div class="wrap">
-    <span class="sobre">O que você recebe hoje</span>
-    <h2>Tudo o que está dentro de <em>O Caminho de Volta</em>.</h2>
-    <div class="space-y-4">
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="mock aspect-[3/4]"><span class="text-[10px] font-bold">O CAMINHO DE VOLTA</span><span class="text-[8px] text-suave">[Nome] · CRP</span></div>
-        <div><strong class="text-verde">O livro, em 12 capítulos curtos</strong><p class="mb-0 text-[17px]">Letra grande, para ler no celular. <span id="caps-linha"></span></p></div>
-      </div>
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="aspect-square rounded-2xl bg-verde grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#e8d9b8" stroke-width="1.8" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></div>
-        <div><strong class="text-verde">O audiobook, na voz da autora</strong><p class="mb-0 text-[17px]">Para ouvir no carro, na cozinha, sem precisar enxergar a tela.</p></div>
-      </div>
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="aspect-square rounded-2xl bg-[#dcf8c6] grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#1f4e46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
-        <div><strong class="text-verde">Mensagens Sem Alarme</strong><p class="mb-0 text-[17px]">30 mensagens prontas, por situação, com botão de copiar. <span id="msg-linha"></span></p></div>
-      </div>
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="aspect-square rounded-2xl bg-areia grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#1f4e46" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
-        <div><strong class="text-verde">O radar em uma página</strong><p class="mb-0 text-[17px]">As 3 perguntas e as 9 mensagens que disparam o alarme, para colar na geladeira.</p></div>
-      </div>
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="aspect-square rounded-2xl bg-white border border-linha grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#1f4e46" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
-        <div><strong class="text-verde">Diário Sem Alarme</strong><p class="mb-0 text-[17px]">30 dias, uma página por dia: o que você teve vontade de mandar, o que sentiu, o que fez no lugar.</p></div>
-      </div>
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="aspect-square rounded-2xl bg-verde-escuro grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#e8d9b8" stroke-width="1.8" stroke-linejoin="round"><path d="M5 5h14v11H5z"/><path d="M10 8.5v4l3.5-2z" fill="#e8d9b8"/><path d="M9 20h6"/></svg></div>
-        <div><strong class="text-verde">Três aulas gravadas</strong><p class="mb-0 text-[17px]"><em>Os 7 tipos de afastamento</em> <span id="aula-linha"></span>, <em>Por que o que você tentou não funcionou</em> e <em>Quando a nora ou o genro está no meio</em>.</p></div>
-      </div>
-      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
-        <div class="aspect-square rounded-2xl bg-terra/15 grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#9e4f27" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3M13 14h3M8 17h3"/></svg></div>
-        <div><strong class="text-verde">Um vídeo da autora e 14 dias de acompanhamento</strong><p class="mb-0 text-[17px]">Uma tarefa para hoje, que não depende de falar com o seu filho, e e-mails curtos nos 14 dias seguintes.</p></div>
-      </div>
+    <div style="text-align:center;max-width:760px;margin:0 auto">
+      <span class="sobre">O que você recebe hoje</span>
+      <h2>Tudo o que está dentro de <em>O Caminho de Volta</em></h2>
+      <p>Nove materiais numa área só, com acesso por e-mail logo depois da confirmação. <span id="caps-linha"></span></p>
+    </div>
+    <div class="pilha-img"><img src="../../img/pilha.webp" alt="Os materiais de O Caminho de Volta" width="1813" height="868" loading="lazy"></div>
+    <div class="entregas">
+      <div class="entrega"><div class="mk"><div class="mk-livro"><div><div class="t">O Caminho<br>de Volta</div><div class="st">Um guia para pais que querem se reaproximar de um filho adulto que se afastou</div></div><div class="au">Lívia R. Viana, psicóloga<br>CRP XX/XXXXX</div><div class="selo">PDF<br>+ áudio</div></div></div><div><span class="num">Item 1 de 9</span><h3>O livro digital <em>O Caminho de Volta</em></h3><p>12 capítulos em PDF com letra grande, para ler no celular, no tablet ou imprimir.</p><p class="como" id="livro-como"></p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-fone"><div class="tela"><div class="cap">Audiobook · cap. 2</div><div class="tit">Visualizou e não respondeu</div><div class="onda"><i style="height:30%"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:35%"></i><i style="height:70%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:30%"></i><i style="height:75%"></i><i style="height:55%"></i></div><div class="play"></div></div></div></div><div><span class="num">Item 2 de 9</span><h3>O audiobook completo</h3><p>Narrado pela autora e dividido por capítulo, para ouvir no carro, na cozinha ou antes de dormir.</p><p class="como">Um toque no play e o capítulo toca no celular. Nada para instalar, nada para enxergar.</p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-fone"><div class="tela"><div class="cap">Mensagens Sem Alarme</div><div class="tit">A primeira depois de meses</div><div class="bolha">Oi, [nome]. Passei a semana lembrando de você e quis só dizer isso. Não precisa responder. Um abraço.</div><div class="copiar">⧉ Copiar</div><div class="bolha" style="opacity:.6">Lembrei de você hoje por nada em especial…</div></div></div></div><div><span class="num">Item 3 de 9</span><h3>Mensagens Sem Alarme</h3><p>30 mensagens prontas, uma para cada situação, com botão de copiar.</p><p class="como" id="msg-linha"></p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">Bônus</div><div class="tit">O radar em uma página</div><div class="caixa">Isso cobra?</div><div class="caixa">Isso julga ou aconselha?</div><div class="caixa">Isso pede?</div><div class="ln"></div><div class="ln c"></div></div><div class=ab>📌</div></div></div><div><span class="num">Item 4 de 9</span><h3>O radar em uma página</h3><p>As três perguntas do radar e as 9 mensagens que disparam o alarme, numa página só.</p><p class="como">Para colar na geladeira e olhar antes de mandar qualquer mensagem.</p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-fone"><div class="tela"><div class="cap">Teste · o seu resultado</div><div class="tit" id="mk-tipo">O seu tipo</div><div class="opc on" id="mk-arq">Guardado na sua área</div><div class="opc">Capítulos indicados</div><div class="opc">Primeiro passo</div></div></div></div><div><span class="num">Item 5 de 9</span><h3>O teste, com o seu resultado guardado</h3><p>O resultado que você acabou de ler fica salvo na sua área, com os capítulos indicados para o seu tipo.</p><p class="como">Refaça quando quiser: o afastamento muda, e o mapa acompanha.</p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">O Caderno</div><div class="tit">Exercício do capítulo 3</div><div class="ln c"></div><div class="linhas"><i></i><i></i><i></i><i></i><i></i></div></div><div class=ab>✏️</div></div></div><div><span class="num">Item 6 de 9</span><h3>O Caderno</h3><p>Os exercícios dos 12 capítulos em páginas para imprimir e preencher.</p><p class="como">Uma página por capítulo, para fazer o exercício à mão.</p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-folhas"><div class="f b1"></div><div class="f b2"></div><div class="f top"><div class="cap">Diário Sem Alarme</div><div class="tit">Dia 12 de 30</div><div class="grade"><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i class="x"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="ln"></div><div class="ln c"></div></div><div class=ab>📅</div></div></div><div><span class="num">Item 7 de 9</span><h3>O Diário Sem Alarme</h3><p>30 dias, uma página por dia: o que você teve vontade de mandar, o que sentiu, o que fez no lugar.</p><p class="como">Cinco minutos por dia, para a mão aprender antes da cabeça.</p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-aulas"><div class="mk-aula a1"><span class="tag">Aula 1</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div><div class="mk-aula a2"><span class="tag">Aula 2</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div><div class="mk-aula a3"><span class="tag">Aula 3</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div></div></div><div><span class="num">Item 8 de 9</span><h3>Três aulas gravadas com a autora</h3><p><em>Os 7 tipos de afastamento</em> <span id="aula-linha"></span> · <em>Por que o que você tentou não funcionou</em> · <em>Quando a nora ou o genro está no meio</em>.</p><p class="como">Aulas curtas, dentro da área do livro, para assistir no seu ritmo e, se quiser, a dois.</p></div></div>
+      <div class="entrega"><div class="mk"><div class="mk-aula"><span class="tag">A tarefa de hoje · 7 min</span><div class="pessoa"></div><div class="play"></div><div class="barra"></div></div></div><div><span class="num">Item 9 de 9</span><h3>Um vídeo com a tarefa de hoje</h3><p>Sete minutos com a autora e uma primeira ação que não depende de falar com o seu filho.</p><p class="como">Nos 14 dias seguintes, e-mails curtos da autora acompanhando o começo.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- 6. Objeção -->
+<!-- Bloco 6 — Objeção -->
 <section class="escuro">
   <div class="wrap">
     <span class="sobre">A pergunta que todo mundo faz</span>
     <h2>"E se ele não quiser conversar?"</h2>
-    <p class="text-[20px]">Então o livro é para agora. Tudo o que ele ensina acontece do seu lado: entender o afastamento, parar o que está piorando e preparar o seu lado do caminho de volta. Nada disso depende de resposta.</p>
-    <p class="text-[#bfd0c8] text-[17px] mb-0">O que o livro não promete: que o seu filho vai ligar, nem quando. Ninguém honesto promete isso.</p>
+    <p class="lead">Então o livro é para agora. Tudo o que ele ensina acontece do seu lado: entender o afastamento, parar o que está piorando e preparar o seu lado do caminho de volta. Nada disso depende de resposta.</p>
+    <p class="nota" style="color:#bfd0c8">O que o livro não promete: que o seu filho vai ligar, nem quando. Ninguém honesto promete isso.</p>
   </div>
 </section>
 
-<!-- 7. Como está hoje (das respostas) -->
+<!-- Bloco 7 — Do jeito que está (a partir das respostas) -->
 <section>
   <div class="wrap">
     <span class="sobre">Do jeito que está</span>
     <h2>O que você contou que tem acontecido.</h2>
-    <ul id="hoje" class="space-y-2 text-[18px]"></ul>
-    <p class="mt-6 text-[18px]">Não precisa continuar assim. Não porque ele vai mudar, mas porque <strong class="text-verde">o seu lado pode mudar hoje</strong>, e é isso que está nas suas mãos.</p>
+    <ul class="lista" id="hoje"></ul>
+    <p class="lead">Não precisa continuar assim. Não porque ele vai mudar, mas porque <strong>o seu lado pode mudar hoje</strong>, e é isso que está nas suas mãos.</p>
   </div>
 </section>
 
-<!-- 8. Oferta -->
+<!-- Bloco 8 — Oferta (mesmo padrão da página principal: preço uma vez, sem destaque) -->
 <section class="alt" id="oferta">
   <div class="wrap">
-    <span class="sobre">Para começar hoje</span>
-    <h2>Tudo isto, numa área só, com acesso na hora.</h2>
-    <ul class="text-[18px] space-y-1 mb-5">
-      <li>Livro em 12 capítulos, com letra grande</li>
-      <li>Audiobook na voz da autora</li>
-      <li>Mensagens Sem Alarme (30 mensagens prontas)</li>
-      <li>O radar em uma página</li>
-      <li>Diário Sem Alarme (30 dias)</li>
-      <li>Três aulas gravadas</li>
-      <li>O teste completo, com o seu resultado guardado</li>
-      <li>Vídeo de pós-compra e 14 dias de acompanhamento</li>
-    </ul>
-    <p class="text-[19px]">Investimento: R$ 97, no Pix ou em até 12 vezes no cartão.</p>
-    <a id="cta" class="btn" href="#oferta">Quero O Caminho de Volta</a>
-    <p class="text-[16px] text-suave mt-4 mb-0">Garantia de 30 dias: se não for para você, devolvemos o valor, sem perguntas. Pagamento pela Hotmart.</p>
-  </div>
-</section>
-
-<!-- 9. FAQ -->
-<section>
-  <div class="wrap">
-    <h2>Perguntas frequentes</h2>
-    <div class="space-y-4 text-[18px]">
-      <div><strong class="text-verde">Serve para o meu tipo de afastamento?</strong><p class="mb-0" id="faq-tipo"></p></div>
-      <div><strong class="text-verde">Meu filho mora fora, ou me bloqueou. Ainda serve?</strong><p class="mb-0">Serve, porque tudo acontece do seu lado. O livro tem um capítulo sobre a distância e orientações para quando não há contato nenhum.</p></div>
-      <div><strong class="text-verde">Isso substitui terapia?</strong><p class="mb-0">Não. É um guia educativo. Se houver sofrimento intenso, procure um psicólogo ou psiquiatra. Em crise, o CVV atende no 188, 24 horas, de graça.</p></div>
-      <div><strong class="text-verde">Não enxergo bem no celular.</strong><p class="mb-0">O audiobook é o formato principal, e o livro tem letra de 14 pontos ou mais, ajustável.</p></div>
-      <div><strong class="text-verde">E se eu não gostar?</strong><p class="mb-0">Você tem 30 dias para pedir o reembolso, sem precisar explicar.</p></div>
+    <div class="oferta oferta2">
+      <span class="sobre">Para começar hoje</span>
+      <h2>Tudo isto, numa área só</h2>
+      <ul class="inclui"><li><span class="it">O livro digital <em>O Caminho de Volta</em> (PDF, letra grande)</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O audiobook completo, narrado pela autora</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O teste, com o seu resultado guardado</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">Mensagens Sem Alarme: 30 mensagens prontas</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O radar em uma página</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O Caderno de exercícios</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O Diário Sem Alarme: 30 dias</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">Três aulas gravadas com a autora</span><span class="pt"></span><span class="ok">incluído</span></li><li><span class="it">O vídeo com a tarefa de hoje e 14 dias de acompanhamento</span><span class="pt"></span><span class="ok">incluído</span></li></ul>
+      <p class="preco"><em>O Caminho de Volta</em>, completo: <b>R$ 97</b>, pagamento único, no Pix ou em até 12x no cartão.</p>
+      <a class="btn wide" href="#oferta" data-checkout>Quero começar O Caminho de Volta</a>
+      <div class="selo">✓ &nbsp;30 dias para ler e pedir reembolso, sem explicação</div>
+      <p class="nota">Pagamento e entrega pela Hotmart. O acesso chega no seu e-mail logo após a confirmação. No Pix, é na hora.</p>
     </div>
   </div>
 </section>
 
-<!-- 10. Fechamento -->
-<section class="escuro">
+<!-- Bloco 9 — FAQ em acordeão (a primeira resposta muda pelo tipo) -->
+<section>
   <div class="wrap">
-    <h2>As datas difíceis vão chegar de qualquer jeito.</h2>
-    <p class="text-[20px]">O Natal, o aniversário dele, o Dia das Mães. A diferença é com que mensagem você vai chegar nelas.</p>
-    <a class="btn" href="#oferta">Quero O Caminho de Volta</a>
+    <h2>Perguntas frequentes</h2>
+    <details class="acc" open><summary>Serve para o meu tipo de afastamento?<span class="chev">▼</span></summary><div class="accbody"><p id="faq-tipo"></p></div></details>
+    <details class="acc"><summary>Meu filho precisa participar?<span class="chev">▼</span></summary><div class="accbody"><p>Não. O livro trabalha o que está do seu lado da relação. Tudo o que ele propõe pode ser feito sem que o seu filho saiba que você está lendo.</p></div></details>
+    <details class="acc"><summary>Meu filho mora fora, ou me bloqueou. Ainda serve?<span class="chev">▼</span></summary><div class="accbody"><p>Serve, porque tudo acontece do seu lado. Há um capítulo sobre a distância e orientações para quando não há contato nenhum.</p></div></details>
+    <details class="acc"><summary>Eu já tentei de tudo. Por que isso seria diferente?<span class="chev">▼</span></summary><div class="accbody"><p>Quase tudo o que os pais tentam costuma passar pelo radar como cobrança ou pedido. O livro não propõe tentar mais. Propõe tentar diferente.</p></div></details>
+    <details class="acc"><summary>É terapia?<span class="chev">▼</span></summary><div class="accbody"><p>Não. É conteúdo educativo escrito por uma psicóloga, e não substitui acompanhamento psicológico. Em sofrimento intenso, o CVV atende no 188, 24 horas, de graça.</p></div></details>
+    <details class="acc"><summary>Tenho dificuldade de ler no celular.<span class="chev">▼</span></summary><div class="accbody"><p>O livro vem com letra grande e com o audiobook completo, dividido por capítulo. Muita gente só ouve.</p></div></details>
+    <details class="acc"><summary>Como recebo?<span class="chev">▼</span></summary><div class="accbody"><p>Por e-mail, logo após a confirmação do pagamento. No Pix, é na hora. Se o e-mail não aparecer, olhe na pasta de promoções ou de spam.</p></div></details>
+    <details class="acc"><summary>Posso pedir reembolso?<span class="chev">▼</span></summary><div class="accbody"><p>Sim. Você tem 30 dias a partir da compra para pedir o reembolso pela plataforma, sem precisar explicar o motivo.</p></div></details>
   </div>
 </section>
 
-<footer class="text-center text-[13.5px] leading-snug text-suave px-5 py-6">
-  <span id="cred" class="hidden"></span>Conteúdo educativo. Não substitui psicoterapia. Em crise, CVV 188.<br>
-  <span class="opacity-80">Exemplos e fotos são ilustrativos, sem pessoas reais · [Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · [endereço] · <a class="underline" href="mailto:[e-mail de contato]">[e-mail de contato]</a> · <a class="underline" href="#">Privacidade</a> · <a class="underline" href="#">Termos</a></span>
+<!-- Bloco 10 — Fechamento -->
+<section class="escuro">
+  <div class="wrap centro">
+    <h2>As datas difíceis vão chegar de qualquer jeito.</h2>
+    <p style="max-width:640px;margin:0 auto 22px" id="fecho"></p>
+    <a class="btn" href="#oferta" data-checkout>Quero começar O Caminho de Volta</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><span id="cred" class="hidden"></span>Conteúdo educativo. Não substitui psicoterapia. Em sofrimento intenso, procure um psicólogo ou psiquiatra; em crise, CVV 188.</p>
+    <p>Exemplos de mensagem e fotos são ilustrativos, sem pessoas reais.</p>
+    <p>[Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · [endereço] · <a href="mailto:[e-mail de contato]">[e-mail de contato]</a></p>
+    <p><a href="#">Política de privacidade</a> · <a href="#">Termos de uso</a></p>
+  </div>
 </footer>
 
-<!-- botão fixo -->
-<div class="fixed bottom-0 inset-x-0 z-20 bg-gradient-to-t from-creme via-creme/95 to-creme/0 pt-5 pb-[max(14px,env(safe-area-inset-bottom))] px-4"><div class="wrap"><a id="cta-fixo" class="btn !text-[19px] !py-4" href="#oferta">Quero O Caminho de Volta</a></div></div>
-<div class="h-24"></div>
-
+<div class="fixo"><div class="wrap"><a class="btn wide" href="#oferta" data-checkout>Quero O Caminho de Volta</a></div></div>
 <script>
 const CHECKOUT = ''; // link da Hotmart quando existir; vazio leva ao bloco da oferta
-const AUTORA = { nome:'', crp:'' };
+const AUTORA = { nome:'Lívia R. Viana', crp:'' }; // CRP a preencher; sem CRP a credencial do rodapé não aparece
 const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
 const q = new URLSearchParams(location.search);
 const dados = lsGet('pfa_quiz', {}) || {};
@@ -237,48 +500,51 @@ const ARQ = {
   cuida:{f:'a mãe que cuida', m:'o pai que cuida', troca:['resgate','confiança'], img:{f:'../img/cuida.jpg', m:'../img/cuida_m.jpg'}},
   aliados:{f:'a mãe que busca aliados', m:'o pai que busca aliados', troca:['conselho','pergunta'], img:{f:'../img/aliados.jpg', m:'../img/aliados_m.jpg'}}
 };
-const tipoK = q.get('tipo') || (dados.n ? {1:'distancia',2:'dinheiro',3:'valores',4:'nova_casa',5:'passado',6:'briga',7:'sem_motivo'}[dados.n] : 'sem_motivo');
+const MAPA = {1:'distancia',2:'dinheiro',3:'valores',4:'nova_casa',5:'passado',6:'briga',7:'sem_motivo'};
+const tipoK = q.get('tipo') || (dados.n ? MAPA[dados.n] : 'sem_motivo');
 const arqK = q.get('arq') || dados.arq || 'espera';
 const tp = TIPOS[tipoK] || TIPOS.sem_motivo, A = ARQ[arqK] || ARQ.espera;
 const sexo = r.quem==='pai' ? 'm' : 'f';
-const ele = r.filho==='ela' ? 'ela' : 'ele', Ele = ele==='ela'?'Ela':'Ele', oFilho = ele==='ela'?'a sua filha':'o seu filho';
+const ele = r.filho==='ela' ? 'ela' : 'ele', Ele = ele==='ela'?'Ela':'Ele';
 const nome = (dados.nome||'').trim();
+const $ = id => document.getElementById(id);
 
-document.getElementById('nome-abre').textContent = nome ? nome + ', ' : '';
-document.getElementById('tipo-abre').textContent = tipoK==='nova_casa' ? `pela nova casa, a família que ${ele} formou,` : tp.nome;
-document.getElementById('arq-abre').textContent = A[sexo];
-document.getElementById('img-arq').src = A.img[sexo];
-document.getElementById('troca-item').textContent = `Trocar ${A.troca[0]} por ${A.troca[1]}: a troca que mais pesa para ${sexo==='m'?'o pai':'a mãe'} que ${arqK==='aliados'?'busca aliados':arqK==='insiste'?'insiste':arqK==='espera'?'espera':arqK==='explica'?'explica':'cuida'}.`;
-document.getElementById('caps-linha').textContent = `Para o seu caso, os capítulos ${tp.caps.slice(0,-1).join(', ')} e ${tp.caps[tp.caps.length-1]} falam direto com o seu resultado.`;
-document.getElementById('msg-linha').textContent = tp.msg;
-document.getElementById('aula-linha').textContent = `(com o caminho do afastamento ${tp.nome})`;
-document.getElementById('faq-tipo').textContent = tp.faq;
+$('nome-abre').textContent = nome ? nome + ', ' : '';
+$('tipo-abre').textContent = tipoK==='nova_casa' ? `pela nova casa, a família que ${ele} formou,` : tp.nome;
+$('arq-abre').textContent = A[sexo];
+$('img-arq').src = A.img[sexo];
+$('troca-item').textContent = `Trocar ${A.troca[0]} por ${A.troca[1]}: a troca que mais pesa para ${A[sexo]}.`;
+$('caps-linha').textContent = `Para o seu caso, os capítulos ${tp.caps.slice(0,-1).join(', ')} e ${tp.caps[tp.caps.length-1]} falam direto com o seu resultado.`;
+$('livro-como').textContent = `Comece pelo capítulo ${tp.caps[0]}: é o que conversa com o afastamento ${tp.nome}.`;
+$('msg-linha').textContent = tp.msg;
+$('aula-linha').textContent = `(com o caminho do afastamento ${tp.nome})`;
+$('mk-tipo').textContent = 'Afastamento ' + tp.nome;
+$('mk-arq').textContent = A[sexo].charAt(0).toUpperCase() + A[sexo].slice(1);
+$('faq-tipo').textContent = tp.faq;
+$('fecho').textContent = (r.data==='natal' ? 'Você contou que o Natal é a data que mais pesa. ' : r.data==='diade' ? `Você contou que ${sexo==='m'?'o Dia dos Pais':'o Dia das Mães'} é a data que mais pesa. ` : '') + 'Para quem vive um afastamento, as datas são as noites mais pesadas do ano, e elas chegam com ou sem um plano. O capítulo 12 é sobre isso: o que enviar, o que não enviar e como cuidar de você. A única diferença que está nas suas mãos é chegar nelas com uma mensagem sem alarme pronta, se for a hora.';
 
-/* o que você contou: 3 ecos */
 const ecos = [];
 if (r.visu==='varias'||r.visu==='algumas') ecos.push(`${Ele} visualiza e não responde, e isso já aconteceu mais de uma vez.`);
 if (r.freq==='dia') ecos.push('Você tenta contato quase todo dia.'); else if (r.freq==='parei') ecos.push('Você parou de tentar, e fica esperando.');
 if (r.parentes==='mudo'||r.parentes==='invento') ecos.push('Quando um parente pergunta, você muda de assunto ou diz que está tudo bem.');
 if (r.outra==='nora') ecos.push('A nora ou o genro pesa nesse contato.');
 if (r.saberia==='medo'||r.saberia==='ns') ecos.push(`Se ${ele} escrevesse hoje, você não saberia o que responder.`);
-if (r.data==='natal') ecos.push('O Natal é a data que mais pesa.'); else if (r.data==='diade') ecos.push(`${sexo==='m'?'O Dia dos Pais':'O Dia das Mães'} é a data que mais pesa.`);
+if (r.data==='natal') ecos.push('O Natal é a data que mais pesa.');
 if (r.quer==='falar') ecos.push(`Hoje, só ${ele} voltar a falar com você já seria muito.`);
 if (!ecos.length) ecos.push('A relação está mais distante do que você gostaria.', 'Você já tentou de um jeito, e não funcionou.', 'Você quer saber o que fazer do seu lado.');
-document.getElementById('ecos').innerHTML = ecos.slice(0,3).map(e=>`<div class="card !py-4 flex gap-3 text-[18px]"><span class="text-terra-escura font-extrabold">•</span><span>${e}</span></div>`).join('');
+$('ecos').innerHTML = ecos.slice(0,3).map(e=>`<div><b>${e}</b></div>`).join('');
 
-/* como está hoje: lista a partir das respostas, sem julgamento */
 const hoje = [];
 if (r.contato==='nenhum') hoje.push('Nenhum contato há meses.'); if (r.contato==='bloq') hoje.push('Bloqueio, ou saída do grupo da família.'); if (r.contato==='pouco') hoje.push('Contato pouco e superficial: figurinha, parabéns, polegar no grupo.'); if (r.contato==='essencial') hoje.push('Só o essencial, quando precisa.');
 if (r.tiques==='dia') hoje.push('Um visualizado sem resposta estraga o dia inteiro.'); if (r.tiques==='releio') hoje.push('Você relê o que mandou procurando onde errou.'); if (r.tiques==='outra') hoje.push('Quando não vem resposta, você manda outra.');
 if (r.pesa==='culpa') hoje.push('A culpa é o que mais pesa.'); if (r.pesa==='raiva') hoje.push('A raiva é o que mais pesa.'); if (r.pesa==='saudade') hoje.push('A saudade é o que mais pesa.'); if (r.pesa==='naosei') hoje.push('Não saber o que fazer é o que mais pesa.'); if (r.pesa==='parentes') hoje.push('A pergunta dos parentes é o que mais pesa.');
 if ((r.tentou||[]).includes('explicar')) hoje.push('Mensagens longas explicando o seu lado, sem resultado.'); if ((r.tentou||[]).includes('silencio')) hoje.push('Silêncio, esperando que ele dê o primeiro passo.');
 if (!hoje.length) hoje.push('Um afastamento que você não escolheu.', 'Tentativas que não chegaram.', 'A dúvida sobre o que fazer agora.');
-document.getElementById('hoje').innerHTML = hoje.slice(0,5).map(h=>`<li class="flex gap-3"><span class="text-terra-escura">✕</span><span>${h}</span></li>`).join('');
+$('hoje').innerHTML = hoje.slice(0,5).map(h=>`<li>${h}</li>`).join('');
 
-/* checkout */
 const url = CHECKOUT ? CHECKOUT + (CHECKOUT.includes('?')?'&':'?') + 'sck=quiz_' + tipoK + '_' + arqK : '#oferta';
-for (const id of ['cta','cta-fixo']) document.getElementById(id).href = url;
-if (AUTORA.nome && AUTORA.crp) { const c=document.getElementById('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
+document.querySelectorAll('[data-checkout]').forEach(a=>a.href=url);
+if (AUTORA.nome && AUTORA.crp) { const c=$('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
 </script>
 </body>
 </html>
