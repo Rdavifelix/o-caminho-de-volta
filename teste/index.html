@@ -70,7 +70,7 @@ tailwind.config = {
 </div>
 
 <footer class="border-t border-linha text-center text-[13.5px] leading-snug text-suave px-4 py-4 pb-[max(16px,env(safe-area-inset-bottom))]">
-  <span id="cred">[Nome], psicóloga · CRP XX/XXXXX</span> · Conteúdo educativo. Não substitui psicoterapia.<br>
+  <span id="cred" class="hidden"></span>Conteúdo educativo. Não substitui psicoterapia.<br>
   <span class="opacity-80">Fotos ilustrativas, sem pessoas reais · [Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · <a class="underline" href="../#privacidade">Privacidade</a></span>
 </footer>
 
@@ -320,7 +320,7 @@ function render(){
 }
 const rotulo = b => `<span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-terra-escura mb-3">${b}</span>`;
 const h2 = q => `<h2 class="font-serif font-semibold text-verde text-[clamp(26px,6.2vw,34px)] leading-[1.2] mb-5">${q}</h2>`;
-const cred = () => (AUTORA.nome&&AUTORA.crp) ? `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp}` : '[Nome], psicóloga · CRP XX/XXXXX';
+const cred = () => (AUTORA.nome&&AUTORA.crp) ? `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp}` : 'a autora';
 
 /* ---- telas ---- */
 function intro(t, box){
@@ -561,7 +561,8 @@ function result(t, box){
   evento('TesteConcluido', {tipo:TIPO_BD[r.n], arq:r.arq});
 }
 
-if (AUTORA.nome && AUTORA.crp) document.getElementById('cred').textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp}`;
+/* Credencial no rodapé só quando nome e CRP estiverem preenchidos (obrigatório no lançamento: CFP exige nome + psicóloga + CRP em toda peça). */
+if (AUTORA.nome && AUTORA.crp) { const c=document.getElementById('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
 ir(0);
 </script>
 </body>
