@@ -50,6 +50,7 @@ tailwind.config = {
   .atraso-1 { animation-delay: .15s } .atraso-2 { animation-delay: .3s } .atraso-3 { animation-delay: .45s }
   @media (prefers-reduced-motion: reduce) { .animate-entra, .animate-pulso, .animate-revela { animation: none } }
 </style>
+<script src="../rastreio.js"></script>
 </head>
 <body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed min-h-[100dvh] flex flex-col">
 
@@ -491,8 +492,8 @@ function salvar(r){
   if (!API) return;
   const corpo = { nome:lead.nome, email:lead.email, optin_whatsapp: !!lead.zap, whatsapp: lead.zap||undefined,
     tipo_afastamento: TIPO_BD[r.n], tipo_secundario: r.n2?TIPO_BD[r.n2]:undefined, arquetipo:r.arq, origem:'quiz', respostas: resp };
-  const q = new URLSearchParams(location.search);
-  for (const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']) if (q.get(k)) corpo[k]=q.get(k);
+  const q = new URLSearchParams(location.search), guardado = window.pfaOrigem ? pfaOrigem() : {};
+  for (const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']) { const v = q.get(k) || guardado[k]; if (v) corpo[k]=v; }
   fetch(API+'/lead-teste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo),keepalive:true}).catch(()=>{});
 }
 

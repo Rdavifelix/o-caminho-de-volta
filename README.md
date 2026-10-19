@@ -12,7 +12,8 @@ Abrir <http://localhost:8790/>.
 
 ## Antes de ir ao ar
 
-- `CHECKOUT` no fim do `index.html`: link do checkout da Hotmart. Vazio, os botões levam ao bloco de preço.
+- `CHECKOUT` no fim do `index.html`: link do checkout da **Kiwify** (`https://pay.kiwify.com.br/zYikTkv`, desde 19/10/2026). Vazio, os botões levam ao bloco de preço.
+- **Rastreio (`rastreio.js`, 19/10/2026):** incluído nas três páginas (`index`, `teste`, `teste/oferta`). Guarda os `utm_*`, `src`, `sck` e `fbclid` da URL do anúncio no `localStorage` e `pfaCheckout()` os acrescenta ao link do checkout (`sck=pagina` na página direta, `sck=quiz_<tipo>_<arquétipo>` na oferta pós-teste). A Kiwify devolve esses parâmetros no webhook e o painel (`brasil/app/painel.html`) liga cada venda ao anúncio. O teste também manda os `utm_*` guardados junto com o lead. Convenção dos parâmetros de URL no Meta em `brasil/Kiwify — O Caminho de Volta.md` §4.
 - Placeholders: `[Nome]`, `CRP XX/XXXXX`, `[X] anos`, `[abordagem]`, história de origem (após a entrevista), `[Razão social]`, `CNPJ`, `[endereço]`, `[e-mail de contato]`, links de Política de privacidade e Termos de uso. Garantia definida: 30 dias (configurar o mesmo prazo na Hotmart). Falta o arquivo do bônus *O radar em uma página* na área de membros.
 - Imagens: foto da autora (4:5, ≥ 800 px, bloco `.foto`). A foto de abertura (`img/abertura.jpg`) pode ser trocada pela foto da autora se ela preferir aparecer no topo. Arte final da capa ainda não existe (o cartão sobre a foto usa um mini-mockup em CSS).
 - Rastreamento (Pixel / GA4): só com política de privacidade e banner de consentimento. O evento de compra fica no checkout.

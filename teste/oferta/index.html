@@ -317,6 +317,7 @@ footer{padding-bottom:110px}
   .lista li{font-size:17.5px}
 }
 </style>
+<script src="../../rastreio.js"></script>
 </head>
 <body>
 <!-- Bloco 1 — Abertura personalizada (nome vem do localStorage do quiz; nunca da URL) -->
@@ -547,7 +548,8 @@ if ((r.tentou||[]).includes('explicar')) hoje.push('Mensagens longas explicando 
 if (!hoje.length) hoje.push('Um afastamento que você não escolheu.', 'Tentativas que não chegaram.', 'A dúvida sobre o que fazer agora.');
 $('hoje').innerHTML = hoje.slice(0,5).map(h=>`<li>${h}</li>`).join('');
 
-const url = CHECKOUT ? CHECKOUT + (CHECKOUT.includes('?')?'&':'?') + 'sck=quiz_' + tipoK + '_' + arqK : '#oferta';
+// sck identifica a porta de entrada (quiz + tipo + arquétipo); os utm_* do anúncio vêm de rastreio.js
+const url = CHECKOUT ? (window.pfaCheckout ? pfaCheckout(CHECKOUT, { sck: 'quiz_' + tipoK + '_' + arqK }) : CHECKOUT + (CHECKOUT.includes('?')?'&':'?') + 'sck=quiz_' + tipoK + '_' + arqK) : '#oferta';
 document.querySelectorAll('[data-checkout]').forEach(a=>a.href=url);
 if (AUTORA.nome && AUTORA.crp) { const c=$('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
 </script>

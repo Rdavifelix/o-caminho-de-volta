@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <!-- Rastreamento (Meta Pixel / GA4): só depois de política de privacidade e banner de consentimento no ar.
-     O evento de compra fica no checkout da Hotmart, não aqui. -->
+     O evento de compra fica no checkout da Kiwify, não aqui. -->
 <style>
 /* Pais de Filhos Adultos — página do livro · mesma identidade da área de membros (brasil/app/estilo.css) */
 :root{
@@ -178,6 +178,7 @@ footer .aviso{color:#fff;font-size:16.5px}
   .oferta2 .selo{font-size:14.5px;padding:8px 12px}
 }
 </style>
+<script src="rastreio.js"></script>
 </head>
 <body>
 
@@ -517,7 +518,7 @@ footer .aviso{color:#fff;font-size:16.5px}
       <a class="btn wide" href="#" data-checkout>Quero começar O Caminho de Volta</a>
       <div class="selo">✓ &nbsp;30 dias para ler e pedir reembolso, sem explicação</div>
       <p>Leia com calma. Se, ao ler, você achar que o livro não é para você, é só pedir o reembolso pela plataforma. Você fica com a leitura e recebe o valor de volta.</p>
-      <p class="nota">Pagamento e entrega pela Hotmart. O acesso à área do livro, com todo o material, chega no seu e-mail logo após a confirmação. No Pix, é na hora.</p>
+      <p class="nota">Pagamento pela Kiwify. O acesso à área do livro, com todo o material, chega no seu e-mail logo após a confirmação. No Pix, é na hora.</p>
     </div>
   </div>
 </section>
@@ -565,11 +566,13 @@ footer .aviso{color:#fff;font-size:16.5px}
 <div class="fixa"><a class="btn" href="#oferta" data-checkout>Quero começar O Caminho de Volta</a></div>
 
 <script>
-/* Link do checkout da Hotmart. Enquanto estiver vazio, os botões levam ao bloco de preço.
-   Quando o produto existir: CHECKOUT = 'https://pay.hotmart.com/XXXXXXX' */
-const CHECKOUT = '';
+/* Link do checkout da Kiwify (19/10/2026). Vazio, os botões levam ao bloco de preço.
+   rastreio.js guarda os utm_* / src / sck do anúncio e pfaCheckout() os repassa ao checkout;
+   a Kiwify devolve esses parâmetros no webhook e o painel liga cada venda ao anúncio. */
+const CHECKOUT = 'https://pay.kiwify.com.br/zYikTkv';
 if (CHECKOUT) {
-  document.querySelectorAll('[data-checkout]').forEach(a => { a.href = CHECKOUT; a.removeAttribute('data-checkout'); });
+  const url = window.pfaCheckout ? pfaCheckout(CHECKOUT, { sck: 'pagina' }) : CHECKOUT;
+  document.querySelectorAll('[data-checkout]').forEach(a => { a.href = url; a.removeAttribute('data-checkout'); });
 }
 </script>
 </body>
