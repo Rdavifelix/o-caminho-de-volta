@@ -396,7 +396,7 @@ function insert(t, box){
     <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-6 bg-areia"><img src="${t.img}" alt="${t.alt}" class="w-full h-full object-cover"></div>
     ${rotulo(t.sobre)}${h2(t.titulo)}
     <p class="text-[20px] leading-[1.6]">${txt(t.texto)}</p>
-    <p class="mt-5 text-[15.5px] text-suave">${cred()}</p>`;
+`;
   seguir.textContent = 'Continuar'; acao.classList.remove('hidden'); seguir.onclick = avancar;
 }
 
@@ -434,7 +434,7 @@ function capture(t, box){
       <div id="zapcampo" class="hidden"><label class="block"><span class="block text-[15px] font-extrabold tracking-wider uppercase text-suave mb-1">WhatsApp com DDD</span>
         <input name="tel" type="tel" autocomplete="tel" inputmode="tel" class="w-full bg-white border-2 border-linha rounded-2xl px-5 py-4 text-[20px] focus:outline-none focus:border-verde" placeholder="(11) 9 9999-9999"></label></div>
       <p id="erro" class="hidden text-terra-escura font-bold text-[16px]">Confira o nome e o e-mail.</p>
-      <p class="text-[14px] leading-snug text-suave">Ao continuar, você autoriza o envio do seu resultado e de e-mails educativos de ${cred()}. Pode se descadastrar em qualquer mensagem. Nenhuma resposta é compartilhada. Conteúdo educativo. Não substitui psicoterapia.</p>
+      <p class="text-[14px] leading-snug text-suave">Ao continuar, você autoriza o envio do seu resultado e de e-mails educativos da autora. Pode se descadastrar em qualquer mensagem. Nenhuma resposta é compartilhada. Conteúdo educativo. Não substitui psicoterapia.</p>
     </form>`;
   const form = box.querySelector('#form');
   form.zap.onchange = ()=> box.querySelector('#zapcampo').classList.toggle('hidden', !form.zap.checked);
@@ -553,7 +553,7 @@ function result(t, box){
           <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>O radar em uma página</strong>, pra colar na geladeira e olhar antes de mandar qualquer mensagem</span></li>
           <li class="flex gap-2"><span class="text-areia">✓</span> <span>O teste completo, o Diário Sem Alarme e três aulas gravadas</span></li>
         </ul>
-        <p class="text-[15px] text-[#bfd0c8]">Guia educativo escrito por ${cred()}. Se não for pra você, devolvemos o valor em até 30 dias.</p>
+        <p class="text-[15px] text-[#bfd0c8]">Guia educativo.</p>
       </div>
     </div>`;
   seguir.textContent = 'Conhecer O Caminho de Volta'; acao.classList.remove('hidden');
