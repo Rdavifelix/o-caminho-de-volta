@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>O seu caminho de volta — O Caminho de Volta</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Página de resultado do teste Qual é o afastamento da sua família, com o guia O Caminho de Volta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { verde:'#1f4e46','verde-escuro':'#153831', terra:'#c4683a','terra-escura':'#9e4f27', areia:'#e8d9b8', tinta:'#2b2a27', suave:'#6b665c', creme:'#faf6ee', linha:'#e7dfcf' },
+  fontFamily: { serif:['Lora','Georgia','serif'], sans:['Nunito','-apple-system','Helvetica','Arial','sans-serif'] },
+  keyframes: { entra:{ '0%':{opacity:0,transform:'translateY(14px)'}, '100%':{opacity:1,transform:'translateY(0)'} } },
+  animation: { entra:'entra .5s cubic-bezier(.2,.7,.2,1) both' }
+} } }
+</script>
+<style>
+  body{-webkit-font-smoothing:antialiased}
+  .sobre{display:block;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#9e4f27;margin-bottom:10px}
+  h2{font-family:Lora,Georgia,serif;font-weight:600;color:#1f4e46;font-size:clamp(26px,6vw,34px);line-height:1.18;margin-bottom:14px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
+  section{padding:44px 0}
+  section.alt{background:#fff;border-top:1px solid #e7dfcf;border-bottom:1px solid #e7dfcf}
+  section.escuro{background:#153831;color:#e6eeea} section.escuro h2{color:#fff} section.escuro .sobre{color:#e8d9b8}
+  p{margin-bottom:16px}
+  .btn{display:block;width:100%;text-align:center;border-radius:999px;color:#fff;font-weight:700;font-size:21px;padding:18px 24px;background:linear-gradient(180deg,#d47d4e,#c4683a 60%,#9e4f27);box-shadow:0 8px 20px rgba(196,104,58,.32);text-decoration:none}
+  .card{background:#fff;border:1px solid #e7dfcf;border-radius:22px;padding:22px 22px}
+  .chat{font-family:Nunito,sans-serif;font-size:16px;line-height:1.4}
+  .balao{max-width:88%;border-radius:14px;padding:10px 12px;margin:6px 0;position:relative}
+  .balao.mae{background:#dcf8c6;margin-left:auto;border-bottom-right-radius:4px}
+  .balao .hora{display:block;text-align:right;font-size:11px;color:#6b665c;margin-top:4px}
+  .mock{background:linear-gradient(160deg,#fbf7ee,#efe4cc);border-radius:4px 10px 10px 4px;box-shadow:-6px 0 0 -3px #c9b98f,0 14px 30px rgba(31,78,70,.18);font-family:Lora,serif;color:#153831;display:flex;flex-direction:column;justify-content:space-between;padding:14px 12px}
+</style>
+</head>
+<body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed">
+
+<!-- 1. Abertura personalizada -->
+<section class="pt-10 pb-8">
+  <div class="wrap animate-entra">
+    <span class="sobre">O seu resultado chegou</span>
+    <h1 class="font-serif font-semibold text-verde text-[clamp(30px,7.6vw,42px)] leading-[1.1] mb-4"><span id="nome-abre"></span>o seu caminho de volta ficou pronto.</h1>
+    <p class="text-[20px]">Pelo que você contou, o afastamento da sua família é <strong class="text-verde" id="tipo-abre"></strong> e você tem reagido como <strong class="text-verde" id="arq-abre"></strong>. Esta página mostra o que fazer com isso, começando hoje.</p>
+    <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] bg-areia mt-6"><img id="img-arq" src="" alt="" class="w-full h-full object-cover"></div>
+  </div>
+</section>
+
+<!-- 2. O que você contou → o que fica nas suas mãos -->
+<section class="alt">
+  <div class="wrap">
+    <span class="sobre">O que você contou</span>
+    <h2>Três coisas que as suas respostas deixaram claras.</h2>
+    <div id="ecos" class="space-y-3 mb-8"></div>
+    <span class="sobre">O que fica nas suas mãos</span>
+    <h2 class="text-[24px]">Você não controla se ele vai voltar. Controla isto:</h2>
+    <ul class="space-y-3 text-[18px]">
+      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span>Saber, antes de apertar enviar, se a mensagem cobra, aconselha ou pede.</span></li>
+      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span id="troca-item">Trocar o gesto que tem pesado pelo gesto que não dispara o alarme.</span></li>
+      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span>Ter uma mensagem pronta para a hora da saudade, às onze da noite, sem improvisar.</span></li>
+      <li class="flex gap-3"><span class="text-verde font-extrabold">✓</span><span>Passar pelas datas difíceis sem transformar a mesa em cobrança.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. Prova de mecanismo: a mesma mensagem, antes e depois do radar (print montado, nome fictício) -->
+<section>
+  <div class="wrap">
+    <span class="sobre">A mesma saudade, dois jeitos de chegar</span>
+    <h2>Veja o que muda numa mensagem quando o radar entra antes do enviar.</h2>
+    <p class="text-suave text-[16px]">Exemplo montado, com nome fictício, para mostrar a ideia do capítulo 6. Não é relato de leitor.</p>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="card chat">
+        <span class="sobre mb-2">Antes</span>
+        <div class="balao mae">Oi filho, tudo bem? Faz 3 semanas que você não dá notícia. Sei que você é ocupado, mas uma ligação de 5 minutos não custa nada né. Sua avó pergunta de você toda hora. Me liga quando puder. Beijo da mãe que te ama <span class="hora">21:47 ✓✓</span></div>
+        <p class="text-[14px] text-suave mt-3 mb-0">Cobra ("3 semanas"), aconselha ("não custa nada"), pede ("me liga"). O alarme dispara três vezes.</p>
+      </div>
+      <div class="card chat">
+        <span class="sobre mb-2">Depois</span>
+        <div class="balao mae">Passei hoje na padaria da esquina e ainda tem aquele pão de queijo que você gostava. Lembrei de você. Não precisa responder, só queria contar. Beijo <span class="hora">21:47 ✓✓</span></div>
+        <p class="text-[14px] text-suave mt-3 mb-0">Não cobra, não aconselha, não pede. Chega como presença, e não como fatura.</p>
+      </div>
+    </div>
+    <p class="text-[17px] text-suave mt-4">Nenhuma mensagem garante resposta. O que muda é o que o seu filho encontra quando abre.</p>
+  </div>
+</section>
+
+<!-- 4. Quem escreve -->
+<section class="alt">
+  <div class="wrap">
+    <div class="grid gap-6 sm:grid-cols-[200px_1fr] items-start">
+      <div class="aspect-[4/5] rounded-[22px] bg-areia grid place-items-center text-center text-[14px] text-suave p-4">[Foto profissional da autora]</div>
+      <div>
+        <span class="sobre">Quem escreve</span>
+        <h2>[Nome]</h2>
+        <p class="text-suave text-[16px] -mt-2">Psicóloga · CRP XX/XXXXX · [X] anos de prática em [abordagem]</p>
+        <p>[História de origem em primeira pessoa, a preencher após a entrevista: o momento em que ela entendeu, na própria vida, que um gesto de carinho pode chegar ao outro como cobrança.]</p>
+        <p>[Segundo parágrafo.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. O que você recebe -->
+<section>
+  <div class="wrap">
+    <span class="sobre">O que você recebe hoje</span>
+    <h2>Tudo o que está dentro de <em>O Caminho de Volta</em>.</h2>
+    <div class="space-y-4">
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="mock aspect-[3/4]"><span class="text-[10px] font-bold">O CAMINHO DE VOLTA</span><span class="text-[8px] text-suave">[Nome] · CRP</span></div>
+        <div><strong class="text-verde">O livro, em 12 capítulos curtos</strong><p class="mb-0 text-[17px]">Letra grande, para ler no celular. <span id="caps-linha"></span></p></div>
+      </div>
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="aspect-square rounded-2xl bg-verde grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#e8d9b8" stroke-width="1.8" stroke-linecap="round"><path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/></svg></div>
+        <div><strong class="text-verde">O audiobook, na voz da autora</strong><p class="mb-0 text-[17px]">Para ouvir no carro, na cozinha, sem precisar enxergar a tela.</p></div>
+      </div>
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="aspect-square rounded-2xl bg-[#dcf8c6] grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#1f4e46" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
+        <div><strong class="text-verde">Mensagens Sem Alarme</strong><p class="mb-0 text-[17px]">30 mensagens prontas, por situação, com botão de copiar. <span id="msg-linha"></span></p></div>
+      </div>
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="aspect-square rounded-2xl bg-areia grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#1f4e46" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+        <div><strong class="text-verde">O radar em uma página</strong><p class="mb-0 text-[17px]">As 3 perguntas e as 9 mensagens que disparam o alarme, para colar na geladeira.</p></div>
+      </div>
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="aspect-square rounded-2xl bg-white border border-linha grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#1f4e46" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <div><strong class="text-verde">Diário Sem Alarme</strong><p class="mb-0 text-[17px]">30 dias, uma página por dia: o que você teve vontade de mandar, o que sentiu, o que fez no lugar.</p></div>
+      </div>
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="aspect-square rounded-2xl bg-verde-escuro grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#e8d9b8" stroke-width="1.8" stroke-linejoin="round"><path d="M5 5h14v11H5z"/><path d="M10 8.5v4l3.5-2z" fill="#e8d9b8"/><path d="M9 20h6"/></svg></div>
+        <div><strong class="text-verde">Três aulas gravadas</strong><p class="mb-0 text-[17px]"><em>Os 7 tipos de afastamento</em> <span id="aula-linha"></span>, <em>Por que o que você tentou não funcionou</em> e <em>Quando a nora ou o genro está no meio</em>.</p></div>
+      </div>
+      <div class="card grid grid-cols-[96px_1fr] gap-5 items-center">
+        <div class="aspect-square rounded-2xl bg-terra/15 grid place-items-center"><svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#9e4f27" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3M13 14h3M8 17h3"/></svg></div>
+        <div><strong class="text-verde">Um vídeo da autora e 14 dias de acompanhamento</strong><p class="mb-0 text-[17px]">Uma tarefa para hoje, que não depende de falar com o seu filho, e e-mails curtos nos 14 dias seguintes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Objeção -->
+<section class="escuro">
+  <div class="wrap">
+    <span class="sobre">A pergunta que todo mundo faz</span>
+    <h2>"E se ele não quiser conversar?"</h2>
+    <p class="text-[20px]">Então o livro é para agora. Tudo o que ele ensina acontece do seu lado: entender o afastamento, parar o que está piorando e preparar o seu lado do caminho de volta. Nada disso depende de resposta.</p>
+    <p class="text-[#bfd0c8] text-[17px] mb-0">O que o livro não promete: que o seu filho vai ligar, nem quando. Ninguém honesto promete isso.</p>
+  </div>
+</section>
+
+<!-- 7. Como está hoje (das respostas) -->
+<section>
+  <div class="wrap">
+    <span class="sobre">Do jeito que está</span>
+    <h2>O que você contou que tem acontecido.</h2>
+    <ul id="hoje" class="space-y-2 text-[18px]"></ul>
+    <p class="mt-6 text-[18px]">Não precisa continuar assim. Não porque ele vai mudar, mas porque <strong class="text-verde">o seu lado pode mudar hoje</strong>, e é isso que está nas suas mãos.</p>
+  </div>
+</section>
+
+<!-- 8. Oferta -->
+<section class="alt" id="oferta">
+  <div class="wrap">
+    <span class="sobre">Para começar hoje</span>
+    <h2>Tudo isto, numa área só, com acesso na hora.</h2>
+    <ul class="text-[18px] space-y-1 mb-5">
+      <li>Livro em 12 capítulos, com letra grande</li>
+      <li>Audiobook na voz da autora</li>
+      <li>Mensagens Sem Alarme (30 mensagens prontas)</li>
+      <li>O radar em uma página</li>
+      <li>Diário Sem Alarme (30 dias)</li>
+      <li>Três aulas gravadas</li>
+      <li>O teste completo, com o seu resultado guardado</li>
+      <li>Vídeo de pós-compra e 14 dias de acompanhamento</li>
+    </ul>
+    <p class="text-[19px]">Investimento: R$ 97, no Pix ou em até 12 vezes no cartão.</p>
+    <a id="cta" class="btn" href="#oferta">Quero O Caminho de Volta</a>
+    <p class="text-[16px] text-suave mt-4 mb-0">Garantia de 30 dias: se não for para você, devolvemos o valor, sem perguntas. Pagamento pela Hotmart.</p>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section>
+  <div class="wrap">
+    <h2>Perguntas frequentes</h2>
+    <div class="space-y-4 text-[18px]">
+      <div><strong class="text-verde">Serve para o meu tipo de afastamento?</strong><p class="mb-0" id="faq-tipo"></p></div>
+      <div><strong class="text-verde">Meu filho mora fora, ou me bloqueou. Ainda serve?</strong><p class="mb-0">Serve, porque tudo acontece do seu lado. O livro tem um capítulo sobre a distância e orientações para quando não há contato nenhum.</p></div>
+      <div><strong class="text-verde">Isso substitui terapia?</strong><p class="mb-0">Não. É um guia educativo. Se houver sofrimento intenso, procure um psicólogo ou psiquiatra. Em crise, o CVV atende no 188, 24 horas, de graça.</p></div>
+      <div><strong class="text-verde">Não enxergo bem no celular.</strong><p class="mb-0">O audiobook é o formato principal, e o livro tem letra de 14 pontos ou mais, ajustável.</p></div>
+      <div><strong class="text-verde">E se eu não gostar?</strong><p class="mb-0">Você tem 30 dias para pedir o reembolso, sem precisar explicar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Fechamento -->
+<section class="escuro">
+  <div class="wrap">
+    <h2>As datas difíceis vão chegar de qualquer jeito.</h2>
+    <p class="text-[20px]">O Natal, o aniversário dele, o Dia das Mães. A diferença é com que mensagem você vai chegar nelas.</p>
+    <a class="btn" href="#oferta">Quero O Caminho de Volta</a>
+  </div>
+</section>
+
+<footer class="text-center text-[13.5px] leading-snug text-suave px-5 py-6">
+  <span id="cred" class="hidden"></span>Conteúdo educativo. Não substitui psicoterapia. Em crise, CVV 188.<br>
+  <span class="opacity-80">Exemplos e fotos são ilustrativos, sem pessoas reais · [Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · [endereço] · <a class="underline" href="mailto:[e-mail de contato]">[e-mail de contato]</a> · <a class="underline" href="#">Privacidade</a> · <a class="underline" href="#">Termos</a></span>
+</footer>
+
+<!-- botão fixo -->
+<div class="fixed bottom-0 inset-x-0 z-20 bg-gradient-to-t from-creme via-creme/95 to-creme/0 pt-5 pb-[max(14px,env(safe-area-inset-bottom))] px-4"><div class="wrap"><a id="cta-fixo" class="btn !text-[19px] !py-4" href="#oferta">Quero O Caminho de Volta</a></div></div>
+<div class="h-24"></div>
+
+<script>
+const CHECKOUT = ''; // link da Hotmart quando existir; vazio leva ao bloco da oferta
+const AUTORA = { nome:'', crp:'' };
+const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+const q = new URLSearchParams(location.search);
+const dados = lsGet('pfa_quiz', {}) || {};
+const r = dados.resp || {};
+const TIPOS = {
+  distancia:{nome:'pela distância', caps:[1,3,6], faq:'Sim. O seu tipo, pela distância, é um dos sete que o livro trata, com um capítulo só sobre o filho que mora longe e o que mandar sem precisar de resposta.', msg:'Inclui mensagens para quem mora longe e responde com atraso.'},
+  dinheiro:{nome:'pelo dinheiro', caps:[8,2,6], faq:'Sim. O capítulo sobre dinheiro, ajuda e herança foi escrito para o seu tipo: como fechar a conta que nunca fecha e separar dinheiro de relação.', msg:'Inclui mensagens para encerrar a conversa de dinheiro sem reabrir a briga.'},
+  valores:{nome:'pelos valores', caps:[8,3,6], faq:'Sim. O seu tipo, pelos valores, tem no livro a troca que mais pesa: separar concordar de aceitar, sem tentar convencer.', msg:'Inclui mensagens para tirar o assunto da mesa sem mudar de opinião.'},
+  nova_casa:{nome:'pela nova casa', caps:[10,3,6], faq:'Sim. O capítulo 10 e a aula sobre nora e genro foram feitos para o seu tipo: a casa que você visita e não administra.', msg:'Inclui mensagens para a nora, o genro e os netos.'},
+  passado:{nome:'pelo passado', caps:[11,7,6], faq:'Sim. O seu tipo, pelo passado, é o que mais precisa da troca de defesa por reparação, e o capítulo 11 é inteiro sobre isso.', msg:'Inclui mensagens de reparação curtas, sem "mas".'},
+  briga:{nome:'por uma briga', caps:[6,9,11], faq:'Sim. Para o seu tipo, por uma briga, o livro ensina a parar de julgar o episódio e cuidar do padrão que veio antes dele.', msg:'Inclui a primeira mensagem depois de um episódio com data.'},
+  sem_motivo:{nome:'sem motivo aparente', caps:[3,2,6], faq:'Sim. O seu tipo, sem motivo aparente, é o que mais se beneficia do radar: a resposta costuma estar no tom que se repetiu, não num fato.', msg:'Inclui mensagens de presença, sem pergunta, para quando não há o que explicar.'}
+};
+const ARQ = {
+  insiste:{f:'a mãe que insiste', m:'o pai que insiste', troca:['cobrança','convite'], img:{f:'../img/insiste.jpg', m:'../img/insiste_m.jpg'}},
+  espera:{f:'a mãe que espera', m:'o pai que espera', troca:['expectativa','curiosidade'], img:{f:'../img/espera_f.jpg', m:'../img/espera.jpg'}},
+  explica:{f:'a mãe que explica', m:'o pai que explica', troca:['defesa','reparação'], img:{f:'../img/explica.jpg', m:'../img/explica_m.jpg'}},
+  cuida:{f:'a mãe que cuida', m:'o pai que cuida', troca:['resgate','confiança'], img:{f:'../img/cuida.jpg', m:'../img/cuida_m.jpg'}},
+  aliados:{f:'a mãe que busca aliados', m:'o pai que busca aliados', troca:['conselho','pergunta'], img:{f:'../img/aliados.jpg', m:'../img/aliados_m.jpg'}}
+};
+const tipoK = q.get('tipo') || (dados.n ? {1:'distancia',2:'dinheiro',3:'valores',4:'nova_casa',5:'passado',6:'briga',7:'sem_motivo'}[dados.n] : 'sem_motivo');
+const arqK = q.get('arq') || dados.arq || 'espera';
+const tp = TIPOS[tipoK] || TIPOS.sem_motivo, A = ARQ[arqK] || ARQ.espera;
+const sexo = r.quem==='pai' ? 'm' : 'f';
+const ele = r.filho==='ela' ? 'ela' : 'ele', Ele = ele==='ela'?'Ela':'Ele', oFilho = ele==='ela'?'a sua filha':'o seu filho';
+const nome = (dados.nome||'').trim();
+
+document.getElementById('nome-abre').textContent = nome ? nome + ', ' : '';
+document.getElementById('tipo-abre').textContent = tipoK==='nova_casa' ? `pela nova casa, a família que ${ele} formou,` : tp.nome;
+document.getElementById('arq-abre').textContent = A[sexo];
+document.getElementById('img-arq').src = A.img[sexo];
+document.getElementById('troca-item').textContent = `Trocar ${A.troca[0]} por ${A.troca[1]}: a troca que mais pesa para ${sexo==='m'?'o pai':'a mãe'} que ${arqK==='aliados'?'busca aliados':arqK==='insiste'?'insiste':arqK==='espera'?'espera':arqK==='explica'?'explica':'cuida'}.`;
+document.getElementById('caps-linha').textContent = `Para o seu caso, os capítulos ${tp.caps.slice(0,-1).join(', ')} e ${tp.caps[tp.caps.length-1]} falam direto com o seu resultado.`;
+document.getElementById('msg-linha').textContent = tp.msg;
+document.getElementById('aula-linha').textContent = `(com o caminho do afastamento ${tp.nome})`;
+document.getElementById('faq-tipo').textContent = tp.faq;
+
+/* o que você contou: 3 ecos */
+const ecos = [];
+if (r.visu==='varias'||r.visu==='algumas') ecos.push(`${Ele} visualiza e não responde, e isso já aconteceu mais de uma vez.`);
+if (r.freq==='dia') ecos.push('Você tenta contato quase todo dia.'); else if (r.freq==='parei') ecos.push('Você parou de tentar, e fica esperando.');
+if (r.parentes==='mudo'||r.parentes==='invento') ecos.push('Quando um parente pergunta, você muda de assunto ou diz que está tudo bem.');
+if (r.outra==='nora') ecos.push('A nora ou o genro pesa nesse contato.');
+if (r.saberia==='medo'||r.saberia==='ns') ecos.push(`Se ${ele} escrevesse hoje, você não saberia o que responder.`);
+if (r.data==='natal') ecos.push('O Natal é a data que mais pesa.'); else if (r.data==='diade') ecos.push(`${sexo==='m'?'O Dia dos Pais':'O Dia das Mães'} é a data que mais pesa.`);
+if (r.quer==='falar') ecos.push(`Hoje, só ${ele} voltar a falar com você já seria muito.`);
+if (!ecos.length) ecos.push('A relação está mais distante do que você gostaria.', 'Você já tentou de um jeito, e não funcionou.', 'Você quer saber o que fazer do seu lado.');
+document.getElementById('ecos').innerHTML = ecos.slice(0,3).map(e=>`<div class="card !py-4 flex gap-3 text-[18px]"><span class="text-terra-escura font-extrabold">•</span><span>${e}</span></div>`).join('');
+
+/* como está hoje: lista a partir das respostas, sem julgamento */
+const hoje = [];
+if (r.contato==='nenhum') hoje.push('Nenhum contato há meses.'); if (r.contato==='bloq') hoje.push('Bloqueio, ou saída do grupo da família.'); if (r.contato==='pouco') hoje.push('Contato pouco e superficial: figurinha, parabéns, polegar no grupo.'); if (r.contato==='essencial') hoje.push('Só o essencial, quando precisa.');
+if (r.tiques==='dia') hoje.push('Um visualizado sem resposta estraga o dia inteiro.'); if (r.tiques==='releio') hoje.push('Você relê o que mandou procurando onde errou.'); if (r.tiques==='outra') hoje.push('Quando não vem resposta, você manda outra.');
+if (r.pesa==='culpa') hoje.push('A culpa é o que mais pesa.'); if (r.pesa==='raiva') hoje.push('A raiva é o que mais pesa.'); if (r.pesa==='saudade') hoje.push('A saudade é o que mais pesa.'); if (r.pesa==='naosei') hoje.push('Não saber o que fazer é o que mais pesa.'); if (r.pesa==='parentes') hoje.push('A pergunta dos parentes é o que mais pesa.');
+if ((r.tentou||[]).includes('explicar')) hoje.push('Mensagens longas explicando o seu lado, sem resultado.'); if ((r.tentou||[]).includes('silencio')) hoje.push('Silêncio, esperando que ele dê o primeiro passo.');
+if (!hoje.length) hoje.push('Um afastamento que você não escolheu.', 'Tentativas que não chegaram.', 'A dúvida sobre o que fazer agora.');
+document.getElementById('hoje').innerHTML = hoje.slice(0,5).map(h=>`<li class="flex gap-3"><span class="text-terra-escura">✕</span><span>${h}</span></li>`).join('');
+
+/* checkout */
+const url = CHECKOUT ? CHECKOUT + (CHECKOUT.includes('?')?'&':'?') + 'sck=quiz_' + tipoK + '_' + arqK : '#oferta';
+for (const id of ['cta','cta-fixo']) document.getElementById(id).href = url;
+if (AUTORA.nome && AUTORA.crp) { const c=document.getElementById('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
+</script>
+</body>
+</html>
