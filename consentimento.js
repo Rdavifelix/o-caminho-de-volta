@@ -2,7 +2,11 @@
    Uso: <script src="/consentimento.js" data-pixel="1182879485402222"></script> antes de </body>.
    A escolha fica em localStorage ("pfa_consent": "aceito" | "essencial"). O link "Cookies" no rodapé
    reabre o banner: <a href="#" data-cookies>Cookies</a>. Chamadas a fbq() feitas antes do aceite ficam
-   na fila e só são enviadas se a pessoa aceitar; se recusar, a fila é descartada. */
+   na fila e só são enviadas se a pessoa aceitar; se recusar, a fila é descartada.
+   O banner é uma faixa discreta no rodapé: não escurece a página nem cobre o conteúdo. Enquanto está
+   na tela, publica a própria altura em --pfa-cookies-h (no <html>), para a página afastar o que fica
+   fixo embaixo (ex.: o botão "Começar o teste"). Alterado em 21/10/2026: o banner antigo cobria o botão
+   do teste no celular e quase ninguém começava. */
 (function(){
   var PIXEL = (document.currentScript && document.currentScript.dataset.pixel) || '';
   var KEY = 'pfa_consent';
@@ -27,23 +31,30 @@
   }
   function recusar(){ window.fbq.queue = []; }
 
-  /* banner */
-  var css = '#pfa-cookies{position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:620px;margin:0 auto;background:#fff;border:1px solid #e7dfcf;border-radius:18px;box-shadow:0 18px 44px rgba(31,78,70,.22);padding:18px 18px 14px;font-family:Nunito,-apple-system,Helvetica,Arial,sans-serif;color:#2b2a27;font-size:15.5px;line-height:1.45}'
-    + '#pfa-cookies p{margin:0 0 12px}#pfa-cookies a{color:#1f4e46}'
-    + '#pfa-cookies .b{display:flex;gap:10px;flex-wrap:wrap}'
-    + '#pfa-cookies button{flex:1 1 160px;border:0;border-radius:999px;padding:12px 16px;font:inherit;font-weight:700;cursor:pointer}'
-    + '#pfa-cookies .ok{background:#1f4e46;color:#fff}#pfa-cookies .nao{background:#f3eee4;color:#1f4e46}'
-    + '@media (max-width:480px){#pfa-cookies{left:8px;right:8px;bottom:8px;padding:14px 14px 12px}}';
+  /* faixa */
+  var css = '#pfa-cookies{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#fffdf8;border-top:1px solid #e7dfcf;box-shadow:0 -4px 14px rgba(31,78,70,.08);padding:10px 14px calc(10px + env(safe-area-inset-bottom));font-family:Nunito,-apple-system,Helvetica,Arial,sans-serif;color:#2b2a27;font-size:14px;line-height:1.35}'
+    + '#pfa-cookies .i{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}'
+    + '#pfa-cookies p{margin:0;flex:1 1 220px}#pfa-cookies a{color:#1f4e46;text-decoration:underline}'
+    + '#pfa-cookies .b{display:flex;gap:8px;flex:0 0 auto}'
+    + '#pfa-cookies button{border:0;border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap}'
+    + '#pfa-cookies .ok{background:#1f4e46;color:#fff}#pfa-cookies .nao{background:transparent;color:#1f4e46;text-decoration:underline;padding-left:6px;padding-right:6px}';
+  function altura(){
+    var d = document.getElementById('pfa-cookies');
+    document.documentElement.style.setProperty('--pfa-cookies-h', d ? d.offsetHeight + 'px' : '0px');
+  }
+  function fechar(d){ d.remove(); altura(); }
   function mostrar(){
     if (document.getElementById('pfa-cookies')) return;
-    var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
-    var d = document.createElement('div'); d.id = 'pfa-cookies'; d.setAttribute('role','dialog'); d.setAttribute('aria-label','Cookies');
+    if (!document.getElementById('pfa-cookies-css')) { var st = document.createElement('style'); st.id = 'pfa-cookies-css'; st.textContent = css; document.head.appendChild(st); }
+    var d = document.createElement('div'); d.id = 'pfa-cookies'; d.setAttribute('role','region'); d.setAttribute('aria-label','Cookies');
     var base = (location.pathname.indexOf('/teste/') === 0 ? (location.pathname.indexOf('/teste/oferta') === 0 ? '../../' : '../') : '');
-    d.innerHTML = '<p>Usamos cookies para medir se os nossos anúncios estão chegando a quem precisa. Nada de saúde, nada vendido a terceiros. <a href="' + base + 'privacidade/">Saiba como tratamos os seus dados</a>.</p>'
-      + '<div class="b"><button type="button" class="ok">Aceitar</button><button type="button" class="nao">Só o essencial</button></div>';
+    d.innerHTML = '<div class="i"><p>Usamos cookies só para medir os anúncios. <a href="' + base + 'privacidade/">Como tratamos os seus dados</a>.</p>'
+      + '<div class="b"><button type="button" class="ok">Aceitar</button><button type="button" class="nao">Só o essencial</button></div></div>';
     document.body.appendChild(d);
-    d.querySelector('.ok').onclick = function(){ set('aceito'); d.remove(); ligarPixel(); };
-    d.querySelector('.nao').onclick = function(){ set('essencial'); d.remove(); recusar(); };
+    altura();
+    d.querySelector('.ok').onclick = function(){ set('aceito'); fechar(d); ligarPixel(); };
+    d.querySelector('.nao').onclick = function(){ set('essencial'); fechar(d); recusar(); };
+    window.addEventListener('resize', altura);
   }
 
   var escolha = get();
