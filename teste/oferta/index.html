@@ -553,7 +553,7 @@ const url = CHECKOUT ? (window.pfaCheckout ? pfaCheckout(CHECKOUT, { sck: 'quiz_
 document.querySelectorAll('[data-checkout]').forEach(a=>a.href=url);
 if (AUTORA.nome && AUTORA.crp) { const c=$('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
 </script>
-<script>try{ if (window.fbq){ fbq('track','ViewContent',{content_name:'Oferta pós-quiz',content_category: (new URLSearchParams(location.search)).get('tipo')||''}); document.addEventListener('click', e => { const a=e.target.closest('a[href*="kiwify"]'); if (a) fbq('track','InitiateCheckout',{content_name:'O Caminho de Volta',value:97,currency:'BRL'}); }); } }catch(e){}</script>
+<script>try{ if (window.fbq){ fbq('track','ViewContent',{content_name:'Oferta pós-quiz',content_category: (new URLSearchParams(location.search)).get('tipo')||''}); fbq('trackCustom','AcessouOferta',{tipo:tipoK, arquetipo:arqK}); document.addEventListener('click', e => { const a=e.target.closest('a[href*="kiwify"]'); if (a) fbq('track','InitiateCheckout',{content_name:'O Caminho de Volta',value:97,currency:'BRL'}); }); } }catch(e){}</script>
 <script src="../../consentimento.js" data-pixel="1182879485402222"></script>
 </body>
 </html>
