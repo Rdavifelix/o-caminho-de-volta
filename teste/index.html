@@ -141,75 +141,75 @@ const T = [
   { id:'intro', type:'intro' },
 
   /* 01 — genérico */
-  { id:'quem', type:'single', bloco:'Sobre você', q:'Você é mãe ou pai?', layout:'foto',
+  { id:'quem', type:'single', bloco:'Vamos começar por você', q:'Você é mãe ou pai?', layout:'foto',
     ops:[['Mãe',{}, 'mae', 'img/mae.jpg'],['Pai',{}, 'pai', 'img/pai.jpg']] },
-  { id:'idade', type:'single', bloco:'Sobre você', q:'Qual é a sua idade?',
+  { id:'idade', type:'single', bloco:'Vamos começar por você', q:'Qual é a sua idade?',
     ops:[['Até 54 anos',{}, 0, I.idade1],['De 55 a 64',{}, 1, I.idade2],['De 65 a 74',{}, 2, I.idade3],['75 ou mais',{}, 3, I.idade4]] },
-  { id:'filho', type:'single', bloco:'Sobre o seu filho', q:'Estamos falando de um filho ou de uma filha?', layout:'foto', sub:'Se for mais de um, pense no que está mais afastado.',
+  { id:'filho', type:'single', bloco:'Agora, sobre quem se afastou', q:'Estamos falando de um filho ou de uma filha?', layout:'foto', sub:'Se for mais de um, pense no que está mais afastado.',
     ops:[['Um filho',{}, 'ele', 'img/filho.jpg'],['Uma filha',{}, 'ela', 'img/filha.jpg']] },
-  { id:'idadef', type:'single', bloco:'Sobre o seu filho', q:()=>`Quantos anos ${P.ele} tem?`,
+  { id:'idadef', type:'single', bloco:'Agora, sobre quem se afastou', q:()=>`Quantos anos ${P.ele} tem?`,
     ops:[['De 18 a 29',{4:1}, 0, I.f1],['De 30 a 39',{4:1}, 1, I.f2],['De 40 a 49',{}, 2, I.f3],['50 ou mais',{}, 3, I.f4]] },
-  { id:'mora', type:'single', bloco:'Sobre o seu filho', q:()=>`${P.Ele} mora…`,
+  { id:'mora', type:'single', bloco:'Agora, sobre quem se afastou', q:()=>`${P.Ele} mora…`,
     ops:[['Na mesma cidade',{7:1}, 'perto', I.casa],['Em outra cidade ou estado',{1:2}, 'longe', I.mapa],['Em outro país',{1:3}, 'pais', I.aviao]] },
 
   /* 02 — dor */
-  { id:'contato', type:'single', bloco:'Como está hoje', q:'Como está o contato entre vocês hoje?',
+  { id:'contato', type:'single', bloco:'Como as coisas estão agora', q:'Como está o contato entre vocês hoje?',
     ops:[['Pouco e superficial: figurinha, parabéns, polegar no grupo',{7:1,1:1}, 'pouco', I.chatmin],['Só o essencial, quando precisa',{2:1,4:1}, 'essencial', I.chat],['Nenhum há meses',{6:1,5:1}, 'nenhum', I.mudo],['Fui bloqueado ou saiu do grupo da família',{6:2,5:1}, 'bloq', I.bloq]] },
-  { id:'inicia', type:'single', bloco:'Como está hoje', q:'Quando há contato, quem costuma começar?', skipIf:r=>r.contato==='bloq',
+  { id:'inicia', type:'single', bloco:'Como as coisas estão agora', q:'Quando há contato, quem costuma começar?', skipIf:r=>r.contato==='bloq',
     ops:[['Quase sempre eu',{7:1,1:1}, 'eu', I.eu],[()=>`Quase sempre ${P.ele}, quando precisa de algo`,{2:2}, 'ele', I.tel],['Os dois, mais ou menos',{4:1}, 'dois', I.dois],['Ninguém mais começa',{6:1,5:1}, 'ninguem', I.ninguem]] },
-  { id:'visu', type:'single', bloco:'Como está hoje', q:()=>`Aconteceu de você mandar mensagem e ver que ${P.ele} visualizou e não respondeu?`, skipIf:r=>r.contato==='bloq',
+  { id:'visu', type:'single', bloco:'Como as coisas estão agora', q:()=>`Aconteceu de você mandar mensagem e ver que ${P.ele} visualizou e não respondeu?`, skipIf:r=>r.contato==='bloq',
     ops:[['Várias vezes',{7:1,1:1}, 'varias', I.olho],['Algumas vezes',{}, 'algumas', I.olho],['Uma ou duas',{}, 'poucas', I.check],['Não',{}, 'nao', I.x]] },
-  { id:'tiques', type:'single', bloco:'Como está hoje', q:'Quando você vê os dois tiques azuis e nenhuma resposta, o que acontece com você?', skipIf:r=>r.contato==='bloq'||r.visu==='nao',
+  { id:'tiques', type:'single', bloco:'Como as coisas estão agora', q:'Quando você vê os dois tiques azuis e nenhuma resposta, o que acontece com você?', skipIf:r=>r.contato==='bloq'||r.visu==='nao',
     ops:[['Fico mal o dia inteiro e não consigo pensar em outra coisa',{5:1}, 'dia', I.medo],['Releio o que mandei procurando onde errei',{5:1,3:1}, 'releio', I.olho],[()=>`Mando outra mensagem, para garantir que ${P.ele} viu`,{7:1,1:1}, 'outra', I.chat],['Fico magoado, mas deixo passar',{}, 'magoa', I.culpa],['Já me acostumei, quase não sinto',{7:1}, 'acostumei', I.raro]] },
-  { id:'tempo', type:'single', bloco:'Como está hoje', q:'Há quanto tempo a relação está assim?',
+  { id:'tempo', type:'single', bloco:'Como as coisas estão agora', q:'Há quanto tempo a relação está assim?', sub:'Não existe resposta certa. Só a sua.',
     ops:[['Menos de 6 meses',{6:2}, 0, I.cal],['De 6 meses a 2 anos',{4:1,6:1}, 1, I.cal],['De 2 a 5 anos',{5:1,3:1}, 2, I.cal],['Mais de 5 anos',{7:1,5:1}, 3, I.cal]] },
 
   { id:'ins1', type:'insert', img:'../img/almoco.jpg', alt:'Mesa de almoço de domingo', sobre:'Uma pausa',
-    titulo:'Afastamento não é uma coisa só.',
-    texto:()=>`${P.tempoFrase} O tempo dói, e por isso é a primeira coisa que a gente mede. Mas é a <strong>causa</strong> que diz o que fazer.<br><br>São sete tipos de afastamento. O gesto que ajuda num deles pode piorar outro. As próximas perguntas servem para encontrar o seu.` },
+    titulo:()=>P.tempoTitulo,
+    texto:()=>`${P.tempoFrase} É a primeira coisa que a gente conta, e é a que mais pesa. Mas o tempo não diz o que fazer. <strong>O motivo diz.</strong><br><br>São sete tipos de afastamento, e o gesto que ajuda num deles pode piorar outro. As próximas perguntas servem para encontrar o seu.` },
 
-  { id:'comeco', type:'single', bloco:'Como começou', q:'Qual destas frases se parece mais com a sua história?',
+  { id:'comeco', type:'single', bloco:'Como tudo começou', q:'Qual destas frases se parece mais com a sua história?',
     ops:[[()=>`Depois que ${P.ele} mudou de cidade ou de país`,{1:3}, 'dist', I.aviao],['Envolveu dinheiro: empréstimo, herança, ajuda que virou cobrança',{2:3}, 'din', I.presente],['Depois que passamos a pensar diferente sobre a vida',{3:3}, 'val', I.fala],[()=>`Depois que ${P.ele} casou, foi morar junto ou teve filhos`,{4:3}, 'casa', I.anel],[()=>`Depois que ${P.ele} começou a falar da infância de um jeito que eu não reconheço`,{5:3}, 'pass', I.rel],['Depois de uma briga ou de um episódio com data',{6:3}, 'briga', I.raiva],['Foi diminuindo, sem motivo que eu consiga apontar',{7:3}, 'sem', I.raro]] },
 
   /* espelho emocional: a cena do que a pessoa acabou de marcar */
   { id:'espelho', type:'espelho' },
 
-  { id:'outra', type:'single', bloco:'Como começou', q:'Existe outra pessoa que pesa nesse contato?',
+  { id:'outra', type:'single', bloco:'Como tudo começou', q:'Existe outra pessoa que pesa nesse contato?',
     ops:[['Nora ou genro',{4:3}, 'nora', I.anel],['Um irmão ou outro parente',{6:1,2:1}, 'parente', I.grupo],['O outro pai ou mãe',{6:1}, 'outro', I.dois],['Não que eu saiba',{7:1}, 'nao', I.x]] },
-  { id:'parentes', type:'single', bloco:'Como começou', q:()=>`Quando um parente pergunta “e ${P.oFilho}, como está?”, o que você faz?`,
+  { id:'parentes', type:'single', bloco:'Como tudo começou', q:()=>`Quando um parente pergunta “e ${P.oFilho}, como está?”, o que você faz?`,
     ops:[['Mudo de assunto, porque não consigo falar sem me emocionar',{}, 'mudo', I.mudo],['Invento que está tudo bem',{}, 'invento', I.meio],['Conto por alto, sem entrar no assunto',{}, 'poralto', I.chatmin],['Falo a verdade, mas dói',{}, 'verdade', I.fala],[()=>`Falo com naturalidade, ${P.ele} só anda ${P.ocupado}`,{1:1}, 'natural', I.sim]] },
   { id:'ins4', type:'insert', img:'img/briga.jpg', alt:'Mesa posta com uma cadeira vazia', sobre:'Quase ninguém conta',
     titulo:'“O que os parentes vão pensar?”',
     texto:()=>`${P.parentesFrase} No consultório, a frase mais comum não é “meu filho se afastou”. É “o que a família vai pensar”.<br><br>A vergonha faz a gente esconder, e esconder faz a solidão dobrar. Você não está ${P.sozinha} nisso, e não precisa explicar nada a ninguém.` },
-  { id:'disse', type:'single', bloco:'Como começou', q:()=>`${P.Ele} já disse por que se afastou?`,
+  { id:'disse', type:'single', bloco:'Como tudo começou', q:()=>`${P.Ele} já disse por que se afastou?`,
     ops:[['Disse com clareza',{}, 'sim', I.fala],['Deu a entender',{}, 'meio', I.meio],['Diz que não aconteceu nada',{7:2}, 'nada', I.nada],['Nunca falamos sobre isso',{7:1,5:1}, 'nunca', I.mudo]] },
-  { id:'frase', type:'single', bloco:'Como começou', q:'Qual frase se parece mais com o que foi dito?', skipIf:r=>!(r.disse==='sim'||r.disse==='meio'),
+  { id:'frase', type:'single', bloco:'Como tudo começou', q:'Qual frase se parece mais com o que foi dito?', skipIf:r=>!(r.disse==='sim'||r.disse==='meio'),
     ops:[['“Você não respeita as minhas escolhas”',{3:3}, 'esc', I.fala],['“Você não aceita a minha família, o meu parceiro”',{4:3}, 'fam', I.anel],['“Você não lembra do que aconteceu quando eu era criança”',{5:3}, 'inf', I.rel],['“Depois do que você fez (ou disse) naquele dia…”',{6:3}, 'dia', I.raiva],['“É só a correria, a distância”',{1:3}, 'corr', I.aviao],['Nenhuma dessas',{}, 'nen', I.x]] },
-  { id:'tentou', type:'multi', bloco:'O que já foi feito', q:'O que você já tentou?', sub:'Pode marcar mais de um.',
+  { id:'tentou', type:'multi', bloco:'O que você já tentou', q:'O que você já tentou?', sub:'Pode marcar tudo. Ninguém aqui vai dizer que você errou.',
     ops:[['Mandar mensagens explicando o meu lado',{5:1,3:1}, 'explicar', I.mail],[()=>`Pedir que ${P.ele} me ligue ou apareça`,{1:1,7:1}, 'pedir', I.tel],['Mandar presentes, comida ou ajuda',{2:1}, 'ajuda', I.presente],['Pedir que outro parente intervenha',{4:1,6:1}, 'parente', I.grupo],['Ficar em silêncio esperando',{6:1}, 'silencio', I.silencio],['Procurar um profissional',{}, 'prof', I.prof],['Nada ainda',{}, 'nada', I.nada]] },
 
   { id:'ins2', type:'insert', img:'../img/tiques.jpg', alt:'Celular com mensagem visualizada e sem resposta', sobre:'Antes de enviar',
-    titulo:'O radar.',
-    texto:()=>`${P.tentouFrase} Antes de mandar qualquer mensagem, três perguntas: <strong>isso cobra? isso aconselha? isso pede?</strong><br><br>Se a resposta for sim a qualquer uma, a mensagem costuma disparar um alarme. E o filho responde ao alarme, não ao amor que estava por trás.` },
+    titulo:'Você digita. Relê. Apaga o “você nunca”. Põe um “querido”. Manda.',
+    texto:()=>`E fica olhando o relógio. ${P.tentouFrase}<br><br>Antes da próxima, três perguntas: <strong>isso cobra? isso aconselha? isso pede?</strong> Se a resposta for sim a qualquer uma, a mensagem chega como alarme. E ${P.oFilho} responde ao alarme, não ao amor que estava por trás.` },
 
-  { id:'freq', type:'single', bloco:'O que já foi feito', q:'Com que frequência você tenta contato hoje?',
+  { id:'freq', type:'single', bloco:'O que você já tentou', q:'Com que frequência você tenta contato hoje?',
     ops:[['Todo dia ou quase',{7:1}, 'dia', I.dia],['Toda semana',{1:1}, 'semana', I.semana],['De vez em quando, com medo de incomodar',{5:1,3:1}, 'raro', I.raro],['Parei de tentar',{6:1}, 'parei', I.parei]] },
 
   /* 03 — desejo */
-  { id:'quer', type:'single', bloco:'O que você gostaria', q:'Se fosse possível uma coisa só, qual seria?',
+  { id:'quer', type:'single', bloco:'O que você mais queria', q:'Se fosse possível uma coisa só, qual seria?',
     ops:[[()=>`Que ${P.ele} voltasse a falar comigo. Qualquer coisa já seria muito`,{6:2,5:1}, 'falar', I.mudo],[()=>`Só saber que ${P.ele} está bem, mesmo sem falar comigo`,{1:1,7:1}, 'bem', I.bem],[()=>`Que ${P.ele} me ouvisse uma vez, sem a conversa virar briga`,{5:1,3:1}, 'ouvir', I.ouvir],['Uma conversa tranquila, sem tocar no assunto antigo',{6:1}, 'conversa', I.conversa],['Ser chamado de novo para as datas da família',{4:1}, 'datas', I.natal],['Conhecer ou conviver mais com os netos',{4:2}, 'netos', I.netos],['Voltar a ter a intimidade de antes: ligar sem motivo, almoçar no domingo',{1:1}, 'intimidade', I.casa]] },
-  { id:'data', type:'single', bloco:'O que você gostaria', q:()=>`Qual data pesa mais sem ${P.ele}?`,
+  { id:'data', type:'single', bloco:'O que você mais queria', q:()=>`Qual data pesa mais sem ${P.ele}?`,
     ops:[['Natal e Réveillon, com a cadeira vazia na mesa',{6:1}, 'natal', I.natal],[()=>`O aniversário ${P.dele}, quando eu não sei se devo ligar`,{7:1}, 'aniversario', I.cal],[()=>`${P.diaDe}, quando chega só uma mensagem pronta, ou nenhuma`,{1:1}, 'diade', I.presente],['O domingo, que era o dia do almoço',{4:1}, 'domingo', I.casa],['Nenhuma pesa mais que o dia a dia',{}, 'nenhuma', I.raro]] },
-  { id:'saberia', type:'single', bloco:'O que você gostaria', q:()=>`Se ${P.ele} mandasse uma mensagem hoje, você saberia o que responder?`,
+  { id:'saberia', type:'single', bloco:'O que você mais queria', q:()=>`Se ${P.ele} mandasse uma mensagem hoje, você saberia o que responder?`,
     ops:[['Sim',{}, 'sim', I.sim],['Acho que sim',{}, 'acho', I.acho],['Não, teria medo de errar',{}, 'medo', I.medo],['Não sei',{}, 'ns', I.naosei]] },
-  { id:'pesa', type:'single', bloco:'O que você gostaria', q:'O que mais pesa quando o assunto aparece?',
+  { id:'pesa', type:'single', bloco:'O que você mais queria', q:'O que mais pesa quando o assunto aparece?', sub:'Marque o que vem primeiro, antes de pensar.',
     ops:[['A pergunta dos parentes: “e o seu filho?”',{}, 'parentes', I.parentes],['A culpa',{5:1}, 'culpa', I.culpa],['A raiva',{6:1}, 'raiva', I.raiva],['A saudade',{1:1}, 'saudade', I.saudade],['Não saber o que fazer',{7:1}, 'naosei', I.naosei]] },
 
   { id:'ins3', type:'insert', img:'../img/leitura.jpg', alt:'Pessoa lendo com calma', sobre:'Uma frase para guardar',
     titulo:'Você não controla se o seu filho vai voltar.',
-    texto:()=>`Mas controla se, quando ${P.ele} voltar, vai encontrar ${P.oMesmo}, ou alguém com quem é seguro conversar.<br><br>O resultado do teste mostra duas coisas: <strong>o tipo de afastamento da sua família</strong> e <strong>o jeito como você tem reagido a ele</strong>. É aí que mora o seu lado do caminho de volta.` },
+    texto:()=>`Mas controla se, quando ${P.ele} voltar, vai encontrar ${P.oMesmo}, ou alguém com quem é seguro conversar.<br><br>O resultado do teste mostra duas coisas: <strong>o tipo de afastamento da sua família</strong> e <strong>o jeito como você tem reagido a ele</strong>. É muita coisa nas suas mãos. E é exatamente isso que o resultado vai te mostrar.` },
 
-  { id:'topa', type:'single', bloco:'Última pergunta', q:'Você toparia mudar o tipo de contato que faz hoje, antes de esperar que ele mude?',
+  { id:'topa', type:'single', bloco:'Só mais uma', q:'Você toparia mudar o tipo de contato que faz hoje, antes de esperar que ele mude?',
     ops:[['Sim, quero entender como',{}, 'sim', I.sim],['Acho que sim, dependendo do que for',{}, 'acho', I.acho],['Ainda não sei',{}, 'ns', I.naosei]] },
 
   { id:'captura', type:'capture' },
@@ -271,7 +271,8 @@ function atualizarP(){
   P.mae = resp.quem==='pai' ? 'm' : 'f';
   P.oMesmo = resp.quem==='pai' ? 'o mesmo pai' : 'a mesma mãe';
   const t = resp.tempo;
-  P.tempoFrase = t===undefined ? '' : ['Menos de seis meses.','Entre seis meses e dois anos.','Entre dois e cinco anos.','Mais de cinco anos.'][t] + ' É um tempo que pesa.';
+  P.tempoTitulo = t===undefined ? 'Afastamento não é uma coisa só.' : ['Menos de seis meses.','Entre seis meses e dois anos.','Entre dois e cinco anos.','Mais de cinco anos.'][t];
+  P.tempoFrase = t===undefined ? 'O tempo é o que a gente mede primeiro.' : ['Já cabe um aniversário nesse tempo, talvez uma data que doeu.','São dois Natais, dois aniversários, uns cem domingos.','São anos de cadeira vazia e de pergunta de parente.','É mais de cinco anos olhando para o telefone.'][t];
   P.ocupado = resp.filho==='ela' ? 'ocupada' : 'ocupado';
   P.cobrado = resp.filho==='ela' ? 'cobrada' : 'cobrado';
   P.cercado = resp.filho==='ela' ? 'cercada' : 'cercado';
@@ -335,8 +336,8 @@ function intro(t, box){
     </div>
     ${rotulo('Teste · 7 tipos de afastamento')}
     <h1 class="font-serif font-semibold text-verde text-[clamp(30px,7.4vw,40px)] leading-[1.12] mb-4">Entenda o motivo do afastamento do seu filho.</h1>
-    <p class="text-[20px] mb-4">Afastamento não é uma coisa só. São sete motivos diferentes, e o gesto que ajuda num deles pode piorar outro.</p>
-    <p class="text-[20px] mb-5">Este teste indica <strong class="text-verde">qual deles mais se parece com a sua história</strong>, o jeito como você tem reagido e por onde começar, do seu lado.</p>
+    <p class="text-[20px] mb-4">Você já escreveu, apagou e escreveu de novo. Já viu o visualizado sem resposta. Já ouviu que é fase, que é normal, que uma hora passa.</p>
+    <p class="text-[20px] mb-5">Não é fase. É um afastamento, e ele tem um motivo. Este teste ajuda você a dar nome a ele: <strong class="text-verde">qual dos sete tipos mais se parece com a sua história</strong>, o jeito como você tem reagido e por onde começar, do seu lado.</p>
     <ul class="text-[17px] text-suave space-y-1">
       <li class="flex gap-2"><span class="text-verde font-extrabold">✓</span> Cerca de 4 minutos, uma pergunta por tela</li>
       <li class="flex gap-2"><span class="text-verde font-extrabold">✓</span> Um resultado claro, com nome: o seu tipo entre os sete</li>
@@ -399,7 +400,7 @@ function multi(t, box){
 function insert(t, box){
   box.innerHTML = `
     <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-6 bg-areia"><img src="${t.img}" alt="${t.alt}" class="w-full h-full object-cover"></div>
-    ${rotulo(t.sobre)}${h2(t.titulo)}
+    ${rotulo(t.sobre)}${h2(txt(t.titulo))}
     <p class="text-[20px] leading-[1.6]">${txt(t.texto)}</p>
 `;
   seguir.textContent = 'Continuar'; acao.classList.remove('hidden'); seguir.onclick = avancar;
@@ -422,13 +423,13 @@ function espelho(t, box){
     <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-6 bg-areia animate-revela"><img src="${IMG_ESPELHO[k]}" alt="" class="w-full h-full object-cover"></div>
     ${rotulo('Você marcou')}${h2(tit)}
     <p class="text-[20px] leading-[1.6]">${texto}</p>
-    <p class="mt-4 text-[17px] text-suave">Se não for bem isso, tudo bem: as próximas perguntas ajustam o resultado.</p>`;
+    <p class="mt-4 text-[17px] text-suave">Se deu um aperto ao ler isso, é porque você reconheceu. É daí que a gente parte. E se não for bem isso, as próximas perguntas ajustam.</p>`;
   seguir.textContent = 'Continuar'; acao.classList.remove('hidden'); seguir.onclick = avancar;
 }
 
 function capture(t, box){
-  box.innerHTML = `${rotulo('Pronto')}${h2('Para onde mando o seu resultado?')}
-    <p class="text-[19px] mb-5">Ele aparece aqui na tela e vai também para o seu e-mail, para você reler com calma.</p>
+  box.innerHTML = `${rotulo('Pronto')}${h2('Suas respostas já dizem muito.')}
+    <p class="text-[19px] mb-5">Me diz onde deixar o seu resultado. Ele aparece aqui na tela e vai para o seu e-mail, para você reler com calma, inclusive às onze da noite, quando bate a vontade de mandar mensagem.</p>
     <form id="form" class="space-y-4" novalidate>
       <label class="block"><span class="block text-[15px] font-extrabold tracking-wider uppercase text-suave mb-1">Seu primeiro nome</span>
         <input name="nome" type="text" autocomplete="given-name" required class="w-full bg-white border-2 border-linha rounded-2xl px-5 py-4 text-[20px] focus:outline-none focus:border-verde" placeholder="Como você gosta de ser chamado"></label>
@@ -479,16 +480,22 @@ function arquetipo(){
 }
 
 function loading(t, box){
-  const nomes = Object.values(TIPOS).map(x=>x.titulo);
+  const nomes = [];
+  if (resp.mora==='pais') nomes.push(`Você contou que ${P.ele} mora em outro país…`); else if (resp.mora==='longe') nomes.push(`Você contou que ${P.ele} mora longe…`);
+  if (resp.contato==='bloq') nomes.push('…que o contato foi cortado…'); else if (resp.contato==='nenhum') nomes.push('…que não há contato há meses…');
+  if (resp.freq==='dia') nomes.push('…que você tenta quase todo dia…'); else if (resp.freq==='parei') nomes.push('…que você parou de tentar…');
+  if (resp.parentes==='mudo'||resp.parentes==='invento') nomes.push('…que é difícil falar disso com os parentes…');
+  if (resp.data==='natal') nomes.push('…e que o Natal é o que mais pesa.'); else if (resp.data==='diade') nomes.push(`…e que ${P.diaDe.toLowerCase()} é o que mais pesa.`); else if (resp.quer) nomes.push('…e o que você mais queria.');
+  if (nomes.length<3) nomes.push('Comparando com os sete tipos de afastamento…');
   box.innerHTML = `<div class="text-center pt-10">
     <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-verde to-verde-escuro grid place-items-center animate-pulso shadow-[0_18px_44px_rgba(31,78,70,.25)]">
       <svg viewBox="0 0 24 24" class="w-10 h-10" fill="none" stroke="#e8d9b8" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
     <h2 class="font-serif font-semibold text-verde text-[28px] mt-7 mb-2">Lendo as suas respostas<span class="ponto animate-ponto">.</span><span class="ponto animate-ponto">.</span><span class="ponto animate-ponto">.</span></h2>
     <p id="lista" class="text-suave text-[18px] min-h-[32px]"></p></div>`;
   const lista = box.querySelector('#lista'); let k=0;
-  const iv = setInterval(()=>{ if (k<nomes.length) lista.textContent = 'Comparando com: ' + nomes[k++].toLowerCase(); else lista.textContent = 'Lendo o jeito como você tem reagido…'; }, 380);
+  const iv = setInterval(()=>{ if (k<nomes.length) lista.textContent = nomes[k++]; else lista.textContent = 'Lendo o jeito como você tem reagido…'; }, 700);
   const r = calcular(); salvar(r);
-  setTimeout(()=>{ clearInterval(iv); avancar(); }, 380*nomes.length + 1100);
+  setTimeout(()=>{ clearInterval(iv); avancar(); }, 700*nomes.length + 900);
 }
 
 function salvar(r){
@@ -517,7 +524,7 @@ function result(t, box){
   const caps = [...new Set([...A.cap, ...RELER[r.n]])].slice(0,4).sort((a,b)=>a-b);
   box.innerHTML = `
     ${rotulo('O seu resultado')}
-    <p class="text-[19px] mb-1">${lead.nome||''}, pelo jeito como você tem reagido, você é…</p>
+    <p class="text-[19px] mb-3">${lead.nome||''}, antes do resultado, uma coisa: ninguém chega até aqui por falta de amor. A gente chega por excesso dele, mal direcionado.</p><p class="text-[19px] mb-1">Pelo que você contou, você é…</p>
     <h1 class="font-serif font-semibold text-verde text-[clamp(34px,8.6vw,46px)] leading-[1.08] mb-4 animate-revela">${arqNome}.</h1>
     <div class="rounded-[22px] overflow-hidden shadow-[0_18px_44px_rgba(31,78,70,.18)] aspect-[16/10] mb-5 bg-areia animate-revela atraso-1"><img src="${A.img[P.mae]}" alt="" class="w-full h-full object-cover"></div>
     <p class="font-serif italic text-[22px] text-verde-escuro leading-snug mb-4">${txt(A.frase)}</p>
@@ -537,9 +544,9 @@ function result(t, box){
     <h2 class="font-serif font-semibold text-verde text-[clamp(28px,7vw,38px)] leading-[1.1] mb-4">${r.n===4 ? `É pela nova casa: a família que ${P.ele} formou.` : `É ${tp.nome}.`}</h2>
     ${tp2 ? `<p class="text-[17px] text-suave mb-5 bg-white border border-linha rounded-2xl px-5 py-3">Com traços do afastamento <strong class="text-verde">${tp2.nome}</strong>. É comum se reconhecer em dois. O primeiro explica o começo; o que pesa mais hoje indica o primeiro passo.</p>` : ''}
     <div class="resultado text-[19px]">
-      <p><strong>Como costuma começar.</strong> ${tp.comeca}</p>
+      <p><strong>Como costuma ter começado com vocês.</strong> ${tp.comeca}</p>
       <p><strong>O que ${P.oFilho} costuma estar sentindo.</strong> ${tp.sente}</p>
-      <p><strong>O erro mais comum.</strong> ${tp.erro}</p>
+      <p><strong>O erro mais comum, que talvez você reconheça.</strong> ${tp.erro}</p>
       <div class="bg-white border border-linha border-l-[6px] border-l-terra rounded-2xl px-5 py-4 my-5"><p class="mb-0"><strong>Um primeiro passo.</strong> ${tp.passo}</p></div>
       ${ecos.slice(0,3).map(e=>`<p class="text-verde-escuro bg-areia/50 rounded-2xl px-5 py-4">${e}</p>`).join('')}
       ${alerta ? `<p class="text-[17px] text-suave border border-linha rounded-2xl px-5 py-4">Se a história envolver violência, abuso ou um sofrimento muito intenso, este teste e o livro não são o lugar: procure um psicólogo ou psiquiatra. Em crise, o CVV atende no <strong>188</strong>, 24 horas, de graça.</p>` : ''}
@@ -551,7 +558,7 @@ function result(t, box){
       <div class="px-6 py-7">
         <span class="block text-[13px] font-extrabold tracking-[.12em] uppercase text-areia mb-2">E agora?</span>
         <h2 class="font-serif font-semibold text-[26px] leading-tight mb-3">Trocar ${A.troca[0]} por ${A.troca[1]}. É por aí que começa, no afastamento ${tp.nome}.</h2>
-        <p class="text-[18px] text-[#d6e2dc] mb-4">É isso que <em>O Caminho de Volta</em> ensina, capítulo por capítulo, com mensagem pronta pra cada situação. No seu caso, os capítulos ${caps.slice(0,-1).join(', ')} e ${caps[caps.length-1]} falam direto com o que você acabou de ler.</p>
+        <p class="text-[18px] text-[#d6e2dc] mb-3">Você não precisa resolver tudo hoje. Precisa de uma mensagem, a primeira, que não dispare o alarme.</p><p class="text-[18px] text-[#d6e2dc] mb-4">É isso que <em>O Caminho de Volta</em> ensina, capítulo por capítulo, com mensagem pronta pra cada situação. No seu caso, os capítulos ${caps.slice(0,-1).join(', ')} e ${caps[caps.length-1]} falam direto com o que você acabou de ler.</p>
         <ul class="text-[17px] text-[#e6eeea] space-y-2 mb-4">
           <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Mensagens Sem Alarme</strong>: 30 mensagens prontas pra hora em que você não sabe o que escrever</span></li>
           <li class="flex gap-2"><span class="text-areia">✓</span> <span><strong>Audiobook</strong> na voz da autora, pra ouvir sem precisar enxergar a tela</span></li>
