@@ -299,10 +299,11 @@ const acao = document.getElementById('acao'), seguir = document.getElementById('
 const CONTA = ['single','multi','insert','espelho'];
 const total = T.filter(t=>CONTA.includes(t.type)).length;
 const progresso = idx => T.slice(0, idx+1).filter(t=>CONTA.includes(t.type)).length;
-function evento(nome, dados){ try{ if (!window.fbq) return; fbq('trackCustom', nome, dados||{});
+/* Pixel: só três eventos (pedido do Davi, 20/10/2026): IniciouQuiz, Lead (captura) e FinalizouQuiz (resultado). */
+function evento(nome, dados){ try{ if (!window.fbq) return;
+  if (nome==='TesteIniciado') fbq('trackCustom','IniciouQuiz');
   if (nome==='TesteLead') fbq('track','Lead',{content_name:'Teste afastamento'});
-  if (nome==='TesteIniciado') fbq('track','ViewContent',{content_name:'Teste afastamento'});
-  if (nome==='TesteConcluido') fbq('track','CompleteRegistration',{content_name:'Teste afastamento', status: dados&&dados.tipo});
+  if (nome==='TesteConcluido') fbq('trackCustom','FinalizouQuiz',{tipo: dados&&dados.tipo, arquetipo: dados&&dados.arq});
 }catch(e){} }
 
 function ir(idx, dir=1){
@@ -377,7 +378,6 @@ function single(t, box){
       box.querySelectorAll('.opcao').forEach(x=>x.classList.remove('marcada'));
       b.classList.add('marcada');
       resp[t.id] = t.ops[k][2] ?? k; pesos[t.id] = t.ops[k][1];
-      evento('TesteResposta', {tela:t.id});
       setTimeout(avancar, 360);
     };
   });
@@ -569,7 +569,7 @@ function result(t, box){
       </div>
     </div>`;
   seguir.textContent = 'Conhecer O Caminho de Volta'; acao.classList.remove('hidden');
-  seguir.onclick = ()=>{ evento('TesteResultado', {tipo:TIPO_BD[r.n], arq:r.arq}); location.href = PAGINA_LIVRO + '?tipo=' + TIPO_BD[r.n] + '&arq=' + r.arq + (r.n2?'&tipo2='+TIPO_BD[r.n2]:''); };
+  seguir.onclick = ()=>{ location.href = PAGINA_LIVRO + '?tipo=' + TIPO_BD[r.n] + '&arq=' + r.arq + (r.n2?'&tipo2='+TIPO_BD[r.n2]:''); };
   evento('TesteConcluido', {tipo:TIPO_BD[r.n], arq:r.arq});
 }
 
