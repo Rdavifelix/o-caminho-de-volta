@@ -179,6 +179,7 @@ footer .aviso{color:#fff;font-size:16.5px}
 }
 </style>
 <script src="rastreio.js"></script>
+<script src="quiz-metricas.js" data-funil="pagina"></script>
 </head>
 <body>
 
@@ -576,6 +577,19 @@ if (CHECKOUT) {
 }
 </script>
 <script>document.addEventListener('click', e => { const a=e.target.closest('a[href*="kiwify"]'); if (a && window.fbq) fbq('track','InitiateCheckout',{content_name:'O Caminho de Volta',value:97,currency:'BRL'}); });</script>
+<script>
+/* Funil da página no painel de vendas (brasil/app/painel.html): abriu → viu a oferta → clicou no checkout.
+   Sessão anônima de primeira parte (quiz-metricas.js com data-funil="pagina"); sem dado pessoal. */
+try { if (window.pfaQuiz) {
+  pfaQuiz.evento('abriu', 'pagina', 0);
+  const of = document.getElementById('oferta');
+  if (of && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { pfaQuiz.evento('oferta', 'pagina', 1); io.disconnect(); } }, { threshold: 0.3 });
+    io.observe(of);
+  }
+  document.addEventListener('click', e => { const a = e.target.closest('a[href*="kiwify"]'); if (a) { pfaQuiz.evento('checkout', 'pagina', 2); pfaQuiz.enviar(); } });
+} } catch (e) {}
+</script>
 <script src="consentimento.js" data-pixel="1182879485402222"></script>
 </body>
 </html>

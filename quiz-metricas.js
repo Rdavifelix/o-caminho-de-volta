@@ -8,6 +8,7 @@
    Rastreio de primeira parte; não depende do banner de cookies (que só governa o pixel da Meta).
 
    Uso: <script src="rastreio.js"></script><script src="quiz-metricas.js"></script> e, na página,
+   (na página de vendas: <script src="quiz-metricas.js" data-funil="pagina"></script> — sessão separada, funil 'pagina' no painel de vendas)
      pfaQuiz.evento(tipo, tela, indice, valor)   tipo: abriu|comecou|tela|resposta|voltou|captura|resultado|oferta|checkout
      pfaQuiz.enviar()                             força o envio (antes de sair da página)
      pfaQuiz.sessao                               id da sessão (vai no /lead-teste como sessao_id)
@@ -15,7 +16,9 @@
    como text/plain para não exigir preflight. O que falhar fica guardado e sai na próxima visita. */
 (function () {
   var API = 'https://twhasxoshpfootucmkmo.supabase.co/functions/v1/area/quiz-eventos';
-  var LS_S = 'pfa_quiz_sessao', LS_F = 'pfa_quiz_fila', VALIDADE = 24 * 3600 * 1000;
+  /* data-funil="pagina" na tag <script>: sessão da página de vendas (chaves próprias, funil marcado no envio) */
+  var FUNIL = 'quiz'; try { if (document.currentScript && document.currentScript.dataset.funil === 'pagina') FUNIL = 'pagina'; } catch (e) {}
+  var LS_S = FUNIL === 'pagina' ? 'pfa_pag_sessao' : 'pfa_quiz_sessao', LS_F = FUNIL === 'pagina' ? 'pfa_pag_fila' : 'pfa_quiz_fila', VALIDADE = 24 * 3600 * 1000;
   function ler(k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } }
   function gravar(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   function uuid() {
@@ -38,7 +41,7 @@
     var ref = ''; try { if (document.referrer) ref = new URL(document.referrer).hostname; } catch (e) {}
     var celular = null; try { celular = window.matchMedia('(pointer:coarse)').matches; } catch (e) {}
     var largura; try { largura = screen.width; } catch (e) {}
-    return { sessao: sess.id, utm_source: o.utm_source, utm_medium: o.utm_medium, utm_campaign: o.utm_campaign,
+    return { sessao: sess.id, funil: FUNIL, utm_source: o.utm_source, utm_medium: o.utm_medium, utm_campaign: o.utm_campaign,
       utm_content: o.utm_content, utm_term: o.utm_term, src: o.src, sck: o.sck, ref: ref || undefined,
       celular: celular, largura: largura };
   }
