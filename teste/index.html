@@ -51,6 +51,7 @@ tailwind.config = {
   @media (prefers-reduced-motion: reduce) { .animate-entra, .animate-pulso, .animate-revela { animation: none } }
 </style>
 <script src="../rastreio.js"></script>
+<script src="../quiz-metricas.js"></script>
 </head>
 <body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed min-h-[100dvh] flex flex-col">
 
@@ -312,11 +313,17 @@ function ir(idx, dir=1){
   atualizarP(); render(); window.scrollTo({top:0, behavior:'instant'});
 }
 function avancar(){ hist.push(i); ir(i+1, 1); }
-function retroceder(){ if (!hist.length) return; i = hist.pop(); atualizarP(); render(); window.scrollTo({top:0, behavior:'instant'}); }
+function retroceder(){ if (!hist.length) return; metrica('voltou', T[i].id, i); i = hist.pop(); atualizarP(); render(); window.scrollTo({top:0, behavior:'instant'}); }
 voltar.onclick = retroceder;
+
+/* Central do quiz: título curto de cada tela, para o painel rotular o funil sem tabela paralela */
+const tituloTela = t => String(t.type==='intro' ? 'Abertura' : t.type==='capture' ? 'Captura' : t.type==='loading' ? 'Lendo as respostas' : t.type==='result' ? 'Resultado' : t.type==='espelho' ? 'Espelho: você marcou' : t.type==='insert' ? 'Inserção: ' + txt(t.titulo) : txt(t.q)).replace(/<[^>]+>/g,'').slice(0,90);
+const rotuloOpcao = o => String(txt(o[0])).replace(/<[^>]+>/g,'').slice(0,60);
+const metrica = (tipo, tela, idx, valor) => { try { if (window.pfaQuiz) pfaQuiz.evento(tipo, tela, idx, valor); } catch(e){} };
 
 function render(){
   const t = T[i], n = progresso(i);
+  metrica('tela', t.id, i, { q: tituloTela(t) });
   barra.style.width = (['capture','loading','result'].includes(t.type) ? 100 : Math.round(n/total*100)) + '%';
   passo.textContent = CONTA.includes(t.type) ? `${n} de ${total}` : (t.type==='capture' ? 'Resultado' : '');
   voltar.disabled = !hist.length || ['result','loading'].includes(t.type);
@@ -346,7 +353,7 @@ function intro(t, box){
     </ul>`;
   seguir.textContent = 'Começar o teste';
   acao.classList.remove('hidden');
-  seguir.onclick = ()=>{ evento('TesteIniciado'); avancar(); };
+  seguir.onclick = ()=>{ evento('TesteIniciado'); metrica('comecou', 'intro', 0); avancar(); };
 }
 
 function opcaoHTML(o, k, tipo){
@@ -378,6 +385,7 @@ function single(t, box){
       box.querySelectorAll('.opcao').forEach(x=>x.classList.remove('marcada'));
       b.classList.add('marcada');
       resp[t.id] = t.ops[k][2] ?? k; pesos[t.id] = t.ops[k][1];
+      metrica('resposta', t.id, i, { i:[k], r:[rotuloOpcao(t.ops[k])] });
       setTimeout(avancar, 360);
     };
   });
@@ -394,7 +402,8 @@ function multi(t, box){
     pinta(); }; });
   pinta();
   seguir.textContent = 'Continuar'; acao.classList.remove('hidden');
-  seguir.onclick = ()=>{ resp[t.id] = [...sel].map(k=>t.ops[k][2]); const p={}; sel.forEach(k=>{ for (const tp in t.ops[k][1]) p[tp]=(p[tp]||0)+t.ops[k][1][tp]; }); pesos[t.id]=p; avancar(); };
+  seguir.onclick = ()=>{ resp[t.id] = [...sel].map(k=>t.ops[k][2]); const p={}; sel.forEach(k=>{ for (const tp in t.ops[k][1]) p[tp]=(p[tp]||0)+t.ops[k][1][tp]; }); pesos[t.id]=p;
+    metrica('resposta', t.id, i, { i:[...sel], r:[...sel].map(k=>rotuloOpcao(t.ops[k])) }); avancar(); };
 }
 
 function insert(t, box){
@@ -450,7 +459,7 @@ function capture(t, box){
     const ok = nome.length>=2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     box.querySelector('#erro').classList.toggle('hidden', ok); if (!ok) return;
     lead = { nome, email, zap: form.zap.checked ? form.tel.value.trim() : '' };
-    evento('TesteLead'); avancar();
+    evento('TesteLead'); metrica('captura', 'captura', i, { zap: !!lead.zap }); avancar();
   };
 }
 
@@ -502,7 +511,8 @@ function salvar(r){
   lsSet('pfa_quiz', { ...lead, n:r.n, n2:r.n2, arq:r.arq, resp, quando:new Date().toISOString() });
   if (!API) return;
   const corpo = { nome:lead.nome, email:lead.email, optin_whatsapp: !!lead.zap, whatsapp: lead.zap||undefined,
-    tipo_afastamento: TIPO_BD[r.n], tipo_secundario: r.n2?TIPO_BD[r.n2]:undefined, arquetipo:r.arq, origem:'quiz', respostas: resp };
+    tipo_afastamento: TIPO_BD[r.n], tipo_secundario: r.n2?TIPO_BD[r.n2]:undefined, arquetipo:r.arq, origem:'quiz', respostas: resp,
+    sessao_id: window.pfaQuiz ? pfaQuiz.sessao : undefined };
   const q = new URLSearchParams(location.search), guardado = window.pfaOrigem ? pfaOrigem() : {};
   for (const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']) { const v = q.get(k) || guardado[k]; if (v) corpo[k]=v; }
   fetch(API+'/lead-teste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(corpo),keepalive:true}).catch(()=>{});
@@ -571,10 +581,13 @@ function result(t, box){
   seguir.textContent = 'Conhecer O Caminho de Volta'; acao.classList.remove('hidden');
   seguir.onclick = ()=>{ location.href = PAGINA_LIVRO + '?tipo=' + TIPO_BD[r.n] + '&arq=' + r.arq + (r.n2?'&tipo2='+TIPO_BD[r.n2]:''); };
   evento('TesteConcluido', {tipo:TIPO_BD[r.n], arq:r.arq});
+  metrica('resultado', 'resultado', i, { tipo:TIPO_BD[r.n], tipo2: r.n2?TIPO_BD[r.n2]:undefined, arq:r.arq });
+  try { if (window.pfaQuiz) pfaQuiz.enviar(); } catch(e){}
 }
 
 /* Credencial no rodapé só quando nome e CRP estiverem preenchidos (obrigatório no lançamento: CFP exige nome + psicóloga + CRP em toda peça). */
 if (AUTORA.nome && AUTORA.crp) { const c=document.getElementById('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
+metrica('abriu', 'intro', 0);
 ir(0);
 </script>
 <script src="../consentimento.js" data-pixel="1182879485402222"></script>
