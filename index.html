@@ -179,6 +179,23 @@ footer .aviso{color:#fff;font-size:16.5px}
 }
 </style>
 <script src="rastreio.js"></script>
+<!-- Meta Pixel Code (id 1182879485402222, inserido em 20/10/2026 a pedido do Davi; LGPD: banner de consentimento pendente) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1182879485402222');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1182879485402222&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -575,5 +592,6 @@ if (CHECKOUT) {
   document.querySelectorAll('[data-checkout]').forEach(a => { a.href = url; a.removeAttribute('data-checkout'); });
 }
 </script>
+<script>document.addEventListener('click', e => { const a=e.target.closest('a[href*="kiwify"]'); if (a && window.fbq) fbq('track','InitiateCheckout',{content_name:'O Caminho de Volta',value:97,currency:'BRL'}); });</script>
 </body>
 </html>

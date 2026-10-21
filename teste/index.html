@@ -51,6 +51,23 @@ tailwind.config = {
   @media (prefers-reduced-motion: reduce) { .animate-entra, .animate-pulso, .animate-revela { animation: none } }
 </style>
 <script src="../rastreio.js"></script>
+<!-- Meta Pixel Code (id 1182879485402222, inserido em 20/10/2026 a pedido do Davi; LGPD: banner de consentimento pendente) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1182879485402222');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1182879485402222&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed min-h-[100dvh] flex flex-col">
 
@@ -298,7 +315,11 @@ const acao = document.getElementById('acao'), seguir = document.getElementById('
 const CONTA = ['single','multi','insert','espelho'];
 const total = T.filter(t=>CONTA.includes(t.type)).length;
 const progresso = idx => T.slice(0, idx+1).filter(t=>CONTA.includes(t.type)).length;
-function evento(nome, dados){ try{ if (window.fbq) fbq('trackCustom', nome, dados||{}); }catch(e){} }
+function evento(nome, dados){ try{ if (!window.fbq) return; fbq('trackCustom', nome, dados||{});
+  if (nome==='TesteLead') fbq('track','Lead',{content_name:'Teste afastamento'});
+  if (nome==='TesteIniciado') fbq('track','ViewContent',{content_name:'Teste afastamento'});
+  if (nome==='TesteConcluido') fbq('track','CompleteRegistration',{content_name:'Teste afastamento', status: dados&&dados.tipo});
+}catch(e){} }
 
 function ir(idx, dir=1){
   while (idx < T.length && T[idx].skipIf && T[idx].skipIf(resp)) idx += dir;
