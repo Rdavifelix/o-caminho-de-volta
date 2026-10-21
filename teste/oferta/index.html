@@ -318,23 +318,6 @@ footer{padding-bottom:110px}
 }
 </style>
 <script src="../../rastreio.js"></script>
-<!-- Meta Pixel Code (id 1182879485402222, inserido em 20/10/2026 a pedido do Davi; LGPD: banner de consentimento pendente) -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1182879485402222');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1182879485402222&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body>
 <!-- Bloco 1 — Abertura personalizada (nome vem do localStorage do quiz; nunca da URL) -->
@@ -495,7 +478,7 @@ src="https://www.facebook.com/tr?id=1182879485402222&ev=PageView&noscript=1"
     <p><span id="cred" class="hidden"></span>Conteúdo educativo. Não substitui psicoterapia. Em sofrimento intenso, procure um psicólogo ou psiquiatra; em crise, CVV 188.</p>
     <p>Exemplos de mensagem e fotos são ilustrativos, sem pessoas reais.</p>
     <p>[Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · [endereço] · <a href="mailto:[e-mail de contato]">[e-mail de contato]</a></p>
-    <p><a href="#">Política de privacidade</a> · <a href="#">Termos de uso</a></p>
+    <p><a href="../../privacidade/">Política de privacidade</a> · <a href="#" data-cookies>Cookies</a> · <a href="#">Termos de uso</a></p>
   </div>
 </footer>
 
@@ -571,5 +554,6 @@ document.querySelectorAll('[data-checkout]').forEach(a=>a.href=url);
 if (AUTORA.nome && AUTORA.crp) { const c=$('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
 </script>
 <script>try{ if (window.fbq){ fbq('track','ViewContent',{content_name:'Oferta pós-quiz',content_category: (new URLSearchParams(location.search)).get('tipo')||''}); document.addEventListener('click', e => { const a=e.target.closest('a[href*="kiwify"]'); if (a) fbq('track','InitiateCheckout',{content_name:'O Caminho de Volta',value:97,currency:'BRL'}); }); } }catch(e){}</script>
+<script src="../../consentimento.js" data-pixel="1182879485402222"></script>
 </body>
 </html>

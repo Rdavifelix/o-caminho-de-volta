@@ -51,23 +51,6 @@ tailwind.config = {
   @media (prefers-reduced-motion: reduce) { .animate-entra, .animate-pulso, .animate-revela { animation: none } }
 </style>
 <script src="../rastreio.js"></script>
-<!-- Meta Pixel Code (id 1182879485402222, inserido em 20/10/2026 a pedido do Davi; LGPD: banner de consentimento pendente) -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1182879485402222');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1182879485402222&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body class="bg-creme text-tinta font-sans text-[19px] leading-relaxed min-h-[100dvh] flex flex-col">
 
@@ -89,7 +72,7 @@ src="https://www.facebook.com/tr?id=1182879485402222&ev=PageView&noscript=1"
 
 <footer class="border-t border-linha text-center text-[13.5px] leading-snug text-suave px-4 py-4 pb-[max(16px,env(safe-area-inset-bottom))]">
   <span id="cred" class="hidden"></span>Conteúdo educativo. Não substitui psicoterapia.<br>
-  <span class="opacity-80">Fotos ilustrativas, sem pessoas reais · [Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · <a class="underline" href="../#privacidade">Privacidade</a></span>
+  <span class="opacity-80">Fotos ilustrativas, sem pessoas reais · [Razão social] · CNPJ [XX.XXX.XXX/0001-XX] · <a class="underline" href="../privacidade/">Privacidade</a> · <a class="underline" href="#" data-cookies>Cookies</a></span>
 </footer>
 
 <script>
@@ -587,5 +570,6 @@ function result(t, box){
 if (AUTORA.nome && AUTORA.crp) { const c=document.getElementById('cred'); c.textContent = `${AUTORA.nome}, psicóloga · CRP ${AUTORA.crp} · `; c.classList.remove('hidden'); }
 ir(0);
 </script>
+<script src="../consentimento.js" data-pixel="1182879485402222"></script>
 </body>
 </html>
