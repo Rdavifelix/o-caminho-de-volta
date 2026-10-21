@@ -1,4 +1,9 @@
-/* Consentimento de cookies (LGPD) e carregamento do Meta Pixel só depois do aceite.
+/* Aviso de cookies e Meta Pixel.
+   Desde 21/10/2026, por decisão do Davi, o pixel carrega ao abrir a página (PageView imediato), sem esperar
+   aceite: a Meta só contava "visualização da página de destino" de quem clicava em "Aceitar". O banner virou
+   um aviso com "Entendi" e link para a política. Isso contraria a orientação da ANPD para cookies não
+   essenciais; o advogado precisa validar. O código de opt-in ficou abaixo, desligado por OPT_IN = false.
+   Texto original do cabeçalho:
    Uso: <script src="/consentimento.js" data-pixel="1182879485402222"></script> antes de </body>.
    A escolha fica em localStorage ("pfa_consent": "aceito" | "essencial"). O link "Cookies" no rodapé
    reabre o banner: <a href="#" data-cookies>Cookies</a>. Chamadas a fbq() feitas antes do aceite ficam
@@ -48,17 +53,24 @@
     if (!document.getElementById('pfa-cookies-css')) { var st = document.createElement('style'); st.id = 'pfa-cookies-css'; st.textContent = css; document.head.appendChild(st); }
     var d = document.createElement('div'); d.id = 'pfa-cookies'; d.setAttribute('role','region'); d.setAttribute('aria-label','Cookies');
     var base = (location.pathname.indexOf('/teste/') === 0 ? (location.pathname.indexOf('/teste/oferta') === 0 ? '../../' : '../') : '');
-    d.innerHTML = '<div class="i"><p>Usamos cookies só para medir os anúncios. <a href="' + base + 'privacidade/">Como tratamos os seus dados</a>.</p>'
-      + '<div class="b"><button type="button" class="ok">Aceitar</button><button type="button" class="nao">Só o essencial</button></div></div>';
+    d.innerHTML = OPT_IN
+      ? '<div class="i"><p>Usamos cookies só para medir os anúncios. <a href="' + base + 'privacidade/">Como tratamos os seus dados</a>.</p>'
+        + '<div class="b"><button type="button" class="ok">Aceitar</button><button type="button" class="nao">Só o essencial</button></div></div>'
+      : '<div class="i"><p>Este site usa cookies para medir os anúncios. <a href="' + base + 'privacidade/">Como tratamos os seus dados</a>.</p>'
+        + '<div class="b"><button type="button" class="ok">Entendi</button></div></div>';
     document.body.appendChild(d);
     altura();
     d.querySelector('.ok').onclick = function(){ set('aceito'); fechar(d); ligarPixel(); };
-    d.querySelector('.nao').onclick = function(){ set('essencial'); fechar(d); recusar(); };
+    var nao = d.querySelector('.nao'); if (nao) nao.onclick = function(){ set('essencial'); fechar(d); recusar(); };
     window.addEventListener('resize', altura);
   }
 
+  var OPT_IN = false; // true = pixel só após "Aceitar" (modelo de 20/10); false = pixel imediato + aviso
   var escolha = get();
-  if (escolha === 'aceito') ligarPixel();
+  if (!OPT_IN) {
+    ligarPixel();
+    if (escolha !== 'aceito' && escolha !== 'essencial') { if (document.body) mostrar(); else document.addEventListener('DOMContentLoaded', mostrar); }
+  } else if (escolha === 'aceito') ligarPixel();
   else if (escolha === 'essencial') recusar();
   else if (document.body) mostrar(); else document.addEventListener('DOMContentLoaded', mostrar);
 
